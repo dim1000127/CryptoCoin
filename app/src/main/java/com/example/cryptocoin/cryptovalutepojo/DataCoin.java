@@ -8,7 +8,7 @@ public class DataCoin {
     private double price;
 
     @SerializedName("volume_24h")
-    private long volume24h;
+    private double volume24h;
 
     @SerializedName("volume_change_24h")
     private double volumeChange24h;
@@ -26,7 +26,7 @@ public class DataCoin {
     private double marketCap;
 
     @SerializedName("market_cap_dominance")
-    private int marketCapDominance;
+    private double marketCapDominance;
 
     @SerializedName("fully_diluted_market_cap")
     private double fullyDilutedMarketCap;
@@ -38,7 +38,7 @@ public class DataCoin {
         return price;
     }
 
-    public long getVolume24h() {
+    public double getVolume24h() {
         return volume24h;
     }
 
@@ -66,7 +66,7 @@ public class DataCoin {
         return marketCap;
     }
 
-    public int getMarketCapDominance() {
+    public double getMarketCapDominance() {
         return marketCapDominance;
     }
 

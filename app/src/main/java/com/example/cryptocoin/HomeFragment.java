@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,6 +39,9 @@ public class HomeFragment extends Fragment {
     TextView textViewPriceCryptoTwo;
     TextView textViewPriceCryptoThree;
 
+    //CryptoValute dataCryptoValute = null;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
@@ -53,7 +58,21 @@ public class HomeFragment extends Fragment {
         textViewPriceCryptoOne = rootView.findViewById(R.id.priceCryptoValuteOne);
         textViewPriceCryptoTwo = rootView.findViewById(R.id.priceCryptoValuteTwo);
         textViewPriceCryptoThree = rootView.findViewById(R.id.priceCryptoValuteThree);
-
+        //fillBlocksTopThree();
         return  inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    private void fillBlocksTopThree(){
+        if(Main.cryptoValute!=null) {
+            textViewSymbolCryptoOne.setText(Main.cryptoValute.getData().get(0).getSymbol());
+            textViewSymbolCryptoTwo.setText(Main.cryptoValute.getData().get(1).getSymbol());
+            textViewSymbolCryptoThree.setText(Main.cryptoValute.getData().get(2).getSymbol());
+            textViewChange24hCryptoOne.setText(String.format("%.2f", Main.cryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPercentChange24h()));
+            textViewChange24hCryptoTwo.setText(String.format("%.2f", Main.cryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPercentChange24h()));
+            textViewChange24hCryptoThree.setText(String.format("%.2f", Main.cryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPercentChange24h()));
+            textViewPriceCryptoOne.setText(String.format("%.2f", Main.cryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice()));
+            textViewPriceCryptoTwo.setText(String.format("%.2f", Main.cryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
+            textViewPriceCryptoThree.setText(String.format("%.2f", Main.cryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPrice()));
+        }
     }
 }

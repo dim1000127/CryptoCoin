@@ -27,6 +27,7 @@ public class Main extends AppCompatActivity {
     BottomNavigationView bottomNav;
     Fragment selectedFragment;
     ActionBar actionBar;
+    public static CryptoValute cryptoValute = null;
 
     private static final String apiKey = "908e2080-ad8d-4d43-bd0a-e65b8587d172";
     public static final String BASE_URL = "https://pro-api.coinmarketcap.com";
@@ -41,6 +42,7 @@ public class Main extends AppCompatActivity {
         bottomNav = findViewById(R.id.navigation_view);
         bottomNav.setOnItemSelectedListener(navListener);
         APICall();
+        //selectedFragment = new HomeFragment(cryptoValute);
     }
 
     private NavigationBarView.OnItemSelectedListener navListener =
@@ -51,6 +53,7 @@ public class Main extends AppCompatActivity {
                     switch (item.getItemId()){
 
                         case R.id.navigation_home:
+                            //selectedFragment =  new HomeFragment(cryptoValute);
                             selectedFragment =  new HomeFragment();
                             //необходимо будет сделать свой ActionBar
                             actionBar.setTitle("CryptoCoin");
@@ -79,15 +82,17 @@ public class Main extends AppCompatActivity {
 
         RequestsAPI requestsAPI = retrofit.create(RequestsAPI.class);
 
-        Call<List<CryptoValute>> dataCryptoValute = requestsAPI.getDataCryptoValute(1,1,"USD");
+        Call<CryptoValute> dataCryptoValute = requestsAPI.getDataCryptoValute(1,3,"USD");
 
-        dataCryptoValute.enqueue(new Callback<List<CryptoValute>>() {
+        dataCryptoValute.enqueue(new Callback<CryptoValute>() {
             @Override
-            public void onResponse(Call<List<CryptoValute>> call, Response<List<CryptoValute>> response) {
+            public void onResponse(Call<CryptoValute> call, Response<CryptoValute> response) {
                 if(response.isSuccessful()){
-                    List<CryptoValute> dataCryptoValute = null;
+                    CryptoValute dataCryptoValute = null;
                     dataCryptoValute = response.body();
-                    //Log.d("List ", String.valueOf(response.body()));
+                    cryptoValute = dataCryptoValute;
+                    //actionBar.setTitle(String.valueOf(dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
+                    Log.d("List ", String.valueOf(response.body()));
                 }
                 else{
                     Log.d("Response code ", String.valueOf(response.code()));
@@ -95,8 +100,9 @@ public class Main extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<CryptoValute>> call, Throwable t) {
+            public void onFailure(Call<CryptoValute> call, Throwable t) {
                 Log.d("Failure", t.toString());
+                actionBar.setTitle("BTC");
             }
         });
     }

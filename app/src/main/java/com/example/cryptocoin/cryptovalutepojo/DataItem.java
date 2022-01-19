@@ -26,13 +26,13 @@ public class DataItem {
     private int numMarketPairs;
 
     @SerializedName("circulating_supply")
-    private int circulatingSupply;
+    private double circulatingSupply;
 
     @SerializedName("total_supply")
-    private int totalSupply;
+    private double totalSupply;
 
     @SerializedName("max_supply")
-    private int maxSupply;
+    private double maxSupply;
 
     @SerializedName("last_updated")
     private String lastUpdated;
@@ -74,15 +74,15 @@ public class DataItem {
         return numMarketPairs;
     }
 
-    public int getCirculatingSupply() {
+    public double getCirculatingSupply() {
         return circulatingSupply;
     }
 
-    public int getTotalSupply() {
+    public double getTotalSupply() {
         return totalSupply;
     }
 
-    public int getMaxSupply() {
+    public double getMaxSupply() {
         return maxSupply;
     }
 
