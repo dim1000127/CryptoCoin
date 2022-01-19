@@ -25,54 +25,80 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
-    View rootView;
-    ImageView imageViewCryptoTop1;
-    ImageView imageViewCryptoTop2;
-    ImageView imageViewCryptoTop3;
-    TextView textViewSymbolCryptoOne;
-    TextView textViewSymbolCryptoTwo;
-    TextView textViewSymbolCryptoThree;
-    TextView textViewChange24hCryptoOne;
-    TextView textViewChange24hCryptoTwo;
-    TextView textViewChange24hCryptoThree;
-    TextView textViewPriceCryptoOne;
-    TextView textViewPriceCryptoTwo;
-    TextView textViewPriceCryptoThree;
-
-    //CryptoValute dataCryptoValute = null;
-
+    public static final String BASE_URL = "https://pro-api.coinmarketcap.com";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
-        rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        imageViewCryptoTop1 = rootView.findViewById(R.id.imageCryptovaluteOne);
-        imageViewCryptoTop2 = rootView.findViewById(R.id.imageCryptovaluteTwo);
-        imageViewCryptoTop3 = rootView.findViewById(R.id.imageCryptovaluteThree);
-        textViewSymbolCryptoOne = rootView.findViewById(R.id.symbolCryptoOne);
-        textViewSymbolCryptoTwo = rootView.findViewById(R.id.symbolCryptoTwo);
-        textViewSymbolCryptoThree = rootView.findViewById(R.id.symbolCryptoThree);
-        textViewChange24hCryptoOne =rootView.findViewById(R.id.percent_change_24hCryptoOne);
-        textViewChange24hCryptoTwo =rootView.findViewById(R.id.percent_change_24hCryptoTwo);
-        textViewChange24hCryptoThree =rootView.findViewById(R.id.percent_change_24hCryptoThree);
-        textViewPriceCryptoOne = rootView.findViewById(R.id.priceCryptoValuteOne);
-        textViewPriceCryptoTwo = rootView.findViewById(R.id.priceCryptoValuteTwo);
-        textViewPriceCryptoThree = rootView.findViewById(R.id.priceCryptoValuteThree);
-        //fillBlocksTopThree();
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         return  inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    private void fillBlocksTopThree(){
-        if(Main.cryptoValute!=null) {
-            textViewSymbolCryptoOne.setText(Main.cryptoValute.getData().get(0).getSymbol());
-            textViewSymbolCryptoTwo.setText(Main.cryptoValute.getData().get(1).getSymbol());
-            textViewSymbolCryptoThree.setText(Main.cryptoValute.getData().get(2).getSymbol());
-            textViewChange24hCryptoOne.setText(String.format("%.2f", Main.cryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPercentChange24h()));
-            textViewChange24hCryptoTwo.setText(String.format("%.2f", Main.cryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPercentChange24h()));
-            textViewChange24hCryptoThree.setText(String.format("%.2f", Main.cryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPercentChange24h()));
-            textViewPriceCryptoOne.setText(String.format("%.2f", Main.cryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice()));
-            textViewPriceCryptoTwo.setText(String.format("%.2f", Main.cryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
-            textViewPriceCryptoThree.setText(String.format("%.2f", Main.cryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPrice()));
-        }
+    @Override
+    public void onStart() {
+        APIGetPriceCall();
+
+        super.onStart();
+    }
+
+    private void APIGetPriceCall() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RequestsAPI requestsAPI = retrofit.create(RequestsAPI.class);
+
+        Call<CryptoValute> dataCryptoValute = requestsAPI.getDataCryptoValute(1,3,"USD");
+
+        dataCryptoValute.enqueue(new Callback<CryptoValute>() {
+            @Override
+            public void onResponse(Call<CryptoValute> call, Response<CryptoValute> response) {
+                if(response.isSuccessful()){
+                    CryptoValute dataCryptoValute = null;
+                    dataCryptoValute = response.body();
+                    fillBlocksTopThree(dataCryptoValute);
+                    Log.d("List ", String.valueOf(response.body()));
+                }
+                else{
+                    Log.d("Response code ", String.valueOf(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CryptoValute> call, Throwable t) {
+                Log.d("Failure", t.toString());
+            }
+        });
+    }
+
+    private void fillBlocksTopThree(CryptoValute dataCryptoValute){
+        TextView textViewSymbolCryptoOne = getActivity().findViewById(R.id.symbolCryptoOne);
+        textViewSymbolCryptoOne.setText(dataCryptoValute.getData().get(0).getSymbol());
+        TextView textViewSymbolCryptoTwo = getActivity().findViewById(R.id.symbolCryptoTwo);
+        textViewSymbolCryptoTwo.setText(dataCryptoValute.getData().get(1).getSymbol());
+        TextView textViewSymbolCryptoThree = getActivity().findViewById(R.id.symbolCryptoThree);
+        textViewSymbolCryptoThree.setText(dataCryptoValute.getData().get(2).getSymbol());
+        TextView textViewPriceOne = getActivity().findViewById(R.id.priceCryptoValuteOne);
+        textViewPriceOne.setText(String.format("$%.2f",dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice()));
+        TextView textViewPriceTwo = getActivity().findViewById(R.id.priceCryptoValuteTwo);
+        textViewPriceTwo.setText(String.format("$%.2f",dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
+        TextView textViewPriceThree = getActivity().findViewById(R.id.priceCryptoValuteThree);
+        textViewPriceThree.setText(String.format("$%.2f",dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPrice()));
+        double valueChange24hCryptoOne = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPercentChange24h();
+        TextView textViewChange24hCryptoOne = getActivity().findViewById(R.id.percent_change_24hCryptoOne);
+        textViewChange24hCryptoOne.setText(String.format("%.2f%%", valueChange24hCryptoOne));
+        if(valueChange24hCryptoOne>=0){ textViewChange24hCryptoOne.setTextColor(getResources().getColor(R.color.green)); }
+        else {textViewChange24hCryptoOne.setTextColor(getResources().getColor(R.color.red)); }
+        double valueChange24hCryptoTwo = dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPercentChange24h();
+        TextView textViewChange24hCryptoTwo = getActivity().findViewById(R.id.percent_change_24hCryptoTwo);
+        textViewChange24hCryptoTwo.setText(String.format("%.2f%%", valueChange24hCryptoTwo));
+        if(valueChange24hCryptoTwo>=0){ textViewChange24hCryptoTwo.setTextColor(getResources().getColor(R.color.green)); }
+        else {textViewChange24hCryptoTwo.setTextColor(getResources().getColor(R.color.red)); }
+        double valueChange24hCryptoThree = dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPercentChange24h();
+        TextView textViewChange24hCryptoThree = getActivity().findViewById(R.id.percent_change_24hCryptoThree);
+        textViewChange24hCryptoThree.setText(String.format("%.2f%%", valueChange24hCryptoThree));
+        if(valueChange24hCryptoThree>=0){ textViewChange24hCryptoThree.setTextColor(getResources().getColor(R.color.green)); }
+        else {textViewChange24hCryptoThree.setTextColor(getResources().getColor(R.color.red)); }
     }
 }
