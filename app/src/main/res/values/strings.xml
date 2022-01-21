@@ -3,4 +3,7 @@
     <string name="book_learn_text">Здесь будут небольшие обучающие тексты,
         после прочтения которых,пользователю будет предлагаться пройти тест</string>
     <string name="soon">Скоро здесь что-то появится</string>
+    <string name="main">Главная</string>
+    <string name="top">Топ</string>
+    <string name="training">Обучение</string>
 </resources>

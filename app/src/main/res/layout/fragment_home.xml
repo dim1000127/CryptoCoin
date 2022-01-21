@@ -25,30 +25,30 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/imageCryptovaluteOne"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/btc" />
+                    android:src="@drawable/btc" />-->
 
                 <TextView
                     android:id="@+id/symbolCryptoOne"
-                    android:text="BTC"
+                    android:text="--"
                     android:layout_marginLeft="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/percent_change_24hCryptoOne"
-                    android:text="2.5%"
+                    android:text="--"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"/>
+                    android:gravity="end"/>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/priceCryptoValuteOne"
-                android:text="43000$"
+                android:text="--"
                 android:textSize="12pt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,31 +70,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/imageCryptovaluteTwo"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/eth"/>
+                    android:src="@drawable/eth"/>-->
 
                 <TextView
                     android:id="@+id/symbolCryptoTwo"
-                    android:text="ETH"
+                    android:text="--"
                     android:layout_marginLeft="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/percent_change_24hCryptoTwo"
-                    android:text="5.5%"
+                    android:text="--"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"/>
+                    android:gravity="end"/>
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/priceCryptoValuteTwo"
-                android:text="3500$"
+                android:text="--"
                 android:textSize="12pt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,31 +115,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/imageCryptovaluteThree"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/bnb"/>
+                    android:src="@drawable/bnb"/>-->
 
                 <TextView
                     android:id="@+id/symbolCryptoThree"
-                    android:text="BNB"
+                    android:text="--"
                     android:layout_marginLeft="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/percent_change_24hCryptoThree"
-                    android:text="1.5%"
+                    android:text="--"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"/>
+                    android:gravity="end"/>
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/priceCryptoValuteThree"
-                android:text="450$"
+                android:text="--"
                 android:textSize="12pt"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"

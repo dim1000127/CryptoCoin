@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/position_in_top"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="31"
+        android:weightSum="100">
+
+        <TextView
+            android:id="@+id/name_cryptovalute_list_top"
+            android:textSize="8pt"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"/>
+
+        <TextView
+            android:id="@+id/symbol_cryptovalute_list_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/price_cryptovalute_list_top"
+        android:gravity="center"
+        android:textSize="8pt"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="31"/>
+    <TextView
+        android:id="@+id/percent_change_cryptovalute_list_top"
+        android:gravity="center"
+        android:textSize="8pt"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="31"/>
+</LinearLayout>

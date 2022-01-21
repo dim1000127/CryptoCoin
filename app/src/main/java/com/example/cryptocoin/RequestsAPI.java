@@ -14,5 +14,5 @@ public interface RequestsAPI {
     @Headers({"Accept: application/json",
             "X-CMC_PRO_API_KEY: 908e2080-ad8d-4d43-bd0a-e65b8587d172"})
    @GET("/v1/cryptocurrency/listings/latest")
-    Call<CryptoValute> getDataCryptoValute(@Query("start") int start, @Query("limit") int limit, @Query("convert") String convert);
+    Call<CryptoValute> getDataCryptoValute(@Query("start") int start, @Query("limit") int limit);
 }

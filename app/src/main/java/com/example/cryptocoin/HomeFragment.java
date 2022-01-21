@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment {
 
         RequestsAPI requestsAPI = retrofit.create(RequestsAPI.class);
 
-        Call<CryptoValute> dataCryptoValute = requestsAPI.getDataCryptoValute(1,3,"USD");
+        Call<CryptoValute> dataCryptoValute = requestsAPI.getDataCryptoValute(1,3);
 
         dataCryptoValute.enqueue(new Callback<CryptoValute>() {
             @Override
@@ -88,17 +89,17 @@ public class HomeFragment extends Fragment {
         double valueChange24hCryptoOne = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPercentChange24h();
         TextView textViewChange24hCryptoOne = getActivity().findViewById(R.id.percent_change_24hCryptoOne);
         textViewChange24hCryptoOne.setText(String.format("%.2f%%", valueChange24hCryptoOne));
-        if(valueChange24hCryptoOne>=0){ textViewChange24hCryptoOne.setTextColor(getResources().getColor(R.color.green)); }
-        else {textViewChange24hCryptoOne.setTextColor(getResources().getColor(R.color.red)); }
+        if(valueChange24hCryptoOne>=0){ textViewChange24hCryptoOne.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
+        else {textViewChange24hCryptoOne.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
         double valueChange24hCryptoTwo = dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPercentChange24h();
         TextView textViewChange24hCryptoTwo = getActivity().findViewById(R.id.percent_change_24hCryptoTwo);
         textViewChange24hCryptoTwo.setText(String.format("%.2f%%", valueChange24hCryptoTwo));
-        if(valueChange24hCryptoTwo>=0){ textViewChange24hCryptoTwo.setTextColor(getResources().getColor(R.color.green)); }
-        else {textViewChange24hCryptoTwo.setTextColor(getResources().getColor(R.color.red)); }
+        if(valueChange24hCryptoTwo>=0){ textViewChange24hCryptoTwo.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
+        else {textViewChange24hCryptoTwo.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
         double valueChange24hCryptoThree = dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPercentChange24h();
         TextView textViewChange24hCryptoThree = getActivity().findViewById(R.id.percent_change_24hCryptoThree);
         textViewChange24hCryptoThree.setText(String.format("%.2f%%", valueChange24hCryptoThree));
-        if(valueChange24hCryptoThree>=0){ textViewChange24hCryptoThree.setTextColor(getResources().getColor(R.color.green)); }
-        else {textViewChange24hCryptoThree.setTextColor(getResources().getColor(R.color.red)); }
+        if(valueChange24hCryptoThree>=0){ textViewChange24hCryptoThree.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
+        else {textViewChange24hCryptoThree.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
     }
 }

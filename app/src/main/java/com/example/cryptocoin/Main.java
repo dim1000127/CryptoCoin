@@ -29,9 +29,6 @@ public class Main extends AppCompatActivity {
     Fragment selectedFragment;
     ActionBar actionBar;
 
-    private static final String apiKey = "908e2080-ad8d-4d43-bd0a-e65b8587d172";
-    public static final String BASE_URL = "https://pro-api.coinmarketcap.com";
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
