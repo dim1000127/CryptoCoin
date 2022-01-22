@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -22,14 +24,42 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListFragment extends Fragment {
     public static final String BASE_URL = "https://pro-api.coinmarketcap.com";
-    ListView listView;
-    AdapterCryptoValutePrice adapterCryptoValutePrice;
+    private ListView listViewTop;
+    private ImageButton buttonListTop;
+    private AdapterCryptoValutePrice adapterCryptoValutePrice;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        listView = (ListView) view.findViewById(R.id.listview_top100_cryptovalute);
+        listViewTop = (ListView) view.findViewById(R.id.listview_top100_cryptovalute);
+        buttonListTop = (ImageButton) view.findViewById(R.id.button_list_up);
+        buttonListTop.setVisibility(View.GONE);
+        listViewTop.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                if(i == 0) {
+                    buttonListTop.setVisibility(View.GONE);
+                }
+                else
+                {
+                    buttonListTop.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        buttonListTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //listViewTop.setSelection(0);
+                listViewTop.smoothScrollToPosition(0);
+            }
+        });
         return  view;
     }
 
@@ -56,7 +86,7 @@ public class ListFragment extends Fragment {
                     CryptoValute dataCryptoValute = null;
                     dataCryptoValute = response.body();
                     adapterCryptoValutePrice = new AdapterCryptoValutePrice(dataCryptoValute);
-                    listView.setAdapter(adapterCryptoValutePrice);
+                    listViewTop.setAdapter(adapterCryptoValutePrice);
                     Log.d("List ", String.valueOf(response.body()));
                 }
                 else{

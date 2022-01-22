@@ -10,4 +10,6 @@
     <color name="lightgreen">#82CF85</color>
     <color name="green">#46CC00</color>
     <color name="red">#FF0000</color>
+    <color name="lightgray_for_click">#CCCCCC</color>
+    <color name="lightgray">#F6F6F6</color>
 </resources>

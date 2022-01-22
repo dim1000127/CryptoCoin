@@ -1,66 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="4dp"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="68dp">
+    android:layout_height="60dp"
+    android:weightSum="100"
+    android:background="@drawable/style_for_list_element">
+
+    <TextView
+        android:id="@+id/position_in_top"
+        android:gravity="center"
+        android:text="@string/empty"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="8"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:weightSum="100"
-        android:background="@drawable/style_for_list_element">
+        android:layout_weight="40"
+        android:weightSum="100">
 
         <TextView
-            android:id="@+id/position_in_top"
-            android:gravity="center"
-            android:text="@string/empty"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="8"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="40"
-            android:weightSum="100">
-
-            <TextView
-                android:id="@+id/name_cryptovalute_list_top"
-                android:textSize="8pt"
-                android:text="@string/empty"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="50"/>
-
-            <TextView
-                android:id="@+id/symbol_cryptovalute_list_top"
-                android:text="@string/empty"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="50"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/price_cryptovalute_list_top"
-            android:gravity="center"
+            android:id="@+id/name_cryptovalute_list_top"
             android:textSize="8pt"
             android:text="@string/empty"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="26"/>
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"/>
+
         <TextView
-            android:id="@+id/percent_change_cryptovalute_list_top"
-            android:gravity="center"
-            android:textSize="8pt"
+            android:id="@+id/symbol_cryptovalute_list_top"
             android:text="@string/empty"
-            android:paddingStart="15dp"
-            android:drawableStart="@drawable/style_arrow_green"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="26"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"/>
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/price_cryptovalute_list_top"
+        android:gravity="center"
+        android:textSize="8pt"
+        android:text="@string/empty"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="26"/>
+    <TextView
+        android:id="@+id/percent_change_cryptovalute_list_top"
+        android:gravity="center"
+        android:textSize="8pt"
+        android:text="@string/empty"
+        android:paddingStart="15dp"
+        android:drawableStart="@drawable/style_arrow_green"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="26"/>
 </LinearLayout>

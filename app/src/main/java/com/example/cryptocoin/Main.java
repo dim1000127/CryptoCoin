@@ -25,9 +25,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Main extends AppCompatActivity {
 
-    BottomNavigationView bottomNav;
-    Fragment selectedFragment;
-    ActionBar actionBar;
+    private BottomNavigationView bottomNav;
+    private Fragment selectedFragment;
+    private ActionBar actionBar;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

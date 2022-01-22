@@ -18,7 +18,7 @@ import org.w3c.dom.Text;
 
 public class AdapterCryptoValutePrice extends BaseAdapter{
 
-    CryptoValute cryptoValuteList;
+    private CryptoValute cryptoValuteList;
 
     public AdapterCryptoValutePrice(CryptoValute _cryptoValuteList){
         cryptoValuteList = _cryptoValuteList;
