@@ -63,8 +63,14 @@ public class AdapterCryptoValutePrice extends BaseAdapter{
         textViewPriceCryptoValute.setText(String.format("$%.2f",priceCryptoValute));
         double percentChange24H = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPercentChange24h();
         textViewPercentChange.setText(String.format("%.2f%%", percentChange24H));
-        if(percentChange24H>=0){ textViewPercentChange.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.green, null)); }
-        else {textViewPercentChange.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.red, null)); }
+        if(percentChange24H>=0){
+            textViewPercentChange.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.green, null));
+            textViewPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_green, 0, 0, 0);
+        }
+        else {
+            textViewPercentChange.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.red, null));
+            textViewPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_red,0,0,0);
+        }
 
         return view;
     }

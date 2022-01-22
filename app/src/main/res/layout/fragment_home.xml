@@ -33,14 +33,14 @@
 
                 <TextView
                     android:id="@+id/symbolCryptoOne"
-                    android:text="--"
+                    android:text="@string/empty"
                     android:layout_marginLeft="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/percent_change_24hCryptoOne"
-                    android:text="--"
+                    android:text="@string/empty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"/>
@@ -48,7 +48,7 @@
 
             <TextView
                 android:id="@+id/priceCryptoValuteOne"
-                android:text="--"
+                android:text="@string/empty"
                 android:textSize="12pt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,14 +78,14 @@
 
                 <TextView
                     android:id="@+id/symbolCryptoTwo"
-                    android:text="--"
+                    android:text="@string/empty"
                     android:layout_marginLeft="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/percent_change_24hCryptoTwo"
-                    android:text="--"
+                    android:text="@string/empty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"/>
@@ -94,7 +94,7 @@
 
             <TextView
                 android:id="@+id/priceCryptoValuteTwo"
-                android:text="--"
+                android:text="@string/empty"
                 android:textSize="12pt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,14 +123,14 @@
 
                 <TextView
                     android:id="@+id/symbolCryptoThree"
-                    android:text="--"
+                    android:text="@string/empty"
                     android:layout_marginLeft="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/percent_change_24hCryptoThree"
-                    android:text="--"
+                    android:text="@string/empty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"/>
@@ -139,7 +139,7 @@
 
             <TextView
                 android:id="@+id/priceCryptoValuteThree"
-                android:text="--"
+                android:text="@string/empty"
                 android:textSize="12pt"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
