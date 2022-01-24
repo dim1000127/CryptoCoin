@@ -3,6 +3,7 @@ package com.example.cryptocoin;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -82,15 +83,16 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
         editTextValueCryptoValute.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && (i == KeyEvent.KEYCODE_ENTER))
+                if((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER))
                 {
                     double valEtCryptoValute = Double.parseDouble(editTextValueCryptoValute.getText().toString());
                     double calculateVal = valEtCryptoValute * priceCryptoValute;
                     if(calculateVal>=1){
-                        editTextValueUsd.setText(String.format("%.2f",calculateVal));
+                        editTextValueUsd.setText(String.format("%.2f",calculateVal).replace(",","."));
+                        //Log.d("editTextValueCryptoValute", String.format("%.2f",calculateVal).replace(",","."));
                     }
                     else {
-                        editTextValueUsd.setText(String.format("%.6f",calculateVal));
+                        editTextValueUsd.setText(String.format("%.6f",calculateVal).replace(",","."));
                     }
                 }
                 return false;
@@ -99,20 +101,23 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
         editTextValueUsd.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && (i == KeyEvent.KEYCODE_ENTER))
+                if((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&(i == KeyEvent.KEYCODE_ENTER))
                 {
                     double valEtUsd = Double.parseDouble(editTextValueUsd.getText().toString());
                     double calculateVal = valEtUsd /priceCryptoValute;
                     if(calculateVal>=1) {
-                        editTextValueCryptoValute.setText(String.format("%.2f",calculateVal));
+                        editTextValueCryptoValute.setText(String.format("%.2f",calculateVal).replace(",","."));
                     }
                     else{
-                        editTextValueCryptoValute.setText(String.format("%.6f",calculateVal));
+                        editTextValueCryptoValute.setText(String.format("%.6f",calculateVal).replace(",","."));
                     }
                 }
                 return false;
             }
         });
+
+        editTextValueCryptoValute.setFilters(new InputFilter[] {new DecimalFilter(6)});
+        editTextValueUsd.setFilters(new InputFilter[] {new DecimalFilter(6)});
     }
 
     private void APIGetPriceCall() {

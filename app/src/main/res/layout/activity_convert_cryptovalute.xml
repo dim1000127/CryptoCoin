@@ -23,14 +23,16 @@
 
         <EditText
             android:id="@+id/et_value_cryptovalute"
-            android:inputType="number"
+            android:maxLines="1"
             android:textSize="14pt"
             android:gravity="end"
+            android:inputType="numberDecimal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="70"/>
+            android:layout_weight="70" />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -49,13 +51,15 @@
 
         <EditText
             android:id="@+id/et_value_usd"
-            android:inputType="number"
+            android:maxLines="1"
             android:textSize="14pt"
             android:gravity="end"
+            android:inputType="numberDecimal"
+            android:digits="0123456789."
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="70"/>
+            android:layout_weight="70" />
     </LinearLayout>
 
 
