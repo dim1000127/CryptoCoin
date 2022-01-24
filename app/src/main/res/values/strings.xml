@@ -7,4 +7,6 @@
     <string name="top">Топ</string>
     <string name="training">Обучение</string>
     <string name="empty">--</string>
+    <string name="convert">Конвертировать</string>
+    <string name="USD">USD</string>
 </resources>

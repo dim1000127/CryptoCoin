@@ -1,8 +1,9 @@
 package com.example.cryptocoin.cryptovalutepojo;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class Quote {
+public class Quote implements Serializable{
     @SerializedName("USD")
     private DataCoin usdDataCoin;
 

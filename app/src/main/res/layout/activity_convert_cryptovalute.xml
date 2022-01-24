@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:weightSum="100"
+        android:background="@drawable/style_for_list_element">
+
+        <TextView
+            android:id="@+id/tv_symbol_cryptovalute"
+            android:textSize="14pt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30" />
+
+        <EditText
+            android:id="@+id/et_value_cryptovalute"
+            android:inputType="number"
+            android:textSize="14pt"
+            android:gravity="end"
+            android:background="@android:color/transparent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="70"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:weightSum="100"
+        android:background="@drawable/style_for_list_element">
+
+        <TextView
+            android:textSize="14pt"
+            android:text="@string/USD"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"/>
+
+        <EditText
+            android:id="@+id/et_value_usd"
+            android:inputType="number"
+            android:textSize="14pt"
+            android:gravity="end"
+            android:background="@android:color/transparent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="70"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,8 +1,9 @@
 package com.example.cryptocoin.cryptovalutepojo;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class Status {
+public class Status implements Serializable{
 
     @SerializedName("error_message")
     private String errorMessage;

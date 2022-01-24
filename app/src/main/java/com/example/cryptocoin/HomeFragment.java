@@ -1,11 +1,13 @@
 package com.example.cryptocoin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,13 +28,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
-    public static final String BASE_URL = "https://pro-api.coinmarketcap.com";
+    private static final String BASE_URL = "https://pro-api.coinmarketcap.com";
+
+    private Button buttonOpenConvertCryptoValute;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        return  inflater.inflate(R.layout.fragment_home, container, false);
+        buttonOpenConvertCryptoValute = (Button) rootView.findViewById(R.id.btn_open_convert_cryptovalute);
+        buttonOpenConvertCryptoValute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ActivityConvertCryptoValute.class);
+                startActivity(intent);
+            }
+        });
+        return  rootView;
     }
 
     @Override

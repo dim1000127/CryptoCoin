@@ -1,12 +1,12 @@
 package com.example.cryptocoin.cryptovalutepojo;
 
-import com.example.cryptocoin.cryptovalutepojo.DataCoin;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class DataItem {
+public class DataItem implements Serializable{
     @SerializedName("id")
     private int id;
 
