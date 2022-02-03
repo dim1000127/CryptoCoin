@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_splash.xml" value="0.176" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/button_up_list.xml" value="0.26614583333333336" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/ic_launcher.xml" value="0.14322916666666666" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14322916666666666" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/style_arrow_green.xml" value="0.26614583333333336" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/style_arrow_red.xml" value="0.26614583333333336" />
@@ -11,16 +14,19 @@
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/style_for_block_top3cryptovalute.xml" value="0.14322916666666666" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/style_for_block_topthreecryptovalute.xml" value="0.264" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/style_for_list_element.xml" value="0.26614583333333336" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/view_icon.xml" value="0.26614583333333336" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_convert_cryptovalute.xml" value="0.536" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_for_select_cryptovalute_convert.xml" value="0.25" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_booklearn.xml" value="0.25" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_home.xml" value="0.4" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_list.xml" value="0.264" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/layout.xml" value="0.25" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/main_screen.xml" value="0.264" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/tv_for_cryptovalute_list.xml" value="0.47099311701081614" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/tv_for_select_cryptovalute_list.xml" value="0.4" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/menu/navigation.xml" value="0.1" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26614583333333336" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.26614583333333336" />
         <entry key="..\:/Games/Diplom/app/src/main/res/layout/fragment_book.xml" value="0.3484375" />
         <entry key="..\:/Games/Diplom/app/src/main/res/layout/fragment_home.xml" value="0.3484375" />
         <entry key="..\:/Games/Diplom/app/src/main/res/layout/fragment_list.xml" value="0.3625" />
