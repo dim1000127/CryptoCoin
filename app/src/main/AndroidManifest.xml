@@ -15,6 +15,7 @@
 
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:theme="@style/SplashScreenTheme"
             android:exported="true">
@@ -23,9 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Main"/>
-        <activity android:name=".ActivityConvertCryptoValute"/>
-        <activity android:name=".ActivitySelectCryptoValuteConvert"/>
+        <activity android:name=".Main"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActivityConvertCryptoValute"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActivitySelectCryptoValuteConvert"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

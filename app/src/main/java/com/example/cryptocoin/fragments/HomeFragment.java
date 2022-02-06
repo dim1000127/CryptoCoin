@@ -1,6 +1,5 @@
-package com.example.cryptocoin;
+package com.example.cryptocoin.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,34 +7,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.cryptocoin.ActivityConvertCryptoValute;
+import com.example.cryptocoin.R;
+import com.example.cryptocoin.RetrofitSingleton;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment {
 
-    private static final String BASE_URL = "https://pro-api.coinmarketcap.com";
-
     private Button buttonOpenConvertCryptoValute;
+    private Subscription subscription;
+    private boolean isLoading;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
         buttonOpenConvertCryptoValute = (Button) rootView.findViewById(R.id.btn_open_convert_cryptovalute);
         buttonOpenConvertCryptoValute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,19 +42,47 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        getCryptoValuteData();
         return  rootView;
     }
 
-    @Override
-    public void onStart() {
-        APIGetPriceCall();
+    private void getCryptoValuteData(){
+        if (subscription != null && !subscription.isUnsubscribed()){
+            subscription.unsubscribe();
+        }
+        subscription = RetrofitSingleton.getCryptoValuteObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<CryptoValute>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d("onCompleted", "onCompleted");
+                    }
 
-        super.onStart();
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(CryptoValute _cryptoValute) {
+                        isLoading = false;
+                        fillBlocksTopThree(_cryptoValute);
+                    }
+                });
     }
 
-    private void APIGetPriceCall() {
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
+
+    /*private void APIGetPriceCall() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Const.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -83,7 +109,7 @@ public class HomeFragment extends Fragment {
                 Log.d("Failure", t.toString());
             }
         });
-    }
+    }*/
 
     private void fillBlocksTopThree(CryptoValute dataCryptoValute){
         TextView textViewSymbolCryptoOne = getActivity().findViewById(R.id.symbolCryptoOne);

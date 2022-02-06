@@ -1,9 +1,7 @@
 package com.example.cryptocoin;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,17 +9,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.fragments.BookLearnFragment;
+import com.example.cryptocoin.fragments.HomeFragment;
+import com.example.cryptocoin.fragments.ListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Main extends AppCompatActivity {
 

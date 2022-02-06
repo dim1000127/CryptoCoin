@@ -1,4 +1,4 @@
-package com.example.cryptocoin;
+package com.example.cryptocoin.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,13 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cryptocoin.R;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
-
-import org.w3c.dom.Text;
 
 public class AdapterCryptoValutePrice extends BaseAdapter{
 
@@ -46,7 +43,7 @@ public class AdapterCryptoValutePrice extends BaseAdapter{
         if (view == null){
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.tv_for_cryptovalute_list, viewGroup, false);
+            view = inflater.inflate(R.layout.tv_cryptovalute_list, viewGroup, false);
         }
 
         LinearLayout layout = (LinearLayout) view;

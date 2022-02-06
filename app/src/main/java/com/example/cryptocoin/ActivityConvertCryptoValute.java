@@ -24,23 +24,24 @@ import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 
 import java.io.Serializable;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class ActivityConvertCryptoValute extends AppCompatActivity {
+
+    public static final String PRICE_MESSAGE="PRICE_MESSAGE";
+    public static final String SYMBOL_MESSAGE="SYMBOL_MESSAGE";
+
+    private Subscription subscription;
+    private boolean isLoading;
 
     private TextView textViewSymbolCryptoValute;
     private EditText editTextValueCryptoValute;
     private EditText editTextValueUsd;
     private CryptoValute dataCryptoValute = null;
     private double priceCryptoValute = 0;
-
-    private static final String BASE_URL = "https://pro-api.coinmarketcap.com";
-    static final String PRICE_MESSAGE="PRICE_MESSAGE";
-    static final String SYMBOL_MESSAGE="SYMBOL_MESSAGE";
 
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -59,7 +60,7 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_convert_cryptovalute);
+        setContentView(R.layout.activity_convert_cv);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -69,13 +70,12 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
         editTextValueUsd = (EditText) findViewById(R.id.et_value_usd);
         editTextValueCryptoValute.setText("0");
         editTextValueUsd.setText("0");
-        APIGetPriceCall();
         textViewSymbolCryptoValute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(dataCryptoValute!=null){
                     Intent intent = new Intent(ActivityConvertCryptoValute.this, ActivitySelectCryptoValuteConvert.class);
-                    intent.putExtra("dataCryptoValute", (Serializable) dataCryptoValute);
+                    intent.putExtra(Const.CRYPTOVALUTE, (Serializable) dataCryptoValute);
                     mStartForResult.launch(intent);
                 }
             }
@@ -89,7 +89,6 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
                     double calculateVal = valEtCryptoValute * priceCryptoValute;
                     if(calculateVal>=1){
                         editTextValueUsd.setText(String.format("%.2f",calculateVal).replace(",","."));
-                        //Log.d("editTextValueCryptoValute", String.format("%.2f",calculateVal).replace(",","."));
                     }
                     else {
                         editTextValueUsd.setText(String.format("%.6f",calculateVal).replace(",","."));
@@ -118,11 +117,49 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
 
         editTextValueCryptoValute.setFilters(new InputFilter[] {new DecimalFilter(6)});
         editTextValueUsd.setFilters(new InputFilter[] {new DecimalFilter(6)});
+        getCryptoValuteData();
+
     }
 
-    private void APIGetPriceCall() {
+    private void getCryptoValuteData(){
+        if (subscription != null && !subscription.isUnsubscribed()){
+            subscription.unsubscribe();
+        }
+        subscription = RetrofitSingleton.getCryptoValuteObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<CryptoValute>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d("onCompleted", "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(CryptoValute _cryptoValute) {
+                        isLoading = false;
+                        dataCryptoValute = _cryptoValute;
+                        textViewSymbolCryptoValute.setText(dataCryptoValute.getData().get(0).getSymbol());
+                        priceCryptoValute = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
+                    }
+                });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
+
+    /*private void APIGetPriceCall() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Const.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -149,7 +186,7 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
                 Log.d("Failure", t.toString());
             }
         });
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

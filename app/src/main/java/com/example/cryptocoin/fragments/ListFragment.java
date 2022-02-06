@@ -1,4 +1,4 @@
-package com.example.cryptocoin;
+package com.example.cryptocoin.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,21 +12,23 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.cryptocoin.R;
+import com.example.cryptocoin.RetrofitSingleton;
+import com.example.cryptocoin.adapter.AdapterCryptoValutePrice;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class ListFragment extends Fragment {
-    public static final String BASE_URL = "https://pro-api.coinmarketcap.com";
     private ListView listViewTop;
     private ImageButton buttonListTop;
     private AdapterCryptoValutePrice adapterCryptoValutePrice;
+    private Subscription subscription;
+    private boolean isLoading;
 
     @Nullable
     @Override
@@ -60,18 +62,48 @@ public class ListFragment extends Fragment {
                 listViewTop.smoothScrollToPosition(0);
             }
         });
+        getCryptoValuteData();
         return  view;
     }
 
-    @Override
-    public void onStart() {
-        APIGetPriceCall();
-        super.onStart();
+    private void getCryptoValuteData(){
+        if (subscription != null && !subscription.isUnsubscribed()){
+            subscription.unsubscribe();
+        }
+        subscription = RetrofitSingleton.getCryptoValuteObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<CryptoValute>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d("onCompleted", "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(CryptoValute _cryptoValute) {
+                        isLoading = false;
+                        adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
+                        listViewTop.setAdapter(adapterCryptoValutePrice);
+                    }
+                });
     }
 
-    private void APIGetPriceCall() {
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
+
+    /*private void APIGetPriceCall() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Const.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -99,5 +131,5 @@ public class ListFragment extends Fragment {
                 Log.d("Failure", t.toString());
             }
         });
-    }
+    }*/
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -13,12 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cryptocoin.adapter.AdapterSelectCryptoValute;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 
-import java.io.Serializable;
-
 public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
-
     private ListView listViewSelectCryptoValute;
     private AdapterSelectCryptoValute adapterSelectCryptoValute;
     private CryptoValute dataCryptoValute = null;
@@ -27,14 +24,14 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_for_select_cryptovalute_convert);
+        setContentView(R.layout.activity_select_cv_convert);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Выбрать криптовалюту");
 
         Bundle extras = getIntent().getExtras();
-        dataCryptoValute = (CryptoValute) extras.getSerializable("dataCryptoValute");
+        dataCryptoValute = (CryptoValute) extras.getSerializable(Const.CRYPTOVALUTE);
         adapterSelectCryptoValute = new AdapterSelectCryptoValute(dataCryptoValute);
         listViewSelectCryptoValute = (ListView) findViewById(R.id.listview_select_cryptovalute);
         listViewSelectCryptoValute.setAdapter(adapterSelectCryptoValute);
