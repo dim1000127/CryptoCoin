@@ -35,7 +35,6 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
     public static final String SYMBOL_MESSAGE="SYMBOL_MESSAGE";
 
     private Subscription subscription;
-    private boolean isLoading;
 
     private TextView textViewSymbolCryptoValute;
     private EditText editTextValueCryptoValute;
@@ -141,7 +140,6 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
 
                     @Override
                     public void onNext(CryptoValute _cryptoValute) {
-                        isLoading = false;
                         dataCryptoValute = _cryptoValute;
                         textViewSymbolCryptoValute.setText(dataCryptoValute.getData().get(0).getSymbol());
                         priceCryptoValute = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cryptocoin.ActivityConvertCryptoValute;
 import com.example.cryptocoin.R;
@@ -23,17 +24,19 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private Button buttonOpenConvertCryptoValute;
     private Subscription subscription;
-    private boolean isLoading;
+    private SwipeRefreshLayout swipeRefreshLayoutHome;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        swipeRefreshLayoutHome = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayoutHome);
+        swipeRefreshLayoutHome.setOnRefreshListener(this);
         buttonOpenConvertCryptoValute = (Button) rootView.findViewById(R.id.btn_open_convert_cryptovalute);
         buttonOpenConvertCryptoValute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +47,20 @@ public class HomeFragment extends Fragment {
         });
         getCryptoValuteData();
         return  rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        RetrofitSingleton.resetCryptoValuteObservable();
+        getCryptoValuteData();
     }
 
     private void getCryptoValuteData(){
@@ -61,23 +78,27 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        if (isAdded()) {
+                            swipeRefreshLayoutHome.setRefreshing(false);
+                            /*Snackbar.make(recyclerView, R.string.connection_error, Snackbar.LENGTH_SHORT)
+                                    .setAction(R.string.try_again, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            swipeRefreshLayoutList.setRefreshing(true);
+                                            RetrofitSingleton.resetModelsObservable();
+                                            getCryptoValuteData();
+                                        }
+                                    })
+                                    .show();*/
+                        }
                     }
 
                     @Override
                     public void onNext(CryptoValute _cryptoValute) {
-                        isLoading = false;
                         fillBlocksTopThree(_cryptoValute);
+                        swipeRefreshLayoutHome.setRefreshing(false);
                     }
                 });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
     }
 
     /*private void APIGetPriceCall() {

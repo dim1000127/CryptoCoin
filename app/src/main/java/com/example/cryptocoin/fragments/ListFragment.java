@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.RetrofitSingleton;
@@ -23,12 +24,12 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
     private ListView listViewTop;
     private ImageButton buttonListTop;
     private AdapterCryptoValutePrice adapterCryptoValutePrice;
     private Subscription subscription;
-    private boolean isLoading;
+    private SwipeRefreshLayout swipeRefreshLayoutList;
 
     @Nullable
     @Override
@@ -36,6 +37,8 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         listViewTop = (ListView) view.findViewById(R.id.listview_top100_cryptovalute);
         buttonListTop = (ImageButton) view.findViewById(R.id.button_list_up);
+        swipeRefreshLayoutList = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutList);
+        swipeRefreshLayoutList.setOnRefreshListener(this);
         buttonListTop.setVisibility(View.GONE);
         listViewTop.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -66,6 +69,20 @@ public class ListFragment extends Fragment {
         return  view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        RetrofitSingleton.resetCryptoValuteObservable();
+        getCryptoValuteData();
+    }
+
     private void getCryptoValuteData(){
         if (subscription != null && !subscription.isUnsubscribed()){
             subscription.unsubscribe();
@@ -81,24 +98,28 @@ public class ListFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        if (isAdded()) {
+                            swipeRefreshLayoutList.setRefreshing(false);
+                            /*Snackbar.make(recyclerView, R.string.connection_error, Snackbar.LENGTH_SHORT)
+                                    .setAction(R.string.try_again, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            swipeRefreshLayoutList.setRefreshing(true);
+                                            RetrofitSingleton.resetModelsObservable();
+                                            getCryptoValuteData();
+                                        }
+                                    })
+                                    .show();*/
+                        }
                     }
 
                     @Override
                     public void onNext(CryptoValute _cryptoValute) {
-                        isLoading = false;
                         adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
                         listViewTop.setAdapter(adapterCryptoValutePrice);
+                        swipeRefreshLayoutList.setRefreshing(false);
                     }
                 });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
     }
 
     /*private void APIGetPriceCall() {
