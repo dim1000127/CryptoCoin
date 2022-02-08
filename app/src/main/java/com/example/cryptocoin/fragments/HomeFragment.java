@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private Button buttonOpenConvertCryptoValute;
     private Subscription subscription;
     private SwipeRefreshLayout swipeRefreshLayoutHome;
+    private CryptoValute oldDataCryptoValute = null;
 
     @Nullable
     @Override
@@ -65,6 +66,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     private void getCryptoValuteData(){
+        //swipeRefreshLayoutHome.setRefreshing(true);
+
         if (subscription != null && !subscription.isUnsubscribed()){
             subscription.unsubscribe();
         }
@@ -97,8 +100,26 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     @Override
                     public void onNext(CryptoValute _cryptoValute) {
                         if (isAdded()) {
-                            fillBlocksTopThree(_cryptoValute);
-                            swipeRefreshLayoutHome.setRefreshing(false);
+                            if (oldDataCryptoValute != null) {
+                                double oldPrice = oldDataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
+                                double newPrice = _cryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
+                                if (oldPrice == newPrice) {
+                                    Snackbar.make(swipeRefreshLayoutHome, R.string.actual_data, Snackbar.LENGTH_SHORT).show();
+                                    swipeRefreshLayoutHome.setRefreshing(false);
+                                }
+                                else
+                                {
+                                    fillBlocksTopThree(_cryptoValute);
+                                    oldDataCryptoValute = _cryptoValute;
+                                    swipeRefreshLayoutHome.setRefreshing(false);
+                                }
+                            }
+                            else
+                            {
+                                fillBlocksTopThree(_cryptoValute);
+                                oldDataCryptoValute = _cryptoValute;
+                                swipeRefreshLayoutHome.setRefreshing(false);
+                            }
                         }
                     }
                 });

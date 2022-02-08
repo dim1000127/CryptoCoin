@@ -33,6 +33,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private Subscription subscription;
     private SwipeRefreshLayout swipeRefreshLayoutList;
     private RelativeLayout relativeLayout;
+    private CryptoValute oldDataCryptoValute = null;
 
     @Nullable
     @Override
@@ -69,6 +70,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 listViewTop.smoothScrollToPosition(0);
             }
         });
+
         getCryptoValuteData();
         return  view;
     }
@@ -88,6 +90,8 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     private void getCryptoValuteData(){
+        //swipeRefreshLayoutList.setRefreshing(true);
+
         if (subscription != null && !subscription.isUnsubscribed()){
             subscription.unsubscribe();
         }
@@ -120,9 +124,28 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     @Override
                     public void onNext(CryptoValute _cryptoValute) {
                         if (isAdded()) {
-                            adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
-                            listViewTop.setAdapter(adapterCryptoValutePrice);
-                            swipeRefreshLayoutList.setRefreshing(false);
+                            if (oldDataCryptoValute != null) {
+                                double oldPrice = oldDataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
+                                double newPrice = _cryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
+                                if (oldPrice == newPrice) {
+                                    Snackbar.make(relativeLayout, R.string.actual_data, Snackbar.LENGTH_SHORT).show();
+                                    swipeRefreshLayoutList.setRefreshing(false);
+                                }
+                                else
+                                {
+                                    adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
+                                    listViewTop.setAdapter(adapterCryptoValutePrice);
+                                    oldDataCryptoValute = _cryptoValute;
+                                    swipeRefreshLayoutList.setRefreshing(false);
+                                }
+                            }
+                            else
+                            {
+                                adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
+                                listViewTop.setAdapter(adapterCryptoValutePrice);
+                                oldDataCryptoValute = _cryptoValute;
+                                swipeRefreshLayoutList.setRefreshing(false);
+                            }
                         }
                     }
                 });

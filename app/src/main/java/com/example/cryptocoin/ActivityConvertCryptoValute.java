@@ -84,13 +84,15 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER))
                 {
-                    double valEtCryptoValute = Double.parseDouble(editTextValueCryptoValute.getText().toString());
-                    double calculateVal = valEtCryptoValute * priceCryptoValute;
-                    if(calculateVal>=1){
-                        editTextValueUsd.setText(String.format("%.2f",calculateVal).replace(",","."));
-                    }
-                    else {
-                        editTextValueUsd.setText(String.format("%.6f",calculateVal).replace(",","."));
+                    String valueEditTextCvStr = editTextValueCryptoValute.getText().toString();
+                    if(valueEditTextCvStr.isEmpty() == false) {
+                        double valEtCryptoValute = Double.parseDouble(editTextValueCryptoValute.getText().toString());
+                        double calculateVal = valEtCryptoValute * priceCryptoValute;
+                        if (calculateVal >= 1) {
+                            editTextValueUsd.setText(String.format("%.2f", calculateVal).replace(",", "."));
+                        } else {
+                            editTextValueUsd.setText(String.format("%.6f", calculateVal).replace(",", "."));
+                        }
                     }
                 }
                 return false;
@@ -101,13 +103,15 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&(i == KeyEvent.KEYCODE_ENTER))
                 {
-                    double valEtUsd = Double.parseDouble(editTextValueUsd.getText().toString());
-                    double calculateVal = valEtUsd /priceCryptoValute;
-                    if(calculateVal>=1) {
-                        editTextValueCryptoValute.setText(String.format("%.2f",calculateVal).replace(",","."));
-                    }
-                    else{
-                        editTextValueCryptoValute.setText(String.format("%.6f",calculateVal).replace(",","."));
+                    String valueEditTextUsdStr = editTextValueUsd.getText().toString();
+                    if(valueEditTextUsdStr.isEmpty() == false) {
+                        double valEtUsd = Double.parseDouble(editTextValueUsd.getText().toString());
+                        double calculateVal = valEtUsd / priceCryptoValute;
+                        if (calculateVal >= 1) {
+                            editTextValueCryptoValute.setText(String.format("%.2f", calculateVal).replace(",", "."));
+                        } else {
+                            editTextValueCryptoValute.setText(String.format("%.6f", calculateVal).replace(",", "."));
+                        }
                     }
                 }
                 return false;
