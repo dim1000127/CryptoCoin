@@ -9,4 +9,6 @@
     <string name="empty">--</string>
     <string name="convert">Конвертировать</string>
     <string name="USD">USD</string>
+    <string name="connection_error">Ошибка подключения</string>
+    <string name="try_again">Повторить</string>
 </resources>

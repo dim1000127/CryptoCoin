@@ -18,6 +18,7 @@ import com.example.cryptocoin.ActivityConvertCryptoValute;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.RetrofitSingleton;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.google.android.material.snackbar.Snackbar;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -80,23 +81,25 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     public void onError(Throwable e) {
                         if (isAdded()) {
                             swipeRefreshLayoutHome.setRefreshing(false);
-                            /*Snackbar.make(recyclerView, R.string.connection_error, Snackbar.LENGTH_SHORT)
+                            Snackbar.make(swipeRefreshLayoutHome, R.string.connection_error, Snackbar.LENGTH_LONG)
                                     .setAction(R.string.try_again, new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            swipeRefreshLayoutList.setRefreshing(true);
-                                            RetrofitSingleton.resetModelsObservable();
+                                            swipeRefreshLayoutHome.setRefreshing(true);
+                                            RetrofitSingleton.resetCryptoValuteObservable();
                                             getCryptoValuteData();
                                         }
                                     })
-                                    .show();*/
+                                    .show();
                         }
                     }
 
                     @Override
                     public void onNext(CryptoValute _cryptoValute) {
-                        fillBlocksTopThree(_cryptoValute);
-                        swipeRefreshLayoutHome.setRefreshing(false);
+                        if (isAdded()) {
+                            fillBlocksTopThree(_cryptoValute);
+                            swipeRefreshLayoutHome.setRefreshing(false);
+                        }
                     }
                 });
     }

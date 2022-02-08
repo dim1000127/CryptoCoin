@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.example.cryptocoin.R;
 import com.example.cryptocoin.RetrofitSingleton;
 import com.example.cryptocoin.adapter.AdapterCryptoValutePrice;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.google.android.material.snackbar.Snackbar;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -30,6 +32,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private AdapterCryptoValutePrice adapterCryptoValutePrice;
     private Subscription subscription;
     private SwipeRefreshLayout swipeRefreshLayoutList;
+    private RelativeLayout relativeLayout;
 
     @Nullable
     @Override
@@ -38,6 +41,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         listViewTop = (ListView) view.findViewById(R.id.listview_top100_cryptovalute);
         buttonListTop = (ImageButton) view.findViewById(R.id.button_list_up);
         swipeRefreshLayoutList = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutList);
+        relativeLayout = (RelativeLayout) view.findViewById(R.id.parentRelativeList);
         swipeRefreshLayoutList.setOnRefreshListener(this);
         buttonListTop.setVisibility(View.GONE);
         listViewTop.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -100,24 +104,26 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     public void onError(Throwable e) {
                         if (isAdded()) {
                             swipeRefreshLayoutList.setRefreshing(false);
-                            /*Snackbar.make(recyclerView, R.string.connection_error, Snackbar.LENGTH_SHORT)
+                            Snackbar.make(relativeLayout, R.string.connection_error, Snackbar.LENGTH_LONG)
                                     .setAction(R.string.try_again, new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             swipeRefreshLayoutList.setRefreshing(true);
-                                            RetrofitSingleton.resetModelsObservable();
+                                            RetrofitSingleton.resetCryptoValuteObservable();
                                             getCryptoValuteData();
                                         }
                                     })
-                                    .show();*/
+                                    .show();
                         }
                     }
 
                     @Override
                     public void onNext(CryptoValute _cryptoValute) {
-                        adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
-                        listViewTop.setAdapter(adapterCryptoValutePrice);
-                        swipeRefreshLayoutList.setRefreshing(false);
+                        if (isAdded()) {
+                            adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
+                            listViewTop.setAdapter(adapterCryptoValutePrice);
+                            swipeRefreshLayoutList.setRefreshing(false);
+                        }
                     }
                 });
     }
