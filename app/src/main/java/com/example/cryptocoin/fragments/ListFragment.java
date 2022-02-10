@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -35,6 +36,8 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private RelativeLayout relativeLayout;
     private CryptoValute oldDataCryptoValute = null;
 
+    private int firstVisibleElemList = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
@@ -53,6 +56,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                firstVisibleElemList = i;
                 if(i == 0) {
                     buttonListTop.setVisibility(View.GONE);
                 }
@@ -63,11 +67,24 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
 
+        listViewTop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(oldDataCryptoValute, i);
+                fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
+            }
+        });
+
         buttonListTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //listViewTop.setSelection(0);
-                listViewTop.smoothScrollToPosition(0);
+                if (firstVisibleElemList >= 10) {
+                    listViewTop.setSelection(0);
+                    listViewTop.smoothScrollToPosition(0);
+                }
+                else {
+                    listViewTop.smoothScrollToPosition(0);
+                }
             }
         });
 

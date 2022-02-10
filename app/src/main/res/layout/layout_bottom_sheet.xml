@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetContainer"
+    android:background="@drawable/bottom_sheet_background"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/bottom_sheet_name_cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Binance Coin"
+        android:textSize="8pt"
+        android:padding="15dp"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/bottom_sheet_image_cv"
+            android:layout_margin="15dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/bnb"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/bottom_sheet_symbol_cv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start"
+                    android:text="Цена BNB"
+                    android:textSize="6pt"
+                    android:textColor="@color/colorSecondaryText"/>
+
+                <TextView
+                    android:id="@+id/bottom_sheet_price_cv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start"
+                    android:text="$410.68"
+                    android:textSize="10pt"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Изменение за 24ч:"
+                    android:textSize="6pt"
+                    android:textColor="@color/colorSecondaryText"/>
+
+                <TextView
+                    android:id="@+id/bottom_sheet_value_change24h"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="$10"
+                    android:textSize="6pt"
+                    android:paddingStart="5dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/bottom_sheet_percent_change24h"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:gravity="center|end"
+                android:text="5.5%"
+                android:textColor="@color/green"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/style_arrow_green" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Подробная информация"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold"
+        android:textSize="7pt"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="15dp"/>
+
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>-->
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Изменение за 1ч"
+            android:textSize="6pt"
+            android:textColor="@color/colorSecondaryText" />
+
+        <TextView
+            android:id="@+id/bottom_sheet_percent_change1h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.5%"
+            android:textSize="6pt"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Изменение за 7д"
+            android:textSize="6pt"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/bottom_sheet_percent_change7d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-10%"
+            android:textSize="6pt"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Объем торгов за 24ч"
+            android:textSize="6pt"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/bottom_sheet_volume24h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$138993480.45"
+            android:textSize="6pt"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Рыночное доминирование"
+            android:textSize="6pt"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/bottom_sheet_dominance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3.44%"
+            android:textSize="6pt"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Рыночная капитализация"
+            android:textSize="6pt"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/bottom_sheet_market_cap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$70,795,212,218.81"
+            android:textSize="6pt"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Предложение"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold"
+        android:textSize="7pt"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="15dp"/>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Циркулирующее предложение"
+            android:textSize="6pt"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/bottom_sheet_circulating_supply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="165 116 761 BNB"
+            android:textSize="6pt"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Общее предложение"
+            android:textSize="6pt"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/bottom_sheet_total_supply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="165 116 761 BNB"
+            android:textSize="6pt"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Максимальное предложение"
+            android:textSize="6pt"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/bottom_sheet_max_supply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="165 116 761 BNB"
+            android:textSize="6pt"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/colorDivider"/>
+</LinearLayout>

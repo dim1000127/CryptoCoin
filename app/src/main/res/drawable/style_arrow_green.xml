@@ -3,5 +3,6 @@
     <item
         android:drawable="@drawable/arrow_green"
         android:width="8pt"
-        android:height="6pt"/>
+        android:height="6pt"
+        android:right="5dp"/>
 </layer-list>
