@@ -41,13 +41,11 @@ public class Main extends AppCompatActivity {
 
                         case R.id.navigation_home:
                             selectedFragment =  new HomeFragment();
-                            //APIGetPriceCall(0);
                             //необходимо будет сделать свой ActionBar
                             actionBar.setTitle("CryptoCoin");
                             break;
                         case R.id.navigation_list_top:
                             selectedFragment =  new ListFragment();
-                            //APIGetPriceCall(1);
                             actionBar.setTitle("Топ криптовалют");
                             break;
                         case R.id.navigation_bool_learn:
