@@ -84,10 +84,31 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         String symbolCV = dataCryptoValute.getData().get(position).getSymbol();
         textViewSymbolCV.setText(symbolCV);
         double priceCV = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPrice();
-        textViewPriceCV.setText(String.format("$%.2f",priceCV ));
+        if(priceCV <= 1){
+            textViewPriceCV.setText(String.format("$%,.6f", priceCV));
+        }
+        else {
+            textViewPriceCV.setText(String.format("$%,.2f", priceCV));
+        }
         double percentChange24h = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPercentChange24h();
         double valChange24h = (priceCV * percentChange24h)/100;
-        textViewValChange24h.setText(String.format("$%.2f", valChange24h));
+        if(valChange24h >= 0){
+            if(valChange24h <=1) {
+                textViewValChange24h.setText(String.format("$%,.6f", valChange24h));
+            }
+            else{
+                textViewValChange24h.setText(String.format("$%,.2f", valChange24h));
+            }
+        }
+        else {
+            if(valChange24h >=-1f) {
+                textViewValChange24h.setText("-"+String.format("$%,.6f", Math.abs(valChange24h)));
+            }
+            else{
+                textViewValChange24h.setText("-"+String.format("$%,.2f", Math.abs(valChange24h)));
+            }
+
+        }
         textViewPercentChange24h.setText(String.format("%.2f%%", percentChange24h));
         if(percentChange24h>=0){
             textViewPercentChange24h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null));
@@ -106,19 +127,19 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         if(percentChange7d >=0){ textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
         double volume24h = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getVolume24h();
-        textViewVolume24h.setText(String.format("$%.2f", volume24h));
+        textViewVolume24h.setText(String.format("$%,.2f", volume24h));
         double dominance = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getMarketCapDominance();
         textViewDominance.setText(String.format("%.2f%%", dominance));
         double marketCap = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getMarketCap();
-        textViewMarketCap.setText(String.format("$%.2f", marketCap));
+        textViewMarketCap.setText(String.format("$%,.2f", marketCap));
         double circulatingSupply = dataCryptoValute.getData().get(position).getCirculatingSupply();
         if (circulatingSupply == 0) { textViewCirculatingSupply.setText("Нет данных"); }
-        else{ textViewCirculatingSupply.setText(String.format("%.0f", circulatingSupply) + " " + symbolCV); }
+        else{ textViewCirculatingSupply.setText(String.format("%,.0f", circulatingSupply) + " " + symbolCV); }
         double totalSupply = dataCryptoValute.getData().get(position).getTotalSupply();
         if (totalSupply == 0) { textViewTotalSupply.setText("Нет данных"); }
-        else{ textViewTotalSupply.setText(String.format("%.0f", totalSupply) + " " + symbolCV); }
+        else{ textViewTotalSupply.setText(String.format("%,.0f", totalSupply) + " " + symbolCV); }
         double maxSupply = dataCryptoValute.getData().get(position).getMaxSupply();
         if (maxSupply == 0){ textViewMaxSupply.setText("Нет данных"); }
-        else{ textViewMaxSupply.setText(String.format("%.0f", maxSupply) + " " + symbolCV); }
+        else{ textViewMaxSupply.setText(String.format("%,.0f", maxSupply) + " " + symbolCV); }
     }
 }

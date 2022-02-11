@@ -57,7 +57,12 @@ public class AdapterCryptoValutePrice extends BaseAdapter{
         textViewNameCryptoValute.setText(cryptoValuteList.getData().get(i).getName());
         textViewSymbolCryptoValute.setText(cryptoValuteList.getData().get(i).getSymbol());
         double priceCryptoValute = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPrice();
-        textViewPriceCryptoValute.setText(String.format("$%.2f",priceCryptoValute));
+        if(priceCryptoValute<=1){
+            textViewPriceCryptoValute.setText(String.format("$%,.6f", priceCryptoValute));
+        }
+        else {
+            textViewPriceCryptoValute.setText(String.format("$%,.2f", priceCryptoValute));
+        }
         double percentChange24H = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPercentChange24h();
         textViewPercentChange.setText(String.format("%.2f%%", percentChange24H));
         if(percentChange24H>=0){
