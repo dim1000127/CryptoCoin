@@ -1,5 +1,6 @@
-package com.example.cryptocoin;
+package com.example.cryptocoin.retrofit;
 
+import com.example.cryptocoin.Const;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 
 import retrofit2.Retrofit;
@@ -65,6 +66,10 @@ public class RetrofitSingleton{
             resetCryptoValuteObservable();
         }
         return observableCryptoValute;
+    }
+
+    public static void resetMetaDataObservable(){
+
     }
 
 }

@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.RetrofitSingleton;
+import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.example.cryptocoin.adapter.AdapterCryptoValutePrice;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.google.android.material.snackbar.Snackbar;

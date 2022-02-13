@@ -49,7 +49,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bottom_sheet, container, false);
+        View view = inflater.inflate(R.layout.fragment_bottom_sheet, container, false);
         imageCryptoValute = (ImageView) view.findViewById(R.id.bottom_sheet_image_cv);
         textViewNameCV = (TextView) view.findViewById(R.id.bottom_sheet_name_cv);
         textViewSymbolCV = (TextView) view.findViewById(R.id.bottom_sheet_symbol_cv);

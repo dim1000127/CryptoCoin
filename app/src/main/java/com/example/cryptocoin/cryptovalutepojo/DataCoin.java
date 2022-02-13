@@ -23,6 +23,15 @@ public class DataCoin implements Serializable{
     @SerializedName("percent_change_7d")
     private double percentChange7d;
 
+    @SerializedName("percent_change_30d")
+    private double percentChange30d;
+
+    @SerializedName("percent_change_60d")
+    private double percentChange60d;
+
+    @SerializedName("percent_change_90d")
+    private double percentChange90d;
+
     @SerializedName("market_cap")
     private double marketCap;
 
@@ -58,6 +67,12 @@ public class DataCoin implements Serializable{
     public double getPercentChange7d() {
         return percentChange7d;
     }
+
+    public double getPercentChange30d(){return percentChange30d;}
+
+    public double getPercentChange60d(){return percentChange60d;}
+
+    public double getPercentChange90d(){return percentChange90d;}
 
     public double getFullyDilutedMarketCap() {
         return fullyDilutedMarketCap;

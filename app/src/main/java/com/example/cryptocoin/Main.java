@@ -23,7 +23,7 @@ public class Main extends AppCompatActivity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_screen);
+        setContentView(R.layout.activity_main_screen);
         actionBar = getSupportActionBar();
 
         selectedFragment = new HomeFragment();

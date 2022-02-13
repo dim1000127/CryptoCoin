@@ -21,6 +21,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.retrofit.RetrofitSingleton;
 
 import java.io.Serializable;
 

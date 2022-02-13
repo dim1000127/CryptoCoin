@@ -16,8 +16,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cryptocoin.ActivityConvertCryptoValute;
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.RetrofitSingleton;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
 
 import rx.Subscriber;
@@ -48,6 +48,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
         getCryptoValuteData();
+        //APIGetPriceCall();
         return  rootView;
     }
 
@@ -133,16 +134,14 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         RequestsAPI requestsAPI = retrofit.create(RequestsAPI.class);
 
-        Call<CryptoValute> dataCryptoValute = requestsAPI.getDataCryptoValute(1,3);
+        Call<Metadata> metadataCall = requestsAPI.getMetadata("1,1027","logo");
 
-        dataCryptoValute.enqueue(new Callback<CryptoValute>() {
+        metadataCall.enqueue(new Callback<Metadata>() {
             @Override
-            public void onResponse(Call<CryptoValute> call, Response<CryptoValute> response) {
+            public void onResponse(Call<Metadata> call, Response<Metadata> response) {
                 if(response.isSuccessful()){
-                    CryptoValute dataCryptoValute = null;
-                    dataCryptoValute = response.body();
-                    fillBlocksTopThree(dataCryptoValute);
-                    Log.d("List ", String.valueOf(response.body()));
+
+                    Log.d("Metadata(logo)",response.body().getData().get("1").getLogo());
                 }
                 else{
                     Log.d("Response code ", String.valueOf(response.code()));
@@ -150,7 +149,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
 
             @Override
-            public void onFailure(Call<CryptoValute> call, Throwable t) {
+            public void onFailure(Call<Metadata> call, Throwable t) {
                 Log.d("Failure", t.toString());
             }
         });

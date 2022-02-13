@@ -1,9 +1,8 @@
 package com.example.cryptocoin.cryptovalutepojo;
 
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.List;
 
 public class DataItem implements Serializable{
@@ -42,9 +41,6 @@ public class DataItem implements Serializable{
 
     @SerializedName("tags")
     private List<String> tags;
-
-    @SerializedName("platform")
-    private Object platform;
 
     @SerializedName("quote")
     //private HashMap<String, DataCoin> quote;
@@ -96,10 +92,6 @@ public class DataItem implements Serializable{
 
     public List<String> getTags() {
         return tags;
-    }
-
-    public Object getPlatform() {
-        return platform;
     }
 
     public Quote getQuote() {
