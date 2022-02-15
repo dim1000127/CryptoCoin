@@ -21,6 +21,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 
 import java.io.Serializable;
@@ -42,6 +43,7 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
     private EditText editTextValueCryptoValute;
     private EditText editTextValueUsd;
     private CryptoValute dataCryptoValute = null;
+    private Metadata metadata = null;
     private double priceCryptoValute = 0;
 
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -76,7 +78,8 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
             public void onClick(View view) {
                 if(dataCryptoValute!=null){
                     Intent intent = new Intent(ActivityConvertCryptoValute.this, ActivitySelectCryptoValuteConvert.class);
-                    intent.putExtra(Const.CRYPTOVALUTE, (Serializable) dataCryptoValute);
+                    intent.putExtra(Const.CRYPTOVALUTE_INTENT, (Serializable) dataCryptoValute);
+                    intent.putExtra(Const.METADATA_INTENT, (Serializable) metadata);
                     mStartForResult.launch(intent);
                 }
             }
@@ -147,7 +150,9 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
                     @Override
                     public void onNext(Map<String, Object> _cryptoValuteMetadata) {
                         CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
+                        Metadata _metadata = (Metadata) _cryptoValuteMetadata.get(Const.METADATA_KEY_MAP);
                         dataCryptoValute = _cryptoValute;
+                        metadata = _metadata;
                         textViewSymbolCryptoValute.setText(dataCryptoValute.getData().get(0).getSymbol());
                         priceCryptoValute = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
                     }

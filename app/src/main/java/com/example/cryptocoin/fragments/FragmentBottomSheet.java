@@ -14,12 +14,16 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.metadatapojo.Metadata;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.squareup.picasso.Picasso;
 
 
 public class FragmentBottomSheet extends BottomSheetDialogFragment {
 
     private CryptoValute dataCryptoValute;
+    private Metadata metadata;
+
     private int position;
     private ImageView imageCryptoValute;
     private TextView textViewNameCV;
@@ -41,8 +45,9 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         return R.style.BottomSheetDialogTheme;
     }
 
-    public FragmentBottomSheet(CryptoValute _cryptoValute, int _position) {
+    public FragmentBottomSheet(CryptoValute _cryptoValute, Metadata _metadata, int _position) {
         dataCryptoValute = _cryptoValute;
+        metadata = _metadata;
         position = _position;
     }
 
@@ -66,6 +71,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         textViewMaxSupply = (TextView) view.findViewById(R.id.bottom_sheet_max_supply);
 
         fillDataSheet();
+
         return view;
     }
 
@@ -80,6 +86,8 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         if(dataCryptoValute == null){
             return;
         }
+        String idCryptoValute = String.valueOf(dataCryptoValute.getData().get(position).getId());
+        Picasso.get().load(metadata.getData().get(idCryptoValute).getLogo()).into(imageCryptoValute);
         textViewNameCV.setText(dataCryptoValute.getData().get(position).getName());
         String symbolCV = dataCryptoValute.getData().get(position).getSymbol();
         textViewSymbolCV.setText(symbolCV);

@@ -19,6 +19,7 @@ import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.AdapterCryptoValutePrice;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -31,6 +32,7 @@ import rx.schedulers.Schedulers;
 
 
 public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+
     private ListView listViewTop;
     private ImageButton buttonListTop;
     private AdapterCryptoValutePrice adapterCryptoValutePrice;
@@ -38,6 +40,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private SwipeRefreshLayout swipeRefreshLayoutList;
     private RelativeLayout relativeLayout;
     private CryptoValute oldDataCryptoValute = null;
+    private Metadata metadata = null;
 
     private int firstVisibleElemList = 0;
 
@@ -73,7 +76,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         listViewTop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(oldDataCryptoValute, i);
+                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(oldDataCryptoValute, metadata, i);
                 fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
             }
         });
@@ -144,6 +147,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     @Override
                     public void onNext(Map<String, Object> _cryptoValuteMetadata) {
                         CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
+                        metadata = (Metadata) _cryptoValuteMetadata.get(Const.METADATA_KEY_MAP);
                         if (isAdded()) {
                             if (oldDataCryptoValute != null) {
                                 double oldPrice = oldDataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
@@ -154,7 +158,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 }
                                 else
                                 {
-                                    adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
+                                    adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute, metadata);
                                     listViewTop.setAdapter(adapterCryptoValutePrice);
                                     oldDataCryptoValute = _cryptoValute;
                                     swipeRefreshLayoutList.setRefreshing(false);
@@ -162,7 +166,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             }
                             else
                             {
-                                adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute);
+                                adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute, metadata);
                                 listViewTop.setAdapter(adapterCryptoValutePrice);
                                 oldDataCryptoValute = _cryptoValute;
                                 swipeRefreshLayoutList.setRefreshing(false);

@@ -38,11 +38,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!--<ImageView
+                    <ImageView
                         android:id="@+id/imageCryptovaluteOne"
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/btc" />-->
+                        android:layout_height="20dp"/>
 
                     <TextView
                         android:id="@+id/symbolCryptoOne"
@@ -83,11 +82,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!--<ImageView
+                    <ImageView
                         android:id="@+id/imageCryptovaluteTwo"
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/eth"/>-->
+                        android:layout_height="20dp"/>
 
                     <TextView
                         android:id="@+id/symbolCryptoTwo"
@@ -128,11 +126,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!--<ImageView
+                    <ImageView
                         android:id="@+id/imageCryptovaluteThree"
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/bnb"/>-->
+                        android:layout_height="20dp"/>
 
                     <TextView
                         android:id="@+id/symbolCryptoThree"

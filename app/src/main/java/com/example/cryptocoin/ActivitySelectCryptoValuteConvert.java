@@ -14,11 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cryptocoin.adapter.AdapterSelectCryptoValute;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.metadatapojo.Metadata;
 
 public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
     private ListView listViewSelectCryptoValute;
     private AdapterSelectCryptoValute adapterSelectCryptoValute;
     private CryptoValute dataCryptoValute = null;
+    private Metadata metadata = null;
     private double priceCryptoValute = 0;
     private String symbolCryptoValute = null;
 
@@ -31,8 +33,10 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
         actionBar.setTitle("Выбрать криптовалюту");
 
         Bundle extras = getIntent().getExtras();
-        dataCryptoValute = (CryptoValute) extras.getSerializable(Const.CRYPTOVALUTE);
-        adapterSelectCryptoValute = new AdapterSelectCryptoValute(dataCryptoValute);
+        dataCryptoValute = (CryptoValute) extras.getSerializable(Const.CRYPTOVALUTE_INTENT);
+        metadata = (Metadata) extras.getSerializable(Const.METADATA_INTENT);
+
+        adapterSelectCryptoValute = new AdapterSelectCryptoValute(dataCryptoValute, metadata);
         listViewSelectCryptoValute = (ListView) findViewById(R.id.listview_select_cryptovalute);
         listViewSelectCryptoValute.setAdapter(adapterSelectCryptoValute);
 

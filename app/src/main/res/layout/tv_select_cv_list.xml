@@ -6,6 +6,12 @@
     android:layout_height="50dp"
     android:background="@drawable/style_for_list_element">
 
+    <ImageView
+        android:id="@+id/image_logo_cryptovalute_list_forconvert"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:padding="4dp"/>
+
     <TextView
         android:id="@+id/name_cryptovalute_list_forconvert"
         android:paddingStart="4dp"
@@ -13,7 +19,7 @@
         android:text="Bitcoin"
         android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/symbol_cryptovalute_list_forconvert"

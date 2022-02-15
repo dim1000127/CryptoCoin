@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import java.util.Map;
 
@@ -119,14 +121,14 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 }
                                 else
                                 {
-                                    fillBlocksTopThree(_cryptoValute);
+                                    fillBlocksTopThree(_cryptoValute, _metadata);
                                     oldDataCryptoValute = _cryptoValute;
                                     swipeRefreshLayoutHome.setRefreshing(false);
                                 }
                             }
                             else
                             {
-                                fillBlocksTopThree(_cryptoValute);
+                                fillBlocksTopThree(_cryptoValute, _metadata);
                                 oldDataCryptoValute = _cryptoValute;
                                 swipeRefreshLayoutHome.setRefreshing(false);
                             }
@@ -135,7 +137,16 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 });
     }
 
-    private void fillBlocksTopThree(CryptoValute dataCryptoValute){
+    private void fillBlocksTopThree(CryptoValute dataCryptoValute, Metadata metadata){
+        String idCryptoOne = String.valueOf(dataCryptoValute.getData().get(0).getId());
+        String idCryptoTwo = String.valueOf(dataCryptoValute.getData().get(1).getId());
+        String idCryptoThree = String.valueOf(dataCryptoValute.getData().get(2).getId());
+        ImageView imageViewCryptoOne = getActivity().findViewById(R.id.imageCryptovaluteOne);
+        Picasso.get().load(metadata.getData().get(idCryptoOne).getLogo()).into(imageViewCryptoOne);
+        ImageView imageViewCryptoTwo = getActivity().findViewById(R.id.imageCryptovaluteTwo);
+        Picasso.get().load(metadata.getData().get(idCryptoTwo).getLogo()).into(imageViewCryptoTwo);
+        ImageView imageViewCryptoThree = getActivity().findViewById(R.id.imageCryptovaluteThree);
+        Picasso.get().load(metadata.getData().get(idCryptoThree).getLogo()).into(imageViewCryptoThree);
         TextView textViewSymbolCryptoOne = getActivity().findViewById(R.id.symbolCryptoOne);
         textViewSymbolCryptoOne.setText(dataCryptoValute.getData().get(0).getSymbol());
         TextView textViewSymbolCryptoTwo = getActivity().findViewById(R.id.symbolCryptoTwo);

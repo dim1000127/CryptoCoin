@@ -5,18 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.metadatapojo.Metadata;
+import com.squareup.picasso.Picasso;
 
 public class AdapterSelectCryptoValute extends BaseAdapter {
 
     private CryptoValute cryptoValuteList;
+    private Metadata metadata;
 
-    public AdapterSelectCryptoValute(CryptoValute _cryptoValuteList){
+    public AdapterSelectCryptoValute(CryptoValute _cryptoValuteList, Metadata _metadata){
         cryptoValuteList = _cryptoValuteList;
+        metadata = _metadata;
     }
 
     @Override
@@ -44,10 +48,13 @@ public class AdapterSelectCryptoValute extends BaseAdapter {
             view = inflater.inflate(R.layout.tv_select_cv_list, viewGroup, false);
         }
 
-        LinearLayout layout = (LinearLayout) view;
-        TextView textViewNameCryptoValute = (TextView) layout.findViewById(R.id.name_cryptovalute_list_forconvert);
-        TextView textViewSymbolCryptoValute = (TextView) layout.findViewById(R.id.symbol_cryptovalute_list_forconvert);
-        layout.setTag(cryptoValuteList.getData().get(i).getId());
+        ImageView imageViewCryptoValuteLogo = (ImageView) view.findViewById(R.id.image_logo_cryptovalute_list_forconvert);
+        TextView textViewNameCryptoValute = (TextView) view.findViewById(R.id.name_cryptovalute_list_forconvert);
+        TextView textViewSymbolCryptoValute = (TextView) view.findViewById(R.id.symbol_cryptovalute_list_forconvert);
+
+        String idCryptoValute = String.valueOf(cryptoValuteList.getData().get(i).getId());
+
+        Picasso.get().load(metadata.getData().get(idCryptoValute).getLogo()).into(imageViewCryptoValuteLogo);
         textViewNameCryptoValute.setText(cryptoValuteList.getData().get(i).getName());
         textViewSymbolCryptoValute.setText(cryptoValuteList.getData().get(i).getSymbol());
 
