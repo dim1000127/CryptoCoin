@@ -15,10 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cryptocoin.ActivityConvertCryptoValute;
+import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Map;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -29,6 +33,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private Button buttonOpenConvertCryptoValute;
     private Subscription subscription;
+    private Subscription subscriptionMetadata;
     private SwipeRefreshLayout swipeRefreshLayoutHome;
     private CryptoValute oldDataCryptoValute = null;
 
@@ -48,7 +53,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
         getCryptoValuteData();
-        //APIGetPriceCall();
+
         return  rootView;
     }
 
@@ -66,6 +71,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         getCryptoValuteData();
     }
 
+
     private void getCryptoValuteData(){
         //swipeRefreshLayoutHome.setRefreshing(true);
 
@@ -75,7 +81,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         subscription = RetrofitSingleton.getCryptoValuteObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<CryptoValute>() {
+                .subscribe(new Subscriber<Map<String, Object>>() {
                     @Override
                     public void onCompleted() {
                         Log.d("onCompleted", "onCompleted");
@@ -99,7 +105,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     }
 
                     @Override
-                    public void onNext(CryptoValute _cryptoValute) {
+                    public void onNext(Map<String, Object> _cryptoValuteMetadata) {
+                        CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
+                        Metadata _metadata = (Metadata) _cryptoValuteMetadata.get(Const.METADATA_KEY_MAP);
+
                         if (isAdded()) {
                             if (oldDataCryptoValute != null) {
                                 double oldPrice = oldDataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
@@ -125,35 +134,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     }
                 });
     }
-
-    /*private void APIGetPriceCall() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Const.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RequestsAPI requestsAPI = retrofit.create(RequestsAPI.class);
-
-        Call<Metadata> metadataCall = requestsAPI.getMetadata("1,1027","logo");
-
-        metadataCall.enqueue(new Callback<Metadata>() {
-            @Override
-            public void onResponse(Call<Metadata> call, Response<Metadata> response) {
-                if(response.isSuccessful()){
-
-                    Log.d("Metadata(logo)",response.body().getData().get("1").getLogo());
-                }
-                else{
-                    Log.d("Response code ", String.valueOf(response.code()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Metadata> call, Throwable t) {
-                Log.d("Failure", t.toString());
-            }
-        });
-    }*/
 
     private void fillBlocksTopThree(CryptoValute dataCryptoValute){
         TextView textViewSymbolCryptoOne = getActivity().findViewById(R.id.symbolCryptoOne);

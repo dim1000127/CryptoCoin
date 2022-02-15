@@ -15,11 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.example.cryptocoin.adapter.AdapterCryptoValutePrice;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Map;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -115,7 +118,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         subscription = RetrofitSingleton.getCryptoValuteObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<CryptoValute>() {
+                .subscribe(new Subscriber<Map<String, Object>>() {
                     @Override
                     public void onCompleted() {
                         Log.d("onCompleted", "onCompleted");
@@ -139,7 +142,8 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     }
 
                     @Override
-                    public void onNext(CryptoValute _cryptoValute) {
+                    public void onNext(Map<String, Object> _cryptoValuteMetadata) {
+                        CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
                         if (isAdded()) {
                             if (oldDataCryptoValute != null) {
                                 double oldPrice = oldDataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
@@ -167,36 +171,4 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     }
                 });
     }
-
-    /*private void APIGetPriceCall() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Const.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RequestsAPI requestsAPI = retrofit.create(RequestsAPI.class);
-
-        Call<CryptoValute> dataCryptoValute = requestsAPI.getDataCryptoValute(1,100);
-
-        dataCryptoValute.enqueue(new Callback<CryptoValute>() {
-            @Override
-            public void onResponse(Call<CryptoValute> call, Response<CryptoValute> response) {
-                if(response.isSuccessful()){
-                    CryptoValute dataCryptoValute = null;
-                    dataCryptoValute = response.body();
-                    adapterCryptoValutePrice = new AdapterCryptoValutePrice(dataCryptoValute);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    Log.d("List ", String.valueOf(response.body()));
-                }
-                else{
-                    Log.d("Response code ", String.valueOf(response.code()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CryptoValute> call, Throwable t) {
-                Log.d("Failure", t.toString());
-            }
-        });
-    }*/
 }

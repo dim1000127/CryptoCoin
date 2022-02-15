@@ -24,6 +24,7 @@ import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -132,7 +133,7 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
         subscription = RetrofitSingleton.getCryptoValuteObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<CryptoValute>() {
+                .subscribe(new Subscriber<Map<String, Object>>() {
                     @Override
                     public void onCompleted() {
                         Log.d("onCompleted", "onCompleted");
@@ -144,7 +145,8 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(CryptoValute _cryptoValute) {
+                    public void onNext(Map<String, Object> _cryptoValuteMetadata) {
+                        CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
                         dataCryptoValute = _cryptoValute;
                         textViewSymbolCryptoValute.setText(dataCryptoValute.getData().get(0).getSymbol());
                         priceCryptoValute = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
@@ -159,37 +161,6 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
             subscription.unsubscribe();
         }
     }
-
-    /*private void APIGetPriceCall() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Const.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RequestsAPI requestsAPI = retrofit.create(RequestsAPI.class);
-
-        Call<CryptoValute> dataCryptoValuteCall = requestsAPI.getDataCryptoValute(1,100);
-
-        dataCryptoValuteCall.enqueue(new Callback<CryptoValute>() {
-            @Override
-            public void onResponse(Call<CryptoValute> call, Response<CryptoValute> response) {
-                if(response.isSuccessful()){
-                    dataCryptoValute = response.body();
-                    textViewSymbolCryptoValute.setText(dataCryptoValute.getData().get(0).getSymbol());
-                    priceCryptoValute = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
-                    Log.d("List ", String.valueOf(response.body()));
-                }
-                else{
-                    Log.d("Response code ", String.valueOf(response.code()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CryptoValute> call, Throwable t) {
-                Log.d("Failure", t.toString());
-            }
-        });
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
