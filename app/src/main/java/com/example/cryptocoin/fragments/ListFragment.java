@@ -85,7 +85,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             @Override
             public void onClick(View view) {
                 if (firstVisibleElemList >= 10) {
-                    listViewTop.setSelection(0);
+                    listViewTop.setSelection(1);
                     listViewTop.smoothScrollToPosition(0);
                 }
                 else {

@@ -15,22 +15,25 @@
             android:text="@string/convert"
             android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_margin="4dp"
+            android:layout_marginStart="@dimen/margin_border"
+            android:layout_marginEnd="@dimen/margin_border"
             android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:id="@+id/top_three_kritovalute"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_border"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/blockForCryptovaluteOne"
+                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_margin="4dp"
+                android:layout_marginEnd="4dp"
                 android:background="@drawable/style_for_block_topthreecryptovalute">
 
                 <LinearLayout
@@ -46,7 +49,7 @@
                     <TextView
                         android:id="@+id/symbolCryptoOne"
                         android:text="@string/empty"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -62,6 +65,7 @@
                     android:id="@+id/priceCryptoValuteOne"
                     android:text="@string/empty"
                     android:textSize="12pt"
+                    android:layout_marginTop="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"/>
@@ -70,11 +74,12 @@
 
             <LinearLayout
                 android:id="@+id/blockForCryptovaluteTwo"
+                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_margin="4dp"
+                android:layout_marginEnd="4dp"
                 android:background="@drawable/style_for_block_topthreecryptovalute">
 
                 <LinearLayout
@@ -90,7 +95,7 @@
                     <TextView
                         android:id="@+id/symbolCryptoTwo"
                         android:text="@string/empty"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -106,6 +111,7 @@
                 <TextView
                     android:id="@+id/priceCryptoValuteTwo"
                     android:text="@string/empty"
+                    android:layout_marginTop="4dp"
                     android:textSize="12pt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,11 +120,11 @@
 
             <LinearLayout
                 android:id="@+id/blockForCryptovaluteThree"
+                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_margin="4dp"
                 android:background="@drawable/style_for_block_topthreecryptovalute">
 
                 <LinearLayout
@@ -134,7 +140,7 @@
                     <TextView
                         android:id="@+id/symbolCryptoThree"
                         android:text="@string/empty"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -150,6 +156,7 @@
                 <TextView
                     android:id="@+id/priceCryptoValuteThree"
                     android:text="@string/empty"
+                    android:layout_marginTop="4dp"
                     android:textSize="12pt"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
