@@ -32,7 +32,6 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
     private double priceCryptoValute = 0;
     private String symbolViat = null;
     private String symbolCryptoValute = null;
-    private String numberAsset = null;
     private String typeAsset = null;
 
 
@@ -47,7 +46,6 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         dataCryptoValute = (CryptoValute) extras.getSerializable(Const.CRYPTOVALUTE_INTENT);
         metadata = (Metadata) extras.getSerializable(Const.METADATA_INTENT);
-        numberAsset = extras.getString(Const.ASSET_NUMBER_INTENT);
 
         adapterSelectCryptoValute = new AdapterSelectCryptoValute(dataCryptoValute, metadata);
 
@@ -68,7 +66,6 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
                 data.putExtra(ActivityConvertCryptoValute.PRICE_MESSAGE, priceCryptoValute);
                 data.putExtra(ActivityConvertCryptoValute.SYMBOL_MESSAGE, symbolCryptoValute);
                 data.putExtra(ActivityConvertCryptoValute.ID_MESSAGE, idCryptoValute);
-                data.putExtra(ActivityConvertCryptoValute.ASSET_NUMBER, numberAsset);
                 data.putExtra(ActivityConvertCryptoValute.TYPE_ASSET, typeAsset);
                 setResult(RESULT_OK, data);
                 finish();
@@ -96,7 +93,6 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
         typeAsset = Const.FIAT;
         Intent data = new Intent();
         data.putExtra(ActivityConvertCryptoValute.TYPE_ASSET, typeAsset);
-        data.putExtra(ActivityConvertCryptoValute.ASSET_NUMBER, numberAsset);
         data.putExtra(ActivityConvertCryptoValute.SYMBOL_MESSAGE, symbolViat);
         setResult(RESULT_OK, data);
         finish();
@@ -107,7 +103,6 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
         typeAsset = Const.FIAT;
         Intent data = new Intent();
         data.putExtra(ActivityConvertCryptoValute.TYPE_ASSET, typeAsset);
-        data.putExtra(ActivityConvertCryptoValute.ASSET_NUMBER, numberAsset);
         data.putExtra(ActivityConvertCryptoValute.SYMBOL_MESSAGE, symbolViat);
         setResult(RESULT_OK, data);
         finish();
