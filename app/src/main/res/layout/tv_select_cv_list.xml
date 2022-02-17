@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/image_logo_cryptovalute_list_forconvert"
-        android:layout_width="40dp"
+        android:layout_width="@dimen/image_width_list"
         android:layout_height="match_parent"
         android:padding="4dp"/>
 
@@ -16,6 +16,7 @@
         android:id="@+id/name_cryptovalute_list_forconvert"
         android:paddingStart="4dp"
         android:textSize="8pt"
+        android:textColor="@color/colorPrimaryText"
         android:text="Bitcoin"
         android:gravity="center"
         android:layout_width="wrap_content"
@@ -26,6 +27,7 @@
         android:paddingStart="4dp"
         android:paddingTop="3dp"
         android:textSize="6pt"
+        android:textColor="@color/colorSecondaryText"
         android:text="BTC"
         android:gravity="center|left"
         android:layout_width="match_parent"

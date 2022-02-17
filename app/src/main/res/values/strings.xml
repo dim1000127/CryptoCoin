@@ -2,14 +2,19 @@
     <string name="app_name">CryptoCoin</string>
     <string name="book_learn_text">Здесь будут небольшие обучающие тексты,
         после прочтения которых,пользователю будет предлагаться пройти тест</string>
-    <string name="soon">Скоро здесь что-то появится</string>
+    <string name="soon">Скоро</string>
     <string name="main">Главная</string>
     <string name="top">Топ</string>
     <string name="training">Обучение</string>
     <string name="empty">--</string>
     <string name="convert">Конвертер</string>
-    <string name="USD">USD</string>
+    <string name="usd">USD</string>
     <string name="connection_error">Ошибка подключения</string>
     <string name="try_again">Повторить</string>
     <string name="actual_data">У Вас находятся актуальные данные</string>
+    <string name="fiat">Фиат</string>
+    <string name="cryptovaluts">Криптовалюты</string>
+    <string name="american_dollar">Американский доллар</string>
+    <string name="russian_ruble">Российский рубль</string>
+    <string name="rub">RUB</string>
 </resources>

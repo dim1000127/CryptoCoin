@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_border">8dp</dimen>
+
     <dimen name="padding_border">8dp</dimen>
+
+    <dimen name="image_width_list">40dp</dimen>
 </resources>
