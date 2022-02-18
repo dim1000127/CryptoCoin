@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,7 +36,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class ActivityConvertCryptoValute extends AppCompatActivity {
+public class ActivityConvertCryptoValute extends AppCompatActivity implements View.OnClickListener {
 
     public static final String PRICE_MESSAGE="PRICE_MESSAGE";
     public static final String SYMBOL_MESSAGE="SYMBOL_MESSAGE";
@@ -53,12 +54,26 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
     private EditText editTextValueSecondAsset;
     private LinearLayout layoutConvertFirstAsset;
     private LinearLayout layoutConvertSecondAsset;
+    private Button buttonCalculateConvert1;
+    private Button buttonCalculateConvert2;
+    private Button buttonCalculateConvert3;
+    private Button buttonCalculateConvert4;
+    private Button buttonCalculateConvert5;
+    private Button buttonCalculateConvert6;
+    private Button buttonCalculateConvert7;
+    private Button buttonCalculateConvert8;
+    private Button buttonCalculateConvert9;
+    private Button buttonCalculateConvert0;
+    private Button buttonCalculateConvertComma;
+    private Button buttonCalculateConvertBackspace;
 
     private CryptoValute dataCryptoValute = null;
     private Metadata metadata = null;
 
-    private double priceFirstAsset = 0;
-    private double priceSecondAsset = 0;
+    private double priceFirstAsset = 11;
+    private double priceSecondAsset = 1;
+    private double dollarPrice = 1;
+    //private double rublePrice = 75;
     private String idCryptoValuteAsset = "1";
     private String symbolMessageFirstAsset = null;
     private String symbolMessageSecondAsset = null;
@@ -84,12 +99,13 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
                             symbolMessageFirstAsset = intent.getStringExtra(SYMBOL_MESSAGE);
                             if(symbolMessageFirstAsset.equals(Const.USD_SYMBOL)){
                                 textViewSymbolFirstAsset.setText(symbolMessageFirstAsset);
+                                priceFirstAsset = dollarPrice;
 
                                 Picasso.get().load(R.drawable.usd_logo).into(imageViewLogoFirstAsset);
                             }
                             else if(symbolMessageFirstAsset.equals(Const.RUB_SYMBOL)){
                                 textViewSymbolFirstAsset.setText(symbolMessageFirstAsset);
-
+                                //priceFirstAsset = dollarPrice / rublePrice;
                                 Picasso.get().load(R.drawable.rub_logo).into(imageViewLogoFirstAsset);
                             }
                         }
@@ -119,12 +135,12 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
                             symbolMessageSecondAsset = intent.getStringExtra(SYMBOL_MESSAGE);
                             if(symbolMessageSecondAsset.equals(Const.USD_SYMBOL)){
                                 textViewSymbolSecondAsset.setText(symbolMessageSecondAsset);
-
+                                priceSecondAsset = dollarPrice;
                                 Picasso.get().load(R.drawable.usd_logo).into(imageViewLogoSecondAsset);
                             }
                             else if(symbolMessageSecondAsset.equals(Const.RUB_SYMBOL)){
                                 textViewSymbolSecondAsset.setText(symbolMessageSecondAsset);
-
+                                //priceSecondAsset = dollarPrice/rublePrice;
                                 Picasso.get().load(R.drawable.rub_logo).into(imageViewLogoSecondAsset);
                             }
                         }
@@ -149,40 +165,53 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
         textViewSymbolSecondAsset = (TextView) findViewById(R.id.tv_symbol_second_asset);
         editTextValueFirstAsset = (EditText) findViewById(R.id.et_value_first_asset);
         editTextValueSecondAsset = (EditText) findViewById(R.id.et_value_second_asset);
+        buttonCalculateConvert1 = (Button) findViewById(R.id.btn_calculate_convert_1);
+        buttonCalculateConvert2 = (Button) findViewById(R.id.btn_calculate_convert_2);
+        buttonCalculateConvert3 = (Button) findViewById(R.id.btn_calculate_convert_3);
+        buttonCalculateConvert4 = (Button) findViewById(R.id.btn_calculate_convert_4);
+        buttonCalculateConvert5 = (Button) findViewById(R.id.btn_calculate_convert_5);
+        buttonCalculateConvert6 = (Button) findViewById(R.id.btn_calculate_convert_6);
+        buttonCalculateConvert7 = (Button) findViewById(R.id.btn_calculate_convert_7);
+        buttonCalculateConvert8 = (Button) findViewById(R.id.btn_calculate_convert_8);
+        buttonCalculateConvert9 = (Button) findViewById(R.id.btn_calculate_convert_9);
+        buttonCalculateConvert0 = (Button) findViewById(R.id.btn_calculate_convert_0);
+        buttonCalculateConvertComma = (Button) findViewById(R.id.btn_calculate_convert_comma);
+        buttonCalculateConvertBackspace = (Button) findViewById(R.id.btn_calculate_convert_backspace);
+
+        buttonCalculateConvert1.setOnClickListener(this);
+        buttonCalculateConvert2.setOnClickListener(this);
+        buttonCalculateConvert3.setOnClickListener(this);
+        buttonCalculateConvert4.setOnClickListener(this);
+        buttonCalculateConvert5.setOnClickListener(this);
+        buttonCalculateConvert6.setOnClickListener(this);
+        buttonCalculateConvert7.setOnClickListener(this);
+        buttonCalculateConvert8.setOnClickListener(this);
+        buttonCalculateConvert9.setOnClickListener(this);
+        buttonCalculateConvert0.setOnClickListener(this);
+        buttonCalculateConvertComma.setOnClickListener(this);
+        buttonCalculateConvertBackspace.setOnClickListener(this);
+        layoutConvertFirstAsset.setOnClickListener(this);
+        layoutConvertSecondAsset.setOnClickListener(this);
 
         editTextValueFirstAsset.setText("0");
         editTextValueSecondAsset.setText("0");
 
-        layoutConvertFirstAsset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                convertFirstAssetSelect();
-            }
-        });
-
-        layoutConvertSecondAsset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                convertSecondAssetSelect();
-            }
-        });
-
         editTextValueFirstAsset.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                /*if((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER))
+                if((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER))
                 {
                     String valueEditTextCvStr = editTextValueFirstAsset.getText().toString();
                     if(valueEditTextCvStr.isEmpty() == false) {
-                        double valEtCryptoValute = Double.parseDouble(editTextValueFirstAsset.getText().toString());
-                        double calculateVal = valEtCryptoValute * priceFirstAsset;
+                        double valEtFirstAsset = Double.parseDouble(valueEditTextCvStr.replace(",", "."));
+                        double calculateVal = valEtFirstAsset * priceFirstAsset / priceSecondAsset;
                         if (calculateVal >= 1) {
-                            editTextValueSecondAsset.setText(String.format("%.2f", calculateVal).replace(",", "."));
+                            editTextValueSecondAsset.setText(String.format("%.2f", calculateVal));
                         } else {
-                            editTextValueSecondAsset.setText(String.format("%.6f", calculateVal).replace(",", "."));
+                            editTextValueSecondAsset.setText(String.format("%.6f", calculateVal));
                         }
                     }
-                }*/
+                }
                 return false;
             }
         });
@@ -190,19 +219,19 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
         editTextValueSecondAsset.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                /*if((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&(i == KeyEvent.KEYCODE_ENTER))
+                if((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&(i == KeyEvent.KEYCODE_ENTER))
                 {
-                    String valueEditTextUsdStr = editTextValueSecondAsset.getText().toString();
-                    if(valueEditTextUsdStr.isEmpty() == false) {
-                        double valEtUsd = Double.parseDouble(editTextValueSecondAsset.getText().toString());
-                        double calculateVal = valEtUsd / priceFirstAsset;
+                    String valueEditTextSecondAssetStr = editTextValueSecondAsset.getText().toString();
+                    if(valueEditTextSecondAssetStr.isEmpty() == false) {
+                        double valEtSecondAsset = Double.parseDouble(valueEditTextSecondAssetStr.replace(",", "."));
+                        double calculateVal = valEtSecondAsset / priceFirstAsset * priceSecondAsset;
                         if (calculateVal >= 1) {
-                            editTextValueFirstAsset.setText(String.format("%.2f", calculateVal).replace(",", "."));
+                            editTextValueFirstAsset.setText(String.format("%.2f", calculateVal));
                         } else {
-                            editTextValueFirstAsset.setText(String.format("%.6f", calculateVal).replace(",", "."));
+                            editTextValueFirstAsset.setText(String.format("%.6f", calculateVal));
                         }
                     }
-                }*/
+                }
                 return false;
             }
         });
@@ -265,6 +294,43 @@ public class ActivityConvertCryptoValute extends AppCompatActivity {
                         Picasso.get().load(R.drawable.usd_logo).into(imageViewLogoSecondAsset);
                     }
                 });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.view_select_first_asset:
+                convertFirstAssetSelect();
+                break;
+            case R.id.view_select_second_asset:
+                convertSecondAssetSelect();
+                break;
+            case R.id.btn_calculate_convert_1:
+                //Snackbar.make(buttonCalculateConvert1, R.string.soon, Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_calculate_convert_2:
+                break;
+            case R.id.btn_calculate_convert_3:
+                break;
+            case R.id.btn_calculate_convert_4:
+                break;
+            case R.id.btn_calculate_convert_5:
+                break;
+            case R.id.btn_calculate_convert_6:
+                break;
+            case R.id.btn_calculate_convert_7:
+                break;
+            case R.id.btn_calculate_convert_8:
+                break;
+            case R.id.btn_calculate_convert_9:
+                break;
+            case R.id.btn_calculate_convert_0:
+                break;
+            case R.id.btn_calculate_convert_comma:
+                break;
+            case R.id.btn_calculate_convert_backspace:
+                break;
+        }
     }
 
     @Override

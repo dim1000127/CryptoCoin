@@ -6,8 +6,8 @@
         <item name="colorPrimaryVariant">@color/primaryColor</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/primaryColor</item>
+        <item name="colorSecondaryVariant">@color/primaryColor</item>
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="android:windowBackground">@color/lightgray</item>
@@ -31,5 +31,12 @@
     
     <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ButtonCalculateConvert" parent="Widget.AppCompat.Button">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlHighlight">@color/primaryColorHighlight</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">10pt</item>
     </style>
 </resources>

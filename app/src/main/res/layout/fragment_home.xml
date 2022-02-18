@@ -65,8 +65,8 @@
                     android:id="@+id/priceCryptoValuteOne"
                     android:text="@string/empty"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="12pt"
-                    android:layout_marginTop="4dp"
+                    android:textSize="10pt"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"/>
@@ -113,8 +113,8 @@
                     android:id="@+id/priceCryptoValuteTwo"
                     android:text="@string/empty"
                     android:textColor="@color/colorPrimaryText"
-                    android:layout_marginTop="4dp"
-                    android:textSize="12pt"
+                    android:layout_marginTop="8dp"
+                    android:textSize="10pt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"/>
@@ -159,8 +159,8 @@
                     android:id="@+id/priceCryptoValuteThree"
                     android:text="@string/empty"
                     android:textColor="@color/colorPrimaryText"
-                    android:layout_marginTop="4dp"
-                    android:textSize="12pt"
+                    android:layout_marginTop="8dp"
+                    android:textSize="10pt"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

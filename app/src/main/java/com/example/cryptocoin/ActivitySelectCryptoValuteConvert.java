@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cryptocoin.adapter.AdapterSelectCryptoValute;
+import com.example.cryptocoin.adapter.SelectCryptoValute;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.metadatapojo.Metadata;
 import com.google.android.material.snackbar.Snackbar;
@@ -21,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
 
     private ListView listViewSelectCryptoValute;
-    private AdapterSelectCryptoValute adapterSelectCryptoValute;
+    private SelectCryptoValute adapterSelectCryptoValute;
     private LinearLayout layoutFiatUsdSelect;
     private LinearLayout layoutFiatRubSelect;
 
@@ -47,7 +47,7 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
         dataCryptoValute = (CryptoValute) extras.getSerializable(Const.CRYPTOVALUTE_INTENT);
         metadata = (Metadata) extras.getSerializable(Const.METADATA_INTENT);
 
-        adapterSelectCryptoValute = new AdapterSelectCryptoValute(dataCryptoValute, metadata);
+        adapterSelectCryptoValute = new SelectCryptoValute(dataCryptoValute, metadata);
 
         layoutFiatUsdSelect = (LinearLayout) findViewById(R.id.layout_fiat_usd_select);
         layoutFiatRubSelect = (LinearLayout) findViewById(R.id.layout_fiat_rub_select);

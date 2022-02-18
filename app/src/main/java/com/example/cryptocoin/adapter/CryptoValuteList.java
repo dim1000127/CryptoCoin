@@ -16,12 +16,12 @@ import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.metadatapojo.Metadata;
 import com.squareup.picasso.Picasso;
 
-public class AdapterCryptoValutePrice extends BaseAdapter{
+public class CryptoValuteList extends BaseAdapter{
 
     private CryptoValute cryptoValuteList;
     private Metadata metadata;
 
-    public AdapterCryptoValutePrice(CryptoValute _cryptoValuteList, Metadata _metadata){
+    public CryptoValuteList(CryptoValute _cryptoValuteList, Metadata _metadata){
         cryptoValuteList = _cryptoValuteList;
         metadata = _metadata;
     }

@@ -96,4 +96,165 @@
     </LinearLayout>
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:gravity="bottom">
+
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/margin_border"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_calculate_convert_1"
+                android:text="1"
+                android:backgroundTint="@color/white"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_calculate_convert_2"
+                android:text="2"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:backgroundTint="@color/white"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_calculate_convert_3"
+                android:text="3"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:backgroundTint="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/margin_border"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_calculate_convert_4"
+                android:text="4"
+                android:backgroundTint="@color/white"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_calculate_convert_5"
+                android:text="5"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:backgroundTint="@color/white"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_calculate_convert_6"
+                android:text="6"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:backgroundTint="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/margin_border"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_calculate_convert_7"
+                android:text="7"
+                android:backgroundTint="@color/white"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_calculate_convert_8"
+                android:text="8"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:backgroundTint="@color/white"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_calculate_convert_9"
+                android:text="9"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:backgroundTint="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/margin_border"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_calculate_convert_comma"
+                android:text=","
+                android:backgroundTint="@color/white"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_calculate_convert_0"
+                android:text="0"
+                android:backgroundTint="@color/white"
+                android:textSize="12pt"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_calculate_convert_backspace"
+                android:text="⌫"
+                android:backgroundTint="@color/white"
+                android:textSize="12pt"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

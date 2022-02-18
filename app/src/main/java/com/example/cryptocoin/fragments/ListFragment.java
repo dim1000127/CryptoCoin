@@ -17,7 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.adapter.AdapterCryptoValutePrice;
+import com.example.cryptocoin.adapter.CryptoValuteList;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
@@ -35,7 +35,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private ListView listViewTop;
     private ImageButton buttonListTop;
-    private AdapterCryptoValutePrice adapterCryptoValutePrice;
+    private CryptoValuteList adapterCryptoValutePrice;
     private Subscription subscription;
     private SwipeRefreshLayout swipeRefreshLayoutList;
     private RelativeLayout relativeLayout;
@@ -158,7 +158,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 }
                                 else
                                 {
-                                    adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute, metadata);
+                                    adapterCryptoValutePrice = new CryptoValuteList(_cryptoValute, metadata);
                                     listViewTop.setAdapter(adapterCryptoValutePrice);
                                     oldDataCryptoValute = _cryptoValute;
                                     swipeRefreshLayoutList.setRefreshing(false);
@@ -166,7 +166,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             }
                             else
                             {
-                                adapterCryptoValutePrice = new AdapterCryptoValutePrice(_cryptoValute, metadata);
+                                adapterCryptoValutePrice = new CryptoValuteList(_cryptoValute, metadata);
                                 listViewTop.setAdapter(adapterCryptoValutePrice);
                                 oldDataCryptoValute = _cryptoValute;
                                 swipeRefreshLayoutList.setRefreshing(false);

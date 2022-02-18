@@ -34,9 +34,10 @@ import rx.schedulers.Schedulers;
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private Button buttonOpenConvertCryptoValute;
-    private Subscription subscription;
-    private Subscription subscriptionMetadata;
     private SwipeRefreshLayout swipeRefreshLayoutHome;
+
+    private Subscription subscription;
+
     private CryptoValute oldDataCryptoValute = null;
 
     @Nullable
@@ -154,11 +155,11 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         TextView textViewSymbolCryptoThree = getActivity().findViewById(R.id.symbolCryptoThree);
         textViewSymbolCryptoThree.setText(dataCryptoValute.getData().get(2).getSymbol());
         TextView textViewPriceOne = getActivity().findViewById(R.id.priceCryptoValuteOne);
-        textViewPriceOne.setText(String.format("$%.2f",dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice()));
+        textViewPriceOne.setText(String.format("$%,.2f",dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice()));
         TextView textViewPriceTwo = getActivity().findViewById(R.id.priceCryptoValuteTwo);
-        textViewPriceTwo.setText(String.format("$%.2f",dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
+        textViewPriceTwo.setText(String.format("$%,.2f",dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
         TextView textViewPriceThree = getActivity().findViewById(R.id.priceCryptoValuteThree);
-        textViewPriceThree.setText(String.format("$%.2f",dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPrice()));
+        textViewPriceThree.setText(String.format("$%,.2f",dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPrice()));
         double valueChange24hCryptoOne = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPercentChange24h();
         TextView textViewChange24hCryptoOne = getActivity().findViewById(R.id.percent_change_24hCryptoOne);
         textViewChange24hCryptoOne.setText(String.format("%.2f%%", valueChange24hCryptoOne));

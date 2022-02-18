@@ -13,12 +13,12 @@ import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.metadatapojo.Metadata;
 import com.squareup.picasso.Picasso;
 
-public class AdapterSelectCryptoValute extends BaseAdapter {
+public class SelectCryptoValute extends BaseAdapter {
 
     private CryptoValute cryptoValuteList;
     private Metadata metadata;
 
-    public AdapterSelectCryptoValute(CryptoValute _cryptoValuteList, Metadata _metadata){
+    public SelectCryptoValute(CryptoValute _cryptoValuteList, Metadata _metadata){
         cryptoValuteList = _cryptoValuteList;
         metadata = _metadata;
     }
