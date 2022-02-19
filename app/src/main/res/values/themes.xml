@@ -17,7 +17,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryColor</item>
         <item name="colorOnPrimary">@color/primaryColor</item>
@@ -33,10 +33,4 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="ButtonCalculateConvert" parent="Widget.AppCompat.Button">
-        <item name="colorAccent">@color/white</item>
-        <item name="colorControlHighlight">@color/primaryColorHighlight</item>
-        <item name="android:textColor">@color/colorPrimaryText</item>
-        <item name="android:textSize">10pt</item>
-    </style>
 </resources>

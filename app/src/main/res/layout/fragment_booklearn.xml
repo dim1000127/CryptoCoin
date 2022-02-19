@@ -10,5 +10,5 @@
         android:layout_height="wrap_content"
         android:text="@string/book_learn_text"
         android:gravity="center"
-        android:textSize="10pt"/>
+        android:textSize="20sp"/>
 </LinearLayout>

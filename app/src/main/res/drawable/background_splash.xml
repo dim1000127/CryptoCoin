@@ -8,6 +8,6 @@
     <item
         android:width="200dp"
         android:height="200dp"
-        android:drawable="@drawable/logo_splash"
+        android:drawable="@drawable/ic_logo_splash"
         android:gravity="center"/>
 </layer-list>

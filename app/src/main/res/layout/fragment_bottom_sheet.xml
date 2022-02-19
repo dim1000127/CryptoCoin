@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Binance Coin"
-        android:textSize="8pt"
+        android:textSize="16sp"
         android:padding="15dp"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"/>
@@ -43,7 +43,13 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -56,7 +62,7 @@
                     android:layout_height="match_parent"
                     android:gravity="start"
                     android:text="Цена BNB"
-                    android:textSize="6pt"
+                    android:textSize="12sp"
                     android:textColor="@color/colorSecondaryText"/>
 
                 <TextView
@@ -65,7 +71,7 @@
                     android:layout_height="match_parent"
                     android:gravity="start"
                     android:text="$410.68"
-                    android:textSize="10pt"
+                    android:textSize="20sp"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -80,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:text="Изменение за 24ч:"
-                    android:textSize="6pt"
+                    android:textSize="12sp"
                     android:textColor="@color/colorSecondaryText"/>
 
                 <TextView
@@ -88,10 +94,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="$10"
-                    android:textSize="6pt"
+                    android:textSize="12sp"
                     android:paddingStart="5dp"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold"/>
+            </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -108,7 +115,7 @@
                 android:gravity="center|end"
                 android:text="5.5%"
                 android:textColor="@color/green"
-                android:textSize="8pt"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/style_arrow_green" />
         </RelativeLayout>
@@ -120,7 +127,7 @@
         android:text="Подробная информация"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="7pt"
+        android:textSize="14sp"
         android:paddingHorizontal="15dp"
         android:paddingTop="15dp"/>
 
@@ -141,18 +148,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:text="Изменение за 1ч"
-            android:textSize="6pt"
-            android:textColor="@color/colorSecondaryText" />
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bottom_sheet_percent_change1h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:text="1.5%"
-            android:textSize="6pt"
             android:textColor="@color/colorPrimaryText"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true"/>
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <View
@@ -170,20 +177,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:text="Изменение за 7д"
-            android:textSize="6pt"
             android:textColor="@color/colorSecondaryText"
-            android:layout_alignParentStart="true"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bottom_sheet_percent_change7d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:text="-10%"
-            android:textSize="6pt"
             android:textColor="@color/colorPrimaryText"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true"/>
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <View
@@ -201,20 +208,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:text="Объем торгов за 24ч"
-            android:textSize="6pt"
             android:textColor="@color/colorSecondaryText"
-            android:layout_alignParentStart="true"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bottom_sheet_volume24h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:text="$138993480.45"
-            android:textSize="6pt"
             android:textColor="@color/colorPrimaryText"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true"/>
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <View
@@ -232,20 +239,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:text="Рыночное доминирование"
-            android:textSize="6pt"
             android:textColor="@color/colorSecondaryText"
-            android:layout_alignParentStart="true"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bottom_sheet_dominance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:text="3.44%"
-            android:textSize="6pt"
             android:textColor="@color/colorPrimaryText"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true"/>
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <View
@@ -263,20 +270,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:text="Рыночная капитализация"
-            android:textSize="6pt"
             android:textColor="@color/colorSecondaryText"
-            android:layout_alignParentStart="true"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bottom_sheet_market_cap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:text="$70,795,212,218.81"
-            android:textSize="6pt"
             android:textColor="@color/colorPrimaryText"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true"/>
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <TextView
@@ -285,7 +292,7 @@
         android:text="Предложение"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="7pt"
+        android:textSize="14sp"
         android:paddingHorizontal="15dp"
         android:paddingTop="15dp"/>
 
@@ -297,17 +304,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:text="Циркулирующее предложение"
-            android:textSize="6pt"
             android:textColor="@color/colorSecondaryText"
-            android:layout_alignParentStart="true"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bottom_sheet_circulating_supply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="165 116 761 BNB"
-            android:textSize="6pt"
+            android:textSize="12sp"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"/>
@@ -328,20 +335,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:text="Общее предложение"
-            android:textSize="6pt"
             android:textColor="@color/colorSecondaryText"
-            android:layout_alignParentStart="true"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bottom_sheet_total_supply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:text="165 116 761 BNB"
-            android:textSize="6pt"
             android:textColor="@color/colorPrimaryText"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true"/>
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <View
@@ -359,17 +366,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:text="Максимальное предложение"
-            android:textSize="6pt"
             android:textColor="@color/colorSecondaryText"
-            android:layout_alignParentStart="true"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bottom_sheet_max_supply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="165 116 761 BNB"
-            android:textSize="6pt"
+            android:textSize="12sp"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"/>

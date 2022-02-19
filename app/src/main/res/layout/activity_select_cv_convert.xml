@@ -6,7 +6,7 @@
 
     <TextView
         android:text="@string/fiat"
-        android:textSize="10pt"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryText"
         android:layout_marginTop="12dp"
@@ -30,13 +30,13 @@
             android:id="@+id/image_logo_usd_forconvert"
             android:layout_width="@dimen/image_width_list"
             android:layout_height="match_parent"
-            android:src="@drawable/usd_logo"
+            android:src="@drawable/ic_usd_logo"
             android:padding="4dp"/>
 
         <TextView
             android:id="@+id/name_usd_forconvert"
             android:paddingStart="4dp"
-            android:textSize="8pt"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimaryText"
             android:text="@string/american_dollar"
             android:gravity="center"
@@ -47,7 +47,7 @@
             android:id="@+id/symbol_usd_forconvert"
             android:paddingStart="4dp"
             android:paddingTop="3dp"
-            android:textSize="6pt"
+            android:textSize="12sp"
             android:textColor="@color/colorSecondaryText"
             android:text="@string/usd"
             android:gravity="center|left"
@@ -72,13 +72,13 @@
             android:id="@+id/image_logo_rub_forconvert"
             android:layout_width="@dimen/image_width_list"
             android:layout_height="match_parent"
-            android:src="@drawable/rub_logo"
+            android:src="@drawable/ic_rub_logo"
             android:padding="4dp"/>
 
         <TextView
             android:id="@+id/name_rub_forconvert"
             android:paddingStart="4dp"
-            android:textSize="8pt"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimaryText"
             android:text="@string/russian_ruble"
             android:gravity="center"
@@ -89,7 +89,7 @@
             android:id="@+id/symbol_rub_forconvert"
             android:paddingStart="4dp"
             android:paddingTop="3dp"
-            android:textSize="6pt"
+            android:textSize="12sp"
             android:textColor="@color/colorSecondaryText"
             android:text="@string/rub"
             android:gravity="center|left"
@@ -100,7 +100,7 @@
 
     <TextView
         android:text="@string/cryptovaluts"
-        android:textSize="10pt"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryText"
         android:layout_marginTop="12dp"
