@@ -15,8 +15,6 @@ public class Const {
     public static final String USD_SYMBOL = "USD";
     public static final String RUB_SYMBOL = "RUB";
 
-    public static final String CONVERT_FIRST = "CONVERTFIRST";
-    public static final String CONVERT_SECOND = "CONVERTSECOND";
-
+    public static final String REGEX_EDITTEXT_CONVERT = "(([1-9]{1}[0-9]{0,})?||[0]{1})((\\,[0-9]{0,6})?)||(\\,)?";
 
 }

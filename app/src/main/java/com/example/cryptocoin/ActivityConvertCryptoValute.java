@@ -1,5 +1,6 @@
 package com.example.cryptocoin;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,10 +30,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -80,8 +84,8 @@ public class ActivityConvertCryptoValute extends AppCompatActivity implements Vi
     private String idCryptoValuteAsset = "1";
     private String symbolMessageFirstAsset = null;
     private String symbolMessageSecondAsset = null;
-    private boolean isConvertFirst = true;
-    private boolean isConvertSecond = true;
+    private boolean isConvertFirst = false;
+    private boolean isConvertSecond = false;
 
     ActivityResultLauncher<Intent> firstStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -215,16 +219,18 @@ public class ActivityConvertCryptoValute extends AppCompatActivity implements Vi
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!isConvertSecond) {
+                if(isConvertSecond) {
                     String valueCvStr = editTextValueFirstAsset.getText().toString();
-                    if (valueCvStr.isEmpty() == false) {
+                    if (!valueCvStr.isEmpty()) {
                         if(!valueCvStr.equals(",")) {
-                            isConvertFirst = true;
+                            isConvertFirst = false;
                             double valEtFirstAsset = Double.parseDouble(valueCvStr.replace(",", "."));
                             double calculateVal = valEtFirstAsset * priceFirstAsset / priceSecondAsset;
-                            if (calculateVal >= 1 || calculateVal == 0) {
+                            if (calculateVal >= 1) {
                                 editTextValueSecondAsset.setText(String.format("%.2f", calculateVal));
-                            } else {
+                            } else if (calculateVal == 0){
+                                editTextValueSecondAsset.setText(String.format("%.0f", calculateVal));
+                            }else{
                                 editTextValueSecondAsset.setText(String.format("%.6f", calculateVal));
                             }
                         }
@@ -249,16 +255,18 @@ public class ActivityConvertCryptoValute extends AppCompatActivity implements Vi
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!isConvertFirst) {
+                if(isConvertFirst) {
                     String valueSecondAssetStr = editTextValueSecondAsset.getText().toString();
-                    if (valueSecondAssetStr.isEmpty() == false) {
+                    if (!valueSecondAssetStr.isEmpty()) {
                         if(!valueSecondAssetStr.equals(",")) {
-                            isConvertSecond = true;
+                            isConvertSecond = false;
                             double valEtSecondAsset = Double.parseDouble(valueSecondAssetStr.replace(",", "."));
                             double calculateVal = valEtSecondAsset / priceFirstAsset * priceSecondAsset;
-                            if (calculateVal >= 1 || calculateVal == 0) {
+                            if (calculateVal >= 1) {
                                 editTextValueFirstAsset.setText(String.format("%.2f", calculateVal));
-                            } else {
+                            } else if (calculateVal == 0){
+                                editTextValueFirstAsset.setText(String.format("%.0f", calculateVal));
+                            }else{
                                 editTextValueFirstAsset.setText(String.format("%.6f", calculateVal));
                             }
                         }
@@ -270,10 +278,11 @@ public class ActivityConvertCryptoValute extends AppCompatActivity implements Vi
             }
         });
 
-        editTextValueFirstAsset.setFilters(new InputFilter[] {new DecimalFilter(6)});
-        editTextValueSecondAsset.setFilters(new InputFilter[] {new DecimalFilter(6)});
+        editTextValueFirstAsset.setFilters(new InputFilter[] {new DecimalFilter()});
+        editTextValueSecondAsset.setFilters(new InputFilter[] {new DecimalFilter()});
         editTextValueFirstAsset.setText("0");
         editTextValueSecondAsset.setText("0");
+        editTextValueFirstAsset.setSelection(editTextValueFirstAsset.getText().length());
 
         getCryptoValuteData();
     }
@@ -415,37 +424,42 @@ public class ActivityConvertCryptoValute extends AppCompatActivity implements Vi
                 break;
             case R.id.btn_calculate_convert_backspace:
                 if (editTextValueFirstAsset.hasFocus()){
-                    isConvertSecond = false;
+                    isConvertSecond = true;
                     int cursorPos = editTextValueFirstAsset.getSelectionStart();
                     int textLenght = editTextValueFirstAsset.getText().length();
                     if(cursorPos != 0 && textLenght != 0){
                         SpannableStringBuilder selection = (SpannableStringBuilder) editTextValueFirstAsset.getText();
-                        selection.replace(cursorPos-1, cursorPos, "");
-                        if(selection.toString().matches("0+")){
-                            editTextValueFirstAsset.setText("0");
-                            editTextValueFirstAsset.setSelection(1);
+                        if((selection.toString().indexOf(",")+1)==cursorPos){
+                            selection.replace(cursorPos-1, cursorPos, "");
+                            String strSelection = selection.toString().replaceFirst("^0*", "");
+                            editTextValueFirstAsset.setText(strSelection);
+                            editTextValueFirstAsset.setSelection(editTextValueFirstAsset.getText().length());
                         }
-                        else {
+                        else{
+                            selection.replace(cursorPos-1, cursorPos, "");
                             editTextValueFirstAsset.setText(selection);
-                            editTextValueFirstAsset.setSelection(cursorPos - 1);
+                            editTextValueFirstAsset.setSelection(cursorPos-1);
                         }
                     }
                 }
                 else if(editTextValueSecondAsset.hasFocus()){
-                    isConvertFirst = false;
+                    isConvertFirst = true;
                     int cursorPos = editTextValueSecondAsset.getSelectionStart();
                     int textLenght = editTextValueSecondAsset.getText().length();
                     if(cursorPos != 0 && textLenght != 0){
                         SpannableStringBuilder selection = (SpannableStringBuilder) editTextValueSecondAsset.getText();
-                        selection.replace(cursorPos-1, cursorPos, "");
-                        if(selection.toString().matches("0+")){
-                            editTextValueSecondAsset.setText("0");
-                            editTextValueSecondAsset.setSelection(1);
+                        if((selection.toString().indexOf(",")+1) == cursorPos){
+                            selection.replace(cursorPos-1, cursorPos, "");
+                            String strSelection = selection.toString().replaceFirst("^0*", "");
+                            editTextValueSecondAsset.setText(strSelection);
+                            editTextValueSecondAsset.setSelection(editTextValueSecondAsset.getText().length());
                         }
-                        else {
+                        else{
+                            selection.replace(cursorPos-1, cursorPos, "");
                             editTextValueSecondAsset.setText(selection);
-                            editTextValueSecondAsset.setSelection(cursorPos - 1);
+                            editTextValueSecondAsset.setSelection(cursorPos-1);
                         }
+
                     }
                 }
                 break;
@@ -473,45 +487,76 @@ public class ActivityConvertCryptoValute extends AppCompatActivity implements Vi
     }
 
     private void updateTextFirstAsset(String strToAdd){
-        isConvertSecond = false;
+        isConvertSecond = true;
         String oldStr = editTextValueFirstAsset.getText().toString();
         int cursorPos = editTextValueFirstAsset.getSelectionStart();
         String leftStr = oldStr.substring(0, cursorPos);
         String rightStr = oldStr.substring(cursorPos);
+
+        if(leftStr.equals("0") && oldStr.equals("0")){
+            leftStr = "";
+            cursorPos--;
+        }
+
         if(leftStr.equals("") && strToAdd.equals(",")){
             strToAdd = "0,";
             cursorPos++;
         }
-        editTextValueFirstAsset.setText(String.format("%s%s%s", leftStr, strToAdd, rightStr));
-        //editTextValueFirstAsset.setSelection(cursorPos + 1);
-        if(editTextValueFirstAsset.getText().toString().equals("")){
-            editTextValueFirstAsset.setText(oldStr);
-            editTextValueFirstAsset.setSelection(cursorPos);
+
+        String newStr = leftStr+strToAdd+rightStr;
+
+        if(newStr.indexOf(",")==0){
+            newStr = "0"+newStr;
+            cursorPos++;
+        }
+
+        if(checkStrCorrect(newStr)){
+            editTextValueFirstAsset.setText(newStr);
+            editTextValueFirstAsset.setSelection(cursorPos+1);
         }
         else {
-            editTextValueFirstAsset.setSelection(cursorPos + 1);
+            editTextValueFirstAsset.setText(oldStr);
+            editTextValueFirstAsset.setSelection(cursorPos);
         }
     }
 
     private void updateTextSecondAsset(String strToAdd){
-        isConvertFirst = false;
+        isConvertFirst = true;
         String oldStr = editTextValueSecondAsset.getText().toString();
         int cursorPos = editTextValueSecondAsset.getSelectionStart();
         String leftStr = oldStr.substring(0, cursorPos);
         String rightStr = oldStr.substring(cursorPos);
+
+        if(leftStr.equals("0") && oldStr.equals("0")){
+            leftStr = "";
+            cursorPos--;
+        }
+
         if(leftStr.equals("") && strToAdd.equals(",")){
             strToAdd = "0,";
             cursorPos++;
         }
-        editTextValueSecondAsset.setText(String.format("%s%s%s", leftStr, strToAdd, rightStr));
-        //editTextValueSecondAsset.setSelection(cursorPos + 1);
-        if( editTextValueSecondAsset.getText().toString().equals("")){
+
+        String newStr = leftStr+strToAdd+rightStr;
+
+        if(newStr.indexOf(",")==0){
+            newStr = "0"+newStr;
+            cursorPos++;
+        }
+
+        if(checkStrCorrect(newStr)){
+            editTextValueSecondAsset.setText(newStr);
+            editTextValueSecondAsset.setSelection(cursorPos+1);
+        }
+        else {
             editTextValueSecondAsset.setText(oldStr);
             editTextValueSecondAsset.setSelection(cursorPos);
         }
-        else {
-            editTextValueSecondAsset.setSelection(cursorPos + 1);
-        }
+    }
+
+    private boolean checkStrCorrect(String str){ ;
+        if (str.matches(Const.REGEX_EDITTEXT_CONVERT)) { return true; }
+        else { return false; }
     }
 
     @Override
