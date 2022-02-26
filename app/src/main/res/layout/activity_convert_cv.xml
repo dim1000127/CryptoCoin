@@ -48,6 +48,7 @@
             android:textAlignment="textEnd"
             android:inputType="none"
             android:background="@android:color/transparent"
+            android:selectAllOnFocus="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -93,6 +94,7 @@
             android:textAlignment="textEnd"
             android:inputType="none"
             android:background="@android:color/transparent"
+            android:selectAllOnFocus="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
