@@ -1,4 +1,4 @@
-package com.example.cryptocoin;
+package com.example.cryptocoin.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +26,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cryptocoin.Const;
+import com.example.cryptocoin.DecimalFilter;
+import com.example.cryptocoin.R;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
@@ -39,7 +42,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class ActivityConvertCryptoValute extends AppCompatActivity implements View.OnClickListener {
+public class ConvertCryptoValute extends AppCompatActivity implements View.OnClickListener {
 
     public static final String PRICE_MESSAGE="PRICE_MESSAGE";
     public static final String SYMBOL_MESSAGE="SYMBOL_MESSAGE";
@@ -486,7 +489,7 @@ public class ActivityConvertCryptoValute extends AppCompatActivity implements Vi
 
     private void convertFirstAssetSelect(){
         if(dataCryptoValute!=null && metadata != null){
-            Intent intent = new Intent(ActivityConvertCryptoValute.this, ActivitySelectCryptoValuteConvert.class);
+            Intent intent = new Intent(ConvertCryptoValute.this, SelectCryptoValuteConvert.class);
             intent.putExtra(Const.CRYPTOVALUTE_INTENT, (Serializable) dataCryptoValute);
             intent.putExtra(Const.METADATA_INTENT, (Serializable) metadata);
             //intent.putExtra(Const.ASSET_NUMBER_INTENT, numberCryptoConvert);
@@ -496,7 +499,7 @@ public class ActivityConvertCryptoValute extends AppCompatActivity implements Vi
 
     private void convertSecondAssetSelect(){
         if(dataCryptoValute!=null && metadata != null){
-            Intent intent = new Intent(ActivityConvertCryptoValute.this, ActivitySelectCryptoValuteConvert.class);
+            Intent intent = new Intent(ConvertCryptoValute.this, SelectCryptoValuteConvert.class);
             intent.putExtra(Const.CRYPTOVALUTE_INTENT, (Serializable) dataCryptoValute);
             intent.putExtra(Const.METADATA_INTENT, (Serializable) metadata);
             //intent.putExtra(Const.ASSET_NUMBER_INTENT, numberCryptoConvert);

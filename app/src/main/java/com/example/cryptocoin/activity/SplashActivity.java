@@ -1,4 +1,4 @@
-package com.example.cryptocoin;
+package com.example.cryptocoin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.cryptocoin;
+package com.example.cryptocoin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cryptocoin.Const;
+import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.SelectCryptoValute;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.metadatapojo.Metadata;
 import com.google.android.material.snackbar.Snackbar;
 
-public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
+public class SelectCryptoValuteConvert extends AppCompatActivity {
 
     private ListView listViewSelectCryptoValute;
     private SelectCryptoValute adapterSelectCryptoValute;
@@ -63,10 +65,10 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
                 typeAsset = Const.CRYPTOVALUTE;
 
                 Intent data = new Intent();
-                data.putExtra(ActivityConvertCryptoValute.PRICE_MESSAGE, priceCryptoValute);
-                data.putExtra(ActivityConvertCryptoValute.SYMBOL_MESSAGE, symbolCryptoValute);
-                data.putExtra(ActivityConvertCryptoValute.ID_MESSAGE, idCryptoValute);
-                data.putExtra(ActivityConvertCryptoValute.TYPE_ASSET, typeAsset);
+                data.putExtra(ConvertCryptoValute.PRICE_MESSAGE, priceCryptoValute);
+                data.putExtra(ConvertCryptoValute.SYMBOL_MESSAGE, symbolCryptoValute);
+                data.putExtra(ConvertCryptoValute.ID_MESSAGE, idCryptoValute);
+                data.putExtra(ConvertCryptoValute.TYPE_ASSET, typeAsset);
                 setResult(RESULT_OK, data);
                 finish();
             }
@@ -92,8 +94,8 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
         symbolViat = Const.USD_SYMBOL;
         typeAsset = Const.FIAT;
         Intent data = new Intent();
-        data.putExtra(ActivityConvertCryptoValute.TYPE_ASSET, typeAsset);
-        data.putExtra(ActivityConvertCryptoValute.SYMBOL_MESSAGE, symbolViat);
+        data.putExtra(ConvertCryptoValute.TYPE_ASSET, typeAsset);
+        data.putExtra(ConvertCryptoValute.SYMBOL_MESSAGE, symbolViat);
         setResult(RESULT_OK, data);
         finish();
     }
@@ -102,8 +104,8 @@ public class ActivitySelectCryptoValuteConvert extends AppCompatActivity {
         symbolViat = Const.RUB_SYMBOL;
         typeAsset = Const.FIAT;
         Intent data = new Intent();
-        data.putExtra(ActivityConvertCryptoValute.TYPE_ASSET, typeAsset);
-        data.putExtra(ActivityConvertCryptoValute.SYMBOL_MESSAGE, symbolViat);
+        data.putExtra(ConvertCryptoValute.TYPE_ASSET, typeAsset);
+        data.putExtra(ConvertCryptoValute.SYMBOL_MESSAGE, symbolViat);
         setResult(RESULT_OK, data);
         finish();
     }

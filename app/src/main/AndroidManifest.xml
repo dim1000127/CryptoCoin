@@ -16,7 +16,7 @@
 
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:theme="@style/SplashScreenTheme"
@@ -26,12 +26,21 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Main"
+        <activity android:name=".activity.Main"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ActivityConvertCryptoValute"
+        <activity android:name=".activity.ConvertCryptoValute"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ActivitySelectCryptoValuteConvert"
+        <activity android:name=".activity.SelectCryptoValuteConvert"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.SearchCryptoValute"
+            android:screenOrientation="portrait"/>
+            <!--android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>-->
     </application>
 
 </manifest>

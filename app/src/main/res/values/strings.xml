@@ -16,6 +16,9 @@
     <string name="cryptovaluts">Криптовалюты</string>
     <string name="american_dollar">Американский доллар</string>
     <string name="russian_ruble">Российский рубль</string>
+
+    <string name="search_hint">Поиск криптоактивов</string>
+
     <string name="rub">RUB</string>
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -28,4 +31,6 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="comma">,</string>
+    <string name="search">Поиск</string>
+    <string name="cancel">Отмена</string>
 </resources>

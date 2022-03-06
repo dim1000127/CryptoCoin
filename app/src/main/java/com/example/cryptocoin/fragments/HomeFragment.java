@@ -15,7 +15,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.cryptocoin.ActivityConvertCryptoValute;
+import com.example.cryptocoin.activity.ConvertCryptoValute;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         buttonOpenConvertCryptoValute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ActivityConvertCryptoValute.class);
+                Intent intent = new Intent(getActivity(), ConvertCryptoValute.class);
                 startActivity(intent);
             }
         });
