@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_searchview.xml" value="0.11574074074074074" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_splash.xml" value="0.176" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/border_list.xml" value="0.14322916666666666" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.26614583333333336" />
@@ -21,11 +22,11 @@
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/style_ic_search.xml" value="0.37864583333333335" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/view_icon.xml" value="0.26614583333333336" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_convert_cryptovalute.xml" value="0.536" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_convert_cv.xml" value="0.4" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_convert_cv.xml" value="0.25" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_for_select_cryptovalute_convert.xml" value="0.25" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_main_screen.xml" value="0.25" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_search_cv.xml" value="0.3625" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_select_cv_convert.xml" value="0.33" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_search_cv.xml" value="0.22191011235955055" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_select_cv_convert.xml" value="0.21629213483146068" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_booklearn.xml" value="0.25" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.4" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_home.xml" value="0.34100877192982454" />
@@ -33,6 +34,7 @@
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/layout.xml" value="0.25" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.4" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/main_screen.xml" value="0.264" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/searchview_action_bar.xml" value="0.3625" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/tv_cryptovalute_list.xml" value="0.264" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/tv_for_cryptovalute_list.xml" value="0.47099311701081614" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/tv_for_select_cryptovalute_list.xml" value="0.4" />

@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -24,13 +25,14 @@ public class Main extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
     private Fragment selectedFragment;
-    private ActionBar actionBar;
+    private Toolbar toolbar;
     private MenuItem menuItemSearch;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        actionBar = getSupportActionBar();
+        toolbar = (Toolbar) findViewById(R.id.toolbar_main_screen);
+        setSupportActionBar(toolbar);
 
         selectedFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
@@ -48,17 +50,17 @@ public class Main extends AppCompatActivity {
                         case R.id.navigation_home:
                             selectedFragment =  new HomeFragment();
                             //необходимо будет сделать свой ActionBar
-                            actionBar.setTitle("CryptoCoin");
+                            toolbar.setTitle("CryptoCoin");
                             menuItemSearch.setVisible(true);
                             break;
                         case R.id.navigation_list_top:
                             selectedFragment =  new ListFragment();
-                            actionBar.setTitle("Топ криптовалют");
+                            toolbar.setTitle("Топ криптовалют");
                             menuItemSearch.setVisible(true);
                             break;
                         case R.id.navigation_bool_learn:
                             selectedFragment =  new BookLearnFragment();
-                            actionBar.setTitle("Обучение");
+                            toolbar.setTitle("Обучение");
                             menuItemSearch.setVisible(false);
                             break;
                     }

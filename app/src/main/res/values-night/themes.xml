@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CryptoCoin" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.CryptoCoin" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <!--<item name="colorPrimary">@color/purple_200</item>-->
         <item name="colorPrimary">@color/primaryColor</item>
@@ -33,6 +33,13 @@
 
     <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:background">?attr/colorPrimary</item>
     </style>
 
 </resources>

@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -159,10 +160,11 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_convert_cv);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Конвертер валют");
+        Toolbar toolbar =findViewById(R.id.toolbar_convert_cv);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Конвертер валют");
 
         layoutConvertFirstAsset = (LinearLayout) findViewById(R.id.view_select_first_asset);
         layoutConvertSecondAsset = (LinearLayout) findViewById(R.id.view_select_second_asset);
