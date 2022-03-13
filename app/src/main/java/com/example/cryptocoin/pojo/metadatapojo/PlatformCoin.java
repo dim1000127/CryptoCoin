@@ -1,4 +1,4 @@
-package com.example.cryptocoin.metadatapojo;
+package com.example.cryptocoin.pojo.metadatapojo;
 
 import com.google.gson.annotations.SerializedName;
 

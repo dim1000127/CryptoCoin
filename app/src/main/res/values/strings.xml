@@ -33,4 +33,5 @@
     <string name="comma">,</string>
     <string name="search">Поиск</string>
     <string name="cancel">Отмена</string>
+    <string name="unsuccesful_search">По вашему запросу ничего не найдено</string>
 </resources>

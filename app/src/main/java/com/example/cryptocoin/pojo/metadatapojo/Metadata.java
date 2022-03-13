@@ -1,6 +1,6 @@
-package com.example.cryptocoin.metadatapojo;
+package com.example.cryptocoin.pojo.metadatapojo;
 
-import com.example.cryptocoin.cryptovalutepojo.Status;
+import com.example.cryptocoin.pojo.cryptovalutepojo.Status;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

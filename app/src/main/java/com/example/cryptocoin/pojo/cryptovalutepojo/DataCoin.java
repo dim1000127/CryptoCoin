@@ -1,4 +1,4 @@
-package com.example.cryptocoin.cryptovalutepojo;
+package com.example.cryptocoin.pojo.cryptovalutepojo;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;

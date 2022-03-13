@@ -13,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
-import com.example.cryptocoin.metadatapojo.Metadata;
+import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 

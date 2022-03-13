@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_search_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/lightgray">
@@ -29,22 +30,35 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
+
+    <RelativeLayout
+        android:id="@+id/parentRelativeListSearch"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout_search_cv">
 
+        <ListView
+            android:id="@+id/lv_search_cryptovalute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:dividerHeight="8dp"
+            android:drawSelectorOnTop="true"
+            android:paddingStart="@dimen/margin_border"
+            android:paddingEnd="@dimen/margin_border"
+            android:scrollbars="none" />
+
         <TextView
+            android:id="@+id/tv_status_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Активность для поиска криптовалют"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="20sp" />
-
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:text="@string/unsuccesful_search"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="14sp" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_list_search_cryptovalute"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/style_for_list_element">
+
+    <TextView
+        android:id="@+id/name_cv_list_search"
+        android:paddingStart="4dp"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryText"
+        android:text="Bitcoin"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/symbol_cv_list_search"
+        android:paddingStart="4dp"
+        android:paddingTop="3dp"
+        android:textSize="12sp"
+        android:textColor="@color/colorSecondaryText"
+        android:text="BTC"
+        android:gravity="center|left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

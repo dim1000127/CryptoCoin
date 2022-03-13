@@ -18,8 +18,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.CryptoValuteList;
-import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
-import com.example.cryptocoin.metadatapojo.Metadata;
+import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -33,14 +33,16 @@ import rx.schedulers.Schedulers;
 
 public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
-    private ListView listViewTop;
-    private ImageButton buttonListTop;
-    private CryptoValuteList adapterCryptoValutePrice;
     private Subscription subscription;
-    private SwipeRefreshLayout swipeRefreshLayoutList;
-    private RelativeLayout relativeLayout;
+    private CryptoValuteList adapterCryptoValutePrice;
     private CryptoValute oldDataCryptoValute = null;
     private Metadata metadata = null;
+
+    private ListView listViewTop;
+    private ImageButton buttonListTop;
+    private SwipeRefreshLayout swipeRefreshLayoutList;
+    private RelativeLayout relativeLayout;
+
 
     private int firstVisibleElemList = 0;
 

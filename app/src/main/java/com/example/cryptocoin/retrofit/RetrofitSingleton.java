@@ -3,8 +3,8 @@ package com.example.cryptocoin.retrofit;
 import android.util.Log;
 
 import com.example.cryptocoin.Const;
-import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
-import com.example.cryptocoin.metadatapojo.Metadata;
+import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 
 import java.util.HashMap;
 import java.util.Map;

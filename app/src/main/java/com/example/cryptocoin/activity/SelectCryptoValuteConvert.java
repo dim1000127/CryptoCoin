@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.SelectCryptoValute;
-import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
-import com.example.cryptocoin.metadatapojo.Metadata;
+import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.google.android.material.snackbar.Snackbar;
 
 public class SelectCryptoValuteConvert extends AppCompatActivity {

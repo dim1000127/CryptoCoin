@@ -24,14 +24,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.DecimalFilter;
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.cryptovalutepojo.CryptoValute;
-import com.example.cryptocoin.metadatapojo.Metadata;
+import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.squareup.picasso.Picasso;
 
