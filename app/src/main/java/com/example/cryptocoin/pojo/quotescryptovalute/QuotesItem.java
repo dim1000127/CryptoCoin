@@ -1,11 +1,11 @@
-package com.example.cryptocoin.pojo.cryptovalutepojo;
+package com.example.cryptocoin.pojo.quotescryptovalute;
 
+import com.example.cryptocoin.pojo.cryptovalutepojo.Quote;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class DataItem implements Serializable{
+public class QuotesItem implements Serializable {
     @SerializedName("id")
     private int id;
 
@@ -41,7 +41,7 @@ public class DataItem implements Serializable{
 
     @SerializedName("quote")
     //private HashMap<String, DataCoin> quote;
-    private Quote quote;
+    private QuotesPrice quote;
 
     public int getId() {
         return id;
@@ -87,7 +87,7 @@ public class DataItem implements Serializable{
         return dateAdded;
     }
 
-    public Quote getQuote() {
+    public QuotesPrice getQuote() {
         return quote;
     }
 }

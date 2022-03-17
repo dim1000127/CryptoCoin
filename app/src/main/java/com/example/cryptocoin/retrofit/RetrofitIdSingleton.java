@@ -35,7 +35,7 @@ public class RetrofitIdSingleton {
         observableRetrofit = requestsAPI.getIdCryptoValute("");
     }
 
-    //Криптовалюта + метаданные//
+    //ID криптовалют по CoinMarketCap//
     public static void resetIdCryptoValuteObservable(){
         observableIdCryptoValute = BehaviorSubject.create();
 

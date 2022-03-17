@@ -3,6 +3,7 @@ package com.example.cryptocoin.retrofit;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
+import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
 
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -25,4 +26,7 @@ public interface RequestsAPI {
             "X-CMC_PRO_API_KEY: 908e2080-ad8d-4d43-bd0a-e65b8587d172"})
     @GET("/v1/cryptocurrency/map")
     Observable<IdCryptoValute> getIdCryptoValute(@Query("aux") String aux);
+
+    @GET("/v2/cryptocurrency/quotes/latest")
+    Observable<QuotesCryptoValute> getQuoteCryptoValute(@Query("id") String id);
 }

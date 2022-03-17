@@ -1,6 +1,7 @@
-package com.example.cryptocoin.pojo.metadatapojo;
+package com.example.cryptocoin.pojo.quotescryptovalute;
 
 import com.example.cryptocoin.pojo.Status;
+import com.example.cryptocoin.pojo.metadatapojo.Item;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,15 +9,15 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Metadata implements Serializable{
+public class QuotesCryptoValute implements Serializable {
     @SerializedName("data")
-        @Expose
-        private Map<String, Item> data = new HashMap<String, Item>();
+    @Expose
+    private Map<String, QuotesItem> data = new HashMap<String, QuotesItem>();
 
     @SerializedName("status")
     private Status status;
 
-    public Map<String, Item> getData(){
+    public Map<String, QuotesItem> getData(){
         return data;
     }
 
@@ -24,5 +25,3 @@ public class Metadata implements Serializable{
         return status;
     }
 }
-
-

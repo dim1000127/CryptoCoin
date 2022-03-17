@@ -1,10 +1,9 @@
-package com.example.cryptocoin.pojo.metadatapojo;
+package com.example.cryptocoin.pojo;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
-public class StatusMetadata implements Serializable {
+public class Status implements Serializable{
 
     @SerializedName("error_message")
     private String errorMessage;

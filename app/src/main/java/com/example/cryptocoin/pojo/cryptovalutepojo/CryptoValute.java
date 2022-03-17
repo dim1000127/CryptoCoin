@@ -1,5 +1,6 @@
 package com.example.cryptocoin.pojo.cryptovalutepojo;
 
+import com.example.cryptocoin.pojo.Status;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
