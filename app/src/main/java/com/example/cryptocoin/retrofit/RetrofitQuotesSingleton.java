@@ -49,9 +49,9 @@ public class RetrofitQuotesSingleton {
     }
 
     //Криптовалюта + метаданные//
-    public static void resetCryptoValuteObservable(String idStr){
+    public static void resetQuotesCVObservable(String idStr){
         observableQuotesCVMetadata = BehaviorSubject.create();
-        quotesCVMetadataMap.clear();
+        //quotesCVMetadataMap.clear();
 
         if(subscription != null && !subscription.isUnsubscribed()){
             subscription.unsubscribe();
@@ -65,7 +65,6 @@ public class RetrofitQuotesSingleton {
                     public Observable<Metadata> call(QuotesCryptoValute quotesCryptoValute) {
                         observableRetrofitMetadata = requestsAPI.getMetadata(idStr, "logo");
                         quotesCVMetadataMap.put(Const.CRYPTOVALUTE_KEY_MAP, quotesCryptoValute);
-
                         return observableRetrofitMetadata;
                     }
                 })
@@ -91,9 +90,11 @@ public class RetrofitQuotesSingleton {
     }
 
     public static Observable<Map<String, Object>> getQuotesCVObservable(String idStr){
-        if(observableQuotesCVMetadata == null){
-            resetCryptoValuteObservable(idStr);
-        }
+        //необходимо добавить сохрание предыдущих найденных токенов
+        resetQuotesCVObservable(idStr);
+        /*if(observableQuotesCVMetadata == null){
+            resetQuotesCVObservable(idStr);
+        }*/
         return observableQuotesCVMetadata;
     }
 }

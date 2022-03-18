@@ -20,6 +20,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.SearchCryptoValuteList;
+import com.example.cryptocoin.fragments.FragmentBottomSheet;
+import com.example.cryptocoin.fragments.SearchBottomSheet;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
 import com.example.cryptocoin.retrofit.RetrofitIdSingleton;
 import com.google.android.material.snackbar.Snackbar;
@@ -67,6 +69,10 @@ public class SearchCryptoValute extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 if(idCryptoValute != null){
                     adapterIdCryptoValute.getFilter().filter(s);
+                    listViewSearchCV.setVisibility(View.VISIBLE);
+                    if(s.trim().length()==0){
+                        listViewSearchCV.setVisibility(View.GONE);
+                    }
                 }
                 return true;
             }
@@ -77,8 +83,10 @@ public class SearchCryptoValute extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LinearLayout layout = view.findViewById(R.id.layout_list_search_cryptovalute);
                 String id = layout.getTag().toString();
-                Snackbar.make(constraintLayout, "Идентификатор токена: "+id,Snackbar.LENGTH_SHORT)
-                        .show();
+                /*Snackbar.make(constraintLayout, "Идентификатор токена: "+id,Snackbar.LENGTH_SHORT)
+                        .show();*/
+                SearchBottomSheet searchBottomSheet = new SearchBottomSheet(id);
+                searchBottomSheet.show(getSupportFragmentManager(), searchBottomSheet.getTag());
             }
         });
         getIdCryptoValute();
@@ -109,6 +117,7 @@ public class SearchCryptoValute extends AppCompatActivity {
 
                         adapterIdCryptoValute = new SearchCryptoValuteList(SearchCryptoValute.this,idCryptoValute);
                         listViewSearchCV.setAdapter(adapterIdCryptoValute);
+                        listViewSearchCV.setVisibility(View.GONE);
                     }
                 });
     }

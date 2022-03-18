@@ -27,6 +27,8 @@ public interface RequestsAPI {
     @GET("/v1/cryptocurrency/map")
     Observable<IdCryptoValute> getIdCryptoValute(@Query("aux") String aux);
 
+    @Headers({"Accept: application/json",
+            "X-CMC_PRO_API_KEY: 908e2080-ad8d-4d43-bd0a-e65b8587d172"})
     @GET("/v2/cryptocurrency/quotes/latest")
     Observable<QuotesCryptoValute> getQuoteCryptoValute(@Query("id") String id);
 }

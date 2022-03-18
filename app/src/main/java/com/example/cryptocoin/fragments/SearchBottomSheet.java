@@ -3,30 +3,47 @@ package com.example.cryptocoin.fragments;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
+import com.example.cryptocoin.activity.SearchCryptoValute;
+import com.example.cryptocoin.adapter.SearchCryptoValuteList;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
+import com.example.cryptocoin.retrofit.RetrofitIdSingleton;
+import com.example.cryptocoin.retrofit.RetrofitQuotesSingleton;
+import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
+import java.util.Map;
+
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class SearchBottomSheet extends BottomSheetDialogFragment {
 
-    private QuotesCryptoValute quotesCruptoValute;
-    private Metadata metadata;
-    private String id;
+    //private QuotesCryptoValute quotesCruptoValute;
+    //private Metadata metadata;
+    private String id = "1";
+    private Subscription subscription;
 
     private ImageView imageCryptoValute;
     private TextView textViewNameCV;
@@ -42,23 +59,23 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
     private TextView textViewCirculatingSupply;
     private TextView textViewTotalSupply;
     private TextView textViewMaxSupply;
+    private LinearLayout linearLayout;
 
     @Override
     public int getTheme() {
         return R.style.BottomSheetDialogTheme;
     }
 
-    //public SearchBottomSheet(QuotesCryptoValute _quotesCruptoValute, Metadata _metadata, String _position) {
     public SearchBottomSheet(String _id) {
-        //quotesCruptoValute = _quotesCruptoValute;
-        //metadata = _metadata;
         id = _id;
+        //getQuotesCVData(id);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bottom_sheet, container, false);
+
         imageCryptoValute = (ImageView) view.findViewById(R.id.bottom_sheet_image_cv);
         textViewNameCV = (TextView) view.findViewById(R.id.bottom_sheet_name_cv);
         textViewSymbolCV = (TextView) view.findViewById(R.id.bottom_sheet_symbol_cv);
@@ -74,9 +91,36 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
         textViewTotalSupply = (TextView) view.findViewById(R.id.bottom_sheet_total_supply);
         textViewMaxSupply = (TextView) view.findViewById(R.id.bottom_sheet_max_supply);
 
-        fillDataSheet();
-
+        getQuotesCVData(id);
         return view;
+    }
+
+    private void getQuotesCVData(String id) {
+        if (subscription != null && !subscription.isUnsubscribed()){
+            subscription.unsubscribe();
+        }
+
+        subscription = RetrofitQuotesSingleton.getQuotesCVObservable(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Map<String, Object>>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d("onCompleted", "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Map<String, Object> _quotesCVMetadata) {
+                        QuotesCryptoValute _quotesCryptoValute = (QuotesCryptoValute) _quotesCVMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
+                        Metadata _metadata = (Metadata) _quotesCVMetadata.get(Const.METADATA_KEY_MAP);
+                        fillDataSheet(_quotesCryptoValute, _metadata, id);
+                    }
+                });
     }
 
     @NonNull
@@ -85,10 +129,11 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
         return super.onCreateDialog(savedInstanceState);
     }
 
-    private void fillDataSheet(){
-        if(quotesCruptoValute == null){
+    private void fillDataSheet(QuotesCryptoValute quotesCruptoValute, Metadata metadata, String id){
+        if(quotesCruptoValute == null || metadata == null){
             return;
         }
+
         String idCryptoValute = String.valueOf(quotesCruptoValute.getData().get(id).getId());
         Picasso.get().load(metadata.getData().get(idCryptoValute).getLogo()).into(imageCryptoValute);
         textViewNameCV.setText(quotesCruptoValute.getData().get(id).getName());
