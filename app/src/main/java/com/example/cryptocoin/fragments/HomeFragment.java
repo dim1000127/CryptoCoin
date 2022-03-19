@@ -142,36 +142,49 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         String idCryptoOne = String.valueOf(dataCryptoValute.getData().get(0).getId());
         String idCryptoTwo = String.valueOf(dataCryptoValute.getData().get(1).getId());
         String idCryptoThree = String.valueOf(dataCryptoValute.getData().get(2).getId());
+
         ImageView imageViewCryptoOne = getActivity().findViewById(R.id.imageCryptovaluteOne);
-        Picasso.get().load(metadata.getData().get(idCryptoOne).getLogo()).into(imageViewCryptoOne);
         ImageView imageViewCryptoTwo = getActivity().findViewById(R.id.imageCryptovaluteTwo);
-        Picasso.get().load(metadata.getData().get(idCryptoTwo).getLogo()).into(imageViewCryptoTwo);
         ImageView imageViewCryptoThree = getActivity().findViewById(R.id.imageCryptovaluteThree);
-        Picasso.get().load(metadata.getData().get(idCryptoThree).getLogo()).into(imageViewCryptoThree);
         TextView textViewSymbolCryptoOne = getActivity().findViewById(R.id.symbolCryptoOne);
-        textViewSymbolCryptoOne.setText(dataCryptoValute.getData().get(0).getSymbol());
         TextView textViewSymbolCryptoTwo = getActivity().findViewById(R.id.symbolCryptoTwo);
-        textViewSymbolCryptoTwo.setText(dataCryptoValute.getData().get(1).getSymbol());
         TextView textViewSymbolCryptoThree = getActivity().findViewById(R.id.symbolCryptoThree);
-        textViewSymbolCryptoThree.setText(dataCryptoValute.getData().get(2).getSymbol());
         TextView textViewPriceOne = getActivity().findViewById(R.id.priceCryptoValuteOne);
-        textViewPriceOne.setText(String.format("$%,.2f",dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice()));
         TextView textViewPriceTwo = getActivity().findViewById(R.id.priceCryptoValuteTwo);
-        textViewPriceTwo.setText(String.format("$%,.2f",dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
         TextView textViewPriceThree = getActivity().findViewById(R.id.priceCryptoValuteThree);
-        textViewPriceThree.setText(String.format("$%,.2f",dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPrice()));
-        double valueChange24hCryptoOne = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPercentChange24h();
         TextView textViewChange24hCryptoOne = getActivity().findViewById(R.id.percent_change_24hCryptoOne);
+        TextView textViewChange24hCryptoTwo = getActivity().findViewById(R.id.percent_change_24hCryptoTwo);
+        TextView textViewChange24hCryptoThree = getActivity().findViewById(R.id.percent_change_24hCryptoThree);
+
+        Picasso.get()
+                .load(metadata.getData().get(idCryptoOne).getLogo())
+                .into(imageViewCryptoOne);
+        Picasso.get()
+                .load(metadata.getData().get(idCryptoTwo).getLogo())
+                .into(imageViewCryptoTwo);
+        Picasso.get()
+                .load(metadata.getData().get(idCryptoThree).getLogo())
+                .into(imageViewCryptoThree);
+
+        textViewSymbolCryptoOne.setText(dataCryptoValute.getData().get(0).getSymbol());
+        textViewSymbolCryptoTwo.setText(dataCryptoValute.getData().get(1).getSymbol());
+        textViewSymbolCryptoThree.setText(dataCryptoValute.getData().get(2).getSymbol());
+
+        textViewPriceOne.setText(String.format("$%,.2f",dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice()));
+        textViewPriceTwo.setText(String.format("$%,.2f",dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
+        textViewPriceThree.setText(String.format("$%,.2f",dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPrice()));
+
+        double valueChange24hCryptoOne = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPercentChange24h();
         textViewChange24hCryptoOne.setText(String.format("%.2f%%", valueChange24hCryptoOne));
         if(valueChange24hCryptoOne>=0){ textViewChange24hCryptoOne.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewChange24hCryptoOne.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
+
         double valueChange24hCryptoTwo = dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPercentChange24h();
-        TextView textViewChange24hCryptoTwo = getActivity().findViewById(R.id.percent_change_24hCryptoTwo);
         textViewChange24hCryptoTwo.setText(String.format("%.2f%%", valueChange24hCryptoTwo));
         if(valueChange24hCryptoTwo>=0){ textViewChange24hCryptoTwo.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewChange24hCryptoTwo.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
+
         double valueChange24hCryptoThree = dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPercentChange24h();
-        TextView textViewChange24hCryptoThree = getActivity().findViewById(R.id.percent_change_24hCryptoThree);
         textViewChange24hCryptoThree.setText(String.format("%.2f%%", valueChange24hCryptoThree));
         if(valueChange24hCryptoThree>=0){ textViewChange24hCryptoThree.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewChange24hCryptoThree.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }

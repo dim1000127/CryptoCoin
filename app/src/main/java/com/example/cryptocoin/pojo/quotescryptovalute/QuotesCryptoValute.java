@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class QuotesCryptoValute implements Serializable {
     @SerializedName("data")
-    @Expose
-    private Map<String, QuotesItem> data = new HashMap<String, QuotesItem>();
+        @Expose
+        private Map<String, QuotesItem> data = new HashMap<String, QuotesItem>();
 
     @SerializedName("status")
     private Status status;

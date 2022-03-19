@@ -60,7 +60,9 @@ public class CryptoValuteList extends BaseAdapter{
         TextView textViewPriceCryptoValute = (TextView) view.findViewById(R.id.price_cryptovalute_list_top);
         TextView textViewPercentChange = (TextView) view.findViewById(R.id.percent_change_cryptovalute_list_top);
 
-        Picasso.get().load(metadata.getData().get(idCryptoValute).getLogo()).into(imageViewCryptoValuteLogo);
+        Picasso.get()
+                .load(metadata.getData().get(idCryptoValute).getLogo())
+                .into(imageViewCryptoValuteLogo);
         textViewPositionInTop.setText(String.valueOf(i+1));
         textViewNameCryptoValute.setText(cryptoValuteList.getData().get(i).getName());
         textViewSymbolCryptoValute.setText(cryptoValuteList.getData().get(i).getSymbol());

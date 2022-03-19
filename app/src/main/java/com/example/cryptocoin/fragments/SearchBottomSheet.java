@@ -40,8 +40,6 @@ import rx.schedulers.Schedulers;
 
 public class SearchBottomSheet extends BottomSheetDialogFragment {
 
-    //private QuotesCryptoValute quotesCruptoValute;
-    //private Metadata metadata;
     private String id = "1";
     private Subscription subscription;
 
@@ -59,16 +57,14 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
     private TextView textViewCirculatingSupply;
     private TextView textViewTotalSupply;
     private TextView textViewMaxSupply;
-    private LinearLayout linearLayout;
 
     @Override
     public int getTheme() {
         return R.style.BottomSheetDialogTheme;
     }
 
-    public SearchBottomSheet(String _id) {
-        id = _id;
-        //getQuotesCVData(id);
+    public SearchBottomSheet(String id) {
+        this.id = id;
     }
 
     @Override
@@ -135,10 +131,13 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
         }
 
         String idCryptoValute = String.valueOf(quotesCruptoValute.getData().get(id).getId());
-        Picasso.get().load(metadata.getData().get(idCryptoValute).getLogo()).into(imageCryptoValute);
+        Picasso.get()
+                .load(metadata.getData().get(idCryptoValute).getLogo())
+                .into(imageCryptoValute);
         textViewNameCV.setText(quotesCruptoValute.getData().get(id).getName());
         String symbolCV = quotesCruptoValute.getData().get(id).getSymbol();
         textViewSymbolCV.setText(symbolCV);
+
         double priceCV = quotesCruptoValute.getData().get(id).getQuote().getUsdDataCoin().getPrice();
         if(priceCV <= 1){
             textViewPriceCV.setText(String.format("$%,.6f", priceCV));
@@ -146,8 +145,10 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
         else {
             textViewPriceCV.setText(String.format("$%,.2f", priceCV));
         }
+
         double percentChange24h = quotesCruptoValute.getData().get(id).getQuote().getUsdDataCoin().getPercentChange24h();
         double valChange24h = (priceCV * percentChange24h)/100;
+
         if(valChange24h >= 0){
             if(valChange24h <=1) {
                 textViewValChange24h.setText(String.format("$%,.6f", valChange24h));
@@ -165,6 +166,7 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
             }
 
         }
+
         textViewPercentChange24h.setText(String.format("%.2f%%", percentChange24h));
         if(percentChange24h>=0){
             textViewPercentChange24h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null));
@@ -174,26 +176,34 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
             textViewPercentChange24h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null));
             textViewPercentChange24h.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_red, 0, 0, 0);
         }
+
         double percentChange1h = quotesCruptoValute.getData().get(id).getQuote().getUsdDataCoin().getPercentChange1h();
         textViewPercentChange1h.setText(String.format("%.2f%%", percentChange1h));
         if(percentChange1h>=0){ textViewPercentChange1h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewPercentChange1h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
+
         double percentChange7d = quotesCruptoValute.getData().get(id).getQuote().getUsdDataCoin().getPercentChange7d();
         textViewPercentChange7d.setText(String.format("%.2f%%", percentChange7d));
         if(percentChange7d >=0){ textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
+
         double volume24h = quotesCruptoValute.getData().get(id).getQuote().getUsdDataCoin().getVolume24h();
         textViewVolume24h.setText(String.format("$%,.2f", volume24h));
+
         double dominance = quotesCruptoValute.getData().get(id).getQuote().getUsdDataCoin().getMarketCapDominance();
         textViewDominance.setText(String.format("%.2f%%", dominance));
+
         double marketCap = quotesCruptoValute.getData().get(id).getQuote().getUsdDataCoin().getMarketCap();
         textViewMarketCap.setText(String.format("$%,.2f", marketCap));
+
         double circulatingSupply = quotesCruptoValute.getData().get(id).getCirculatingSupply();
         if (circulatingSupply == 0) { textViewCirculatingSupply.setText("Нет данных"); }
         else{ textViewCirculatingSupply.setText(String.format("%,.0f", circulatingSupply) + " " + symbolCV); }
+
         double totalSupply = quotesCruptoValute.getData().get(id).getTotalSupply();
         if (totalSupply == 0) { textViewTotalSupply.setText("Нет данных"); }
         else{ textViewTotalSupply.setText(String.format("%,.0f", totalSupply) + " " + symbolCV); }
+
         double maxSupply = quotesCruptoValute.getData().get(id).getMaxSupply();
         if (maxSupply == 0){ textViewMaxSupply.setText("Нет данных"); }
         else{ textViewMaxSupply.setText(String.format("%,.0f", maxSupply) + " " + symbolCV); }

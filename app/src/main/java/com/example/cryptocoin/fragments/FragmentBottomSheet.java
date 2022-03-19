@@ -87,10 +87,15 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
             return;
         }
         String idCryptoValute = String.valueOf(dataCryptoValute.getData().get(position).getId());
-        Picasso.get().load(metadata.getData().get(idCryptoValute).getLogo()).into(imageCryptoValute);
+        Picasso.get()
+                .load(metadata.getData().get(idCryptoValute).getLogo())
+                .placeholder(R.drawable.ic_placeholder_image)
+                .into(imageCryptoValute);
+
         textViewNameCV.setText(dataCryptoValute.getData().get(position).getName());
         String symbolCV = dataCryptoValute.getData().get(position).getSymbol();
         textViewSymbolCV.setText(symbolCV);
+
         double priceCV = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPrice();
         if(priceCV <= 1){
             textViewPriceCV.setText(String.format("$%,.6f", priceCV));
@@ -98,6 +103,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         else {
             textViewPriceCV.setText(String.format("$%,.2f", priceCV));
         }
+
         double percentChange24h = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPercentChange24h();
         double valChange24h = (priceCV * percentChange24h)/100;
         if(valChange24h >= 0){
@@ -117,6 +123,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
             }
 
         }
+
         textViewPercentChange24h.setText(String.format("%.2f%%", percentChange24h));
         if(percentChange24h>=0){
             textViewPercentChange24h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null));
@@ -126,26 +133,32 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
             textViewPercentChange24h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null));
             textViewPercentChange24h.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_red, 0, 0, 0);
         }
+
         double percentChange1h = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPercentChange1h();
         textViewPercentChange1h.setText(String.format("%.2f%%", percentChange1h));
         if(percentChange1h>=0){ textViewPercentChange1h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewPercentChange1h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
+
         double percentChange7d = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPercentChange7d();
         textViewPercentChange7d.setText(String.format("%.2f%%", percentChange7d));
         if(percentChange7d >=0){ textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
+
         double volume24h = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getVolume24h();
         textViewVolume24h.setText(String.format("$%,.2f", volume24h));
         double dominance = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getMarketCapDominance();
         textViewDominance.setText(String.format("%.2f%%", dominance));
         double marketCap = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getMarketCap();
         textViewMarketCap.setText(String.format("$%,.2f", marketCap));
+
         double circulatingSupply = dataCryptoValute.getData().get(position).getCirculatingSupply();
         if (circulatingSupply == 0) { textViewCirculatingSupply.setText("Нет данных"); }
         else{ textViewCirculatingSupply.setText(String.format("%,.0f", circulatingSupply) + " " + symbolCV); }
+
         double totalSupply = dataCryptoValute.getData().get(position).getTotalSupply();
         if (totalSupply == 0) { textViewTotalSupply.setText("Нет данных"); }
         else{ textViewTotalSupply.setText(String.format("%,.0f", totalSupply) + " " + symbolCV); }
+
         double maxSupply = dataCryptoValute.getData().get(position).getMaxSupply();
         if (maxSupply == 0){ textViewMaxSupply.setText("Нет данных"); }
         else{ textViewMaxSupply.setText(String.format("%,.0f", maxSupply) + " " + symbolCV); }

@@ -32,7 +32,7 @@ public class SelectCryptoValuteConvert extends AppCompatActivity {
 
     private int idCryptoValute = 0;
     private double priceCryptoValute = 0;
-    private String symbolViat = null;
+    private String symbolFiat = null;
     private String symbolCryptoValute = null;
     private String typeAsset = null;
 
@@ -41,6 +41,7 @@ public class SelectCryptoValuteConvert extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_cv_convert);
         Toolbar toolbar = findViewById(R.id.toolbar_select_convert_cv);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,21 +93,21 @@ public class SelectCryptoValuteConvert extends AppCompatActivity {
     }
 
     private void selecetFiatUsd(){
-        symbolViat = Const.USD_SYMBOL;
+        symbolFiat = Const.USD_SYMBOL;
         typeAsset = Const.FIAT;
         Intent data = new Intent();
         data.putExtra(ConvertCryptoValute.TYPE_ASSET, typeAsset);
-        data.putExtra(ConvertCryptoValute.SYMBOL_MESSAGE, symbolViat);
+        data.putExtra(ConvertCryptoValute.SYMBOL_MESSAGE, symbolFiat);
         setResult(RESULT_OK, data);
         finish();
     }
 
     private void selectFiatRub(){
-        symbolViat = Const.RUB_SYMBOL;
+        symbolFiat = Const.RUB_SYMBOL;
         typeAsset = Const.FIAT;
         Intent data = new Intent();
         data.putExtra(ConvertCryptoValute.TYPE_ASSET, typeAsset);
-        data.putExtra(ConvertCryptoValute.SYMBOL_MESSAGE, symbolViat);
+        data.putExtra(ConvertCryptoValute.SYMBOL_MESSAGE, symbolFiat);
         setResult(RESULT_OK, data);
         finish();
     }

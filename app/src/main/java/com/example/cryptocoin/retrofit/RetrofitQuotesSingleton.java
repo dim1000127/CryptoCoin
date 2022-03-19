@@ -1,13 +1,19 @@
 package com.example.cryptocoin.retrofit;
 
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
+import com.example.cryptocoin.pojo.quotescryptovalute.QuotesItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Retrofit;
@@ -26,7 +32,9 @@ public class RetrofitQuotesSingleton {
     private static Observable<Metadata> observableRetrofitMetadata;
     private static Subscription subscription;
     private static BehaviorSubject<Map<String, Object>> observableQuotesCVMetadata;
-    private static Map<String, Object> quotesCVMetadataMap= new HashMap<String, Object>();
+
+    private static Map<String, Object> quotesCVMetadataMap= new HashMap<>();
+    private static String previousIdStr = "";
 
     private static RequestsAPI requestsAPI;
 
@@ -51,7 +59,7 @@ public class RetrofitQuotesSingleton {
     //Криптовалюта + метаданные//
     public static void resetQuotesCVObservable(String idStr){
         observableQuotesCVMetadata = BehaviorSubject.create();
-        //quotesCVMetadataMap.clear();
+        previousIdStr = idStr;
 
         if(subscription != null && !subscription.isUnsubscribed()){
             subscription.unsubscribe();
@@ -78,7 +86,6 @@ public class RetrofitQuotesSingleton {
                     @Override
                     public void onError(Throwable e) {
                         observableQuotesCVMetadata.onError(e);
-                        Log.d("Metadata", e.toString());
                     }
 
                     @Override
@@ -90,11 +97,10 @@ public class RetrofitQuotesSingleton {
     }
 
     public static Observable<Map<String, Object>> getQuotesCVObservable(String idStr){
-        //необходимо добавить сохрание предыдущих найденных токенов
-        resetQuotesCVObservable(idStr);
-        /*if(observableQuotesCVMetadata == null){
+        //не выполнять запрос к API, если производится запрос о том же токене
+        if(!previousIdStr.equals(idStr)) {
             resetQuotesCVObservable(idStr);
-        }*/
+        }
         return observableQuotesCVMetadata;
     }
 }

@@ -54,7 +54,9 @@ public class SelectCryptoValute extends BaseAdapter {
 
         String idCryptoValute = String.valueOf(cryptoValuteList.getData().get(i).getId());
 
-        Picasso.get().load(metadata.getData().get(idCryptoValute).getLogo()).into(imageViewCryptoValuteLogo);
+        Picasso.get()
+                .load(metadata.getData().get(idCryptoValute).getLogo())
+                .into(imageViewCryptoValuteLogo);
         textViewNameCryptoValute.setText(cryptoValuteList.getData().get(i).getName());
         textViewSymbolCryptoValute.setText(cryptoValuteList.getData().get(i).getSymbol());
 
