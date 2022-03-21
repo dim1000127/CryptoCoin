@@ -98,7 +98,7 @@ public class RetrofitQuotesSingleton {
 
     public static Observable<Map<String, Object>> getQuotesCVObservable(String idStr){
         //не выполнять запрос к API, если производится запрос о том же токене
-        if(!previousIdStr.equals(idStr)) {
+        if(!previousIdStr.equals(idStr) || observableQuotesCVMetadata == null) {
             resetQuotesCVObservable(idStr);
         }
         return observableQuotesCVMetadata;
