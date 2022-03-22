@@ -51,7 +51,7 @@ public class SearchCryptoValuteList extends BaseAdapter implements Filterable {
         if (view == null){
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.tv_search_cv_list, viewGroup, false);
+            view = inflater.inflate(R.layout.item_search_cv_list, viewGroup, false);
         }
 
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout_list_search_cryptovalute);

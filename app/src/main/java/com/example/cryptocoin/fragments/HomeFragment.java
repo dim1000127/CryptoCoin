@@ -7,23 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.cryptocoin.activity.ConvertCryptoValute;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
+import com.example.cryptocoin.activity.ConvertCryptoValute;
+import com.example.cryptocoin.adapter.GrowthFallRecyclerView;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import rx.Subscriber;
@@ -35,9 +38,15 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private Button buttonOpenConvertCryptoValute;
     private SwipeRefreshLayout swipeRefreshLayoutHome;
+    private RecyclerView recyclerViewLeadersGrowth;
+    private RecyclerView recyclerViewLeadersFall;
+    private RecyclerView recyclerViewLeadersCap;
 
     private Subscription subscription;
 
+    private GrowthFallRecyclerView adapterRVGrowth;
+    private GrowthFallRecyclerView adapterRVFall;
+    private GrowthFallRecyclerView adapterRVCap;
     private CryptoValute oldDataCryptoValute = null;
 
     @Nullable
@@ -45,8 +54,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        recyclerViewLeadersGrowth = (RecyclerView) rootView.findViewById(R.id.rvLeadersGrowth);
+        recyclerViewLeadersFall = (RecyclerView) rootView.findViewById(R.id.rvLeadersFall);
+        recyclerViewLeadersCap = (RecyclerView) rootView.findViewById(R.id.rvLeadersCap);
         swipeRefreshLayoutHome = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayoutHome);
         swipeRefreshLayoutHome.setOnRefreshListener(this);
+
         buttonOpenConvertCryptoValute = (Button) rootView.findViewById(R.id.btn_open_convert_cryptovalute);
         buttonOpenConvertCryptoValute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +68,46 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 startActivity(intent);
             }
         });
+
+        recyclerViewLeadersCap.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+                    swipeRefreshLayoutHome.setEnabled(false);
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE)
+                    swipeRefreshLayoutHome.setEnabled(true);
+            }
+        });
+
+        recyclerViewLeadersFall.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+                    swipeRefreshLayoutHome.setEnabled(false);
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE)
+                    swipeRefreshLayoutHome.setEnabled(true);
+            }
+        });
+
+        recyclerViewLeadersGrowth.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+                    swipeRefreshLayoutHome.setEnabled(false);
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE)
+                    swipeRefreshLayoutHome.setEnabled(true);
+            }
+        });
+
         getCryptoValuteData();
 
         return  rootView;
@@ -123,6 +176,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 else
                                 {
                                     fillBlocksTopThree(_cryptoValute, _metadata);
+                                    fillRVGrowthFall(_cryptoValute, _metadata);
                                     oldDataCryptoValute = _cryptoValute;
                                     swipeRefreshLayoutHome.setRefreshing(false);
                                 }
@@ -130,6 +184,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             else
                             {
                                 fillBlocksTopThree(_cryptoValute, _metadata);
+                                fillRVGrowthFall(_cryptoValute, _metadata);
                                 oldDataCryptoValute = _cryptoValute;
                                 swipeRefreshLayoutHome.setRefreshing(false);
                             }
@@ -138,55 +193,61 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 });
     }
 
+    private void fillRVGrowthFall(CryptoValute cryptoValute, Metadata metadata) {
+        List<DataItem> dataCVItems = new ArrayList<>();
+        dataCVItems.addAll(cryptoValute.getData());
+        List<DataItem> dataItemsGrowth = new ArrayList<>();
+        List<DataItem> dataItemsFall = new ArrayList<>();
+        DataItem maxItem;
+        DataItem minItem;
+
+        for (int i = 0; i<5; i++){
+            maxItem = dataCVItems.get(0);
+            for (DataItem dataItem:dataCVItems){
+                double percentValue = dataItem.getQuote().getUsdDataCoin().getPercentChange24h();
+                if(maxItem.getQuote().getUsdDataCoin().getPercentChange24h()<percentValue){
+                    maxItem = dataItem;
+                }
+            }
+            dataItemsGrowth.add(maxItem);
+            dataCVItems.remove(maxItem);
+        }
+
+        for (int i = 0; i<5; i++){
+            minItem = dataCVItems.get(0);
+            for (DataItem dataItem:dataCVItems){
+                double percentValue = dataItem.getQuote().getUsdDataCoin().getPercentChange24h();
+                if(minItem.getQuote().getUsdDataCoin().getPercentChange24h()>percentValue){
+                    minItem = dataItem;
+                }
+            }
+            dataItemsFall.add(minItem);
+            dataCVItems.remove(minItem);
+        }
+
+        LinearLayoutManager horizontalLayoutManagerGrowth
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewLeadersGrowth.setLayoutManager(horizontalLayoutManagerGrowth);
+        adapterRVGrowth = new GrowthFallRecyclerView(dataItemsGrowth, metadata);
+        recyclerViewLeadersGrowth.setAdapter(adapterRVGrowth);
+
+        LinearLayoutManager horizontalLayoutManagerFall
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewLeadersFall.setLayoutManager(horizontalLayoutManagerFall);
+        adapterRVFall = new GrowthFallRecyclerView(dataItemsFall, metadata);
+        recyclerViewLeadersFall.setAdapter(adapterRVFall);
+    }
+
     private void fillBlocksTopThree(CryptoValute dataCryptoValute, Metadata metadata){
-        String idCryptoOne = String.valueOf(dataCryptoValute.getData().get(0).getId());
-        String idCryptoTwo = String.valueOf(dataCryptoValute.getData().get(1).getId());
-        String idCryptoThree = String.valueOf(dataCryptoValute.getData().get(2).getId());
 
-        ImageView imageViewCryptoOne = getActivity().findViewById(R.id.imageCryptovaluteOne);
-        ImageView imageViewCryptoTwo = getActivity().findViewById(R.id.imageCryptovaluteTwo);
-        ImageView imageViewCryptoThree = getActivity().findViewById(R.id.imageCryptovaluteThree);
-        TextView textViewSymbolCryptoOne = getActivity().findViewById(R.id.symbolCryptoOne);
-        TextView textViewSymbolCryptoTwo = getActivity().findViewById(R.id.symbolCryptoTwo);
-        TextView textViewSymbolCryptoThree = getActivity().findViewById(R.id.symbolCryptoThree);
-        TextView textViewPriceOne = getActivity().findViewById(R.id.priceCryptoValuteOne);
-        TextView textViewPriceTwo = getActivity().findViewById(R.id.priceCryptoValuteTwo);
-        TextView textViewPriceThree = getActivity().findViewById(R.id.priceCryptoValuteThree);
-        TextView textViewChange24hCryptoOne = getActivity().findViewById(R.id.percent_change_24hCryptoOne);
-        TextView textViewChange24hCryptoTwo = getActivity().findViewById(R.id.percent_change_24hCryptoTwo);
-        TextView textViewChange24hCryptoThree = getActivity().findViewById(R.id.percent_change_24hCryptoThree);
+        List<DataItem> dataItemsCV = new ArrayList<>();
+        dataItemsCV = dataCryptoValute.getData().subList(0,5);
 
-        Picasso.get()
-                .load(metadata.getData().get(idCryptoOne).getLogo())
-                .into(imageViewCryptoOne);
-        Picasso.get()
-                .load(metadata.getData().get(idCryptoTwo).getLogo())
-                .into(imageViewCryptoTwo);
-        Picasso.get()
-                .load(metadata.getData().get(idCryptoThree).getLogo())
-                .into(imageViewCryptoThree);
-
-        textViewSymbolCryptoOne.setText(dataCryptoValute.getData().get(0).getSymbol());
-        textViewSymbolCryptoTwo.setText(dataCryptoValute.getData().get(1).getSymbol());
-        textViewSymbolCryptoThree.setText(dataCryptoValute.getData().get(2).getSymbol());
-
-        textViewPriceOne.setText(String.format("$%,.2f",dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice()));
-        textViewPriceTwo.setText(String.format("$%,.2f",dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPrice()));
-        textViewPriceThree.setText(String.format("$%,.2f",dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPrice()));
-
-        double valueChange24hCryptoOne = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPercentChange24h();
-        textViewChange24hCryptoOne.setText(String.format("%.2f%%", valueChange24hCryptoOne));
-        if(valueChange24hCryptoOne>=0){ textViewChange24hCryptoOne.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
-        else {textViewChange24hCryptoOne.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
-
-        double valueChange24hCryptoTwo = dataCryptoValute.getData().get(1).getQuote().getUsdDataCoin().getPercentChange24h();
-        textViewChange24hCryptoTwo.setText(String.format("%.2f%%", valueChange24hCryptoTwo));
-        if(valueChange24hCryptoTwo>=0){ textViewChange24hCryptoTwo.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
-        else {textViewChange24hCryptoTwo.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
-
-        double valueChange24hCryptoThree = dataCryptoValute.getData().get(2).getQuote().getUsdDataCoin().getPercentChange24h();
-        textViewChange24hCryptoThree.setText(String.format("%.2f%%", valueChange24hCryptoThree));
-        if(valueChange24hCryptoThree>=0){ textViewChange24hCryptoThree.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
-        else {textViewChange24hCryptoThree.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
+        LinearLayoutManager horizontalLayoutManagerCap
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewLeadersCap.setLayoutManager(horizontalLayoutManagerCap);
+        adapterRVCap = new GrowthFallRecyclerView(dataItemsCV, metadata);
+        recyclerViewLeadersCap.setAdapter(adapterRVCap);
     }
 }
+

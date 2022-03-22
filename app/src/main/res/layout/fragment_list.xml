@@ -17,9 +17,9 @@
             android:divider="@null"
             android:dividerHeight="8dp"
             android:drawSelectorOnTop="true"
-            android:scrollbars="none"
             android:paddingStart="@dimen/margin_border"
-            android:paddingEnd="@dimen/margin_border" />
+            android:paddingEnd="@dimen/margin_border"
+            android:scrollbars="none" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageButton

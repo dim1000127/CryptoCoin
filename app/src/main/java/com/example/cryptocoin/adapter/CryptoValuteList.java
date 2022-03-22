@@ -48,7 +48,7 @@ public class CryptoValuteList extends BaseAdapter{
         if (view == null){
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.tv_cryptovalute_list, viewGroup, false);
+            view = inflater.inflate(R.layout.item_cryptovalute_list, viewGroup, false);
         }
 
         LinearLayout layout = (LinearLayout) view;

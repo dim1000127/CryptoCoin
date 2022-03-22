@@ -45,7 +45,7 @@ public class SelectCryptoValute extends BaseAdapter {
         if (view == null){
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.tv_select_cv_list, viewGroup, false);
+            view = inflater.inflate(R.layout.item_select_cv_list, viewGroup, false);
         }
 
         ImageView imageViewCryptoValuteLogo = (ImageView) view.findViewById(R.id.image_logo_cryptovalute_list_forconvert);

@@ -47,4 +47,8 @@
     <string name="circulating_supply">Циркулирующее предложение</string>
     <string name="total_supply">Общее предложение</string>
     <string name="max_supply">Максимальное предложение</string>
+    <string name="top5_cap">Топ-5 по капитализации</string>
+    <string name="leadersGrowth">Лидеры роста</string>
+    <string name="leaders_fall">Лидеры падения</string>
+    <string name="list_tracking">Список отслеживания</string>
 </resources>
