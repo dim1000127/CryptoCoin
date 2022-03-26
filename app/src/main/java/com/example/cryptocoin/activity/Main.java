@@ -12,6 +12,10 @@ import androidx.annotation.Nullable;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.fragments.BookLearnFragment;
@@ -21,12 +25,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
+
 public class Main extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
-    private Fragment selectedFragment;
+    //private Fragment selectedFragment;
     private Toolbar toolbar;
     private MenuItem menuItemSearch;
+    private NavController navController;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,40 +41,34 @@ public class Main extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_main_screen);
         setSupportActionBar(toolbar);
 
-        selectedFragment = new HomeFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+        navController = Navigation.findNavController(this, R.id.fragment_container);
         bottomNav = findViewById(R.id.navigation_view);
-        bottomNav.setOnItemSelectedListener(navListener);
+        NavigationUI.setupWithNavController(bottomNav, navController);
+        navController.addOnDestinationChangedListener(navControllerListener);
     }
 
-    private NavigationBarView.OnItemSelectedListener navListener =
-            new NavigationBarView.OnItemSelectedListener(){
+    private NavController.OnDestinationChangedListener navControllerListener =
+            new NavController.OnDestinationChangedListener() {
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
-                    switch (item.getItemId()){
-
-                        case R.id.navigation_home:
-                            selectedFragment =  new HomeFragment();
-                            //необходимо будет сделать свой ActionBar
-                            toolbar.setTitle("CryptoCoin");
+                public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                    if(navDestination.getId() == R.id.homeFragment) {
+                        toolbar.setTitle("CryptoCoin");
+                        if(menuItemSearch != null) {
                             menuItemSearch.setVisible(true);
-                            break;
-                        case R.id.navigation_list_top:
-                            selectedFragment =  new ListFragment();
-                            toolbar.setTitle("Топ криптовалют");
+                        }
+                    }
+                    else if (navDestination.getId() == R.id.listFragment){
+                        toolbar.setTitle("Топ криптовалют");
+                        if(menuItemSearch != null) {
                             menuItemSearch.setVisible(true);
-                            break;
-                        case R.id.navigation_bool_learn:
-                            selectedFragment =  new BookLearnFragment();
-                            toolbar.setTitle("Обучение");
+                        }
+                    }
+                    else if(navDestination.getId() == R.id.bookLearnFragment) {
+                        toolbar.setTitle("Обучение");
+                        if(menuItemSearch != null) {
                             menuItemSearch.setVisible(false);
-                            break;
+                        }
                     }
-                    if(selectedFragment != null){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-                    }
-                    return true;
                 }
             };
 
@@ -90,5 +91,4 @@ public class Main extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

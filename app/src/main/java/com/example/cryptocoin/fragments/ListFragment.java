@@ -35,8 +35,8 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private Subscription subscription;
     private CryptoValuteList adapterCryptoValutePrice;
-    private CryptoValute oldDataCryptoValute = null;
-    private Metadata metadata = null;
+    private CryptoValute oldDataCryptoValute;
+    private Metadata metadata;
 
     private ListView listViewTop;
     private ImageButton buttonListTop;
@@ -56,6 +56,10 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         relativeLayout = (RelativeLayout) view.findViewById(R.id.parentRelativeList);
         swipeRefreshLayoutList.setOnRefreshListener(this);
         buttonListTop.setVisibility(View.GONE);
+
+        oldDataCryptoValute = null;
+        metadata = null;
+
         listViewTop.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -150,6 +154,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     public void onNext(Map<String, Object> _cryptoValuteMetadata) {
                         CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
                         metadata = (Metadata) _cryptoValuteMetadata.get(Const.METADATA_KEY_MAP);
+
                         if (isAdded()) {
                             if (oldDataCryptoValute != null) {
                                 double oldPrice = oldDataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();

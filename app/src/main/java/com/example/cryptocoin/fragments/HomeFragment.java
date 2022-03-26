@@ -36,29 +36,30 @@ import rx.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
+    private Subscription subscription;
+
+    private GrowthFallRecyclerView adapterRVGrowth;
+    private GrowthFallRecyclerView adapterRVFall;
+    private GrowthFallRecyclerView adapterRVCap;
+    private CryptoValute oldDataCryptoValute;
+
     private Button buttonOpenConvertCryptoValute;
     private SwipeRefreshLayout swipeRefreshLayoutHome;
     private RecyclerView recyclerViewLeadersGrowth;
     private RecyclerView recyclerViewLeadersFall;
     private RecyclerView recyclerViewLeadersCap;
 
-    private Subscription subscription;
-
-    private GrowthFallRecyclerView adapterRVGrowth;
-    private GrowthFallRecyclerView adapterRVFall;
-    private GrowthFallRecyclerView adapterRVCap;
-    private CryptoValute oldDataCryptoValute = null;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
         recyclerViewLeadersGrowth = (RecyclerView) rootView.findViewById(R.id.rvLeadersGrowth);
         recyclerViewLeadersFall = (RecyclerView) rootView.findViewById(R.id.rvLeadersFall);
         recyclerViewLeadersCap = (RecyclerView) rootView.findViewById(R.id.rvLeadersCap);
         swipeRefreshLayoutHome = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayoutHome);
         swipeRefreshLayoutHome.setOnRefreshListener(this);
+
+        oldDataCryptoValute = null;
 
         buttonOpenConvertCryptoValute = (Button) rootView.findViewById(R.id.btn_open_convert_cryptovalute);
         buttonOpenConvertCryptoValute.setOnClickListener(new View.OnClickListener() {
@@ -196,8 +197,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private void fillRVGrowthFall(CryptoValute cryptoValute, Metadata metadata) {
         List<DataItem> dataCVItems = new ArrayList<>();
         dataCVItems.addAll(cryptoValute.getData());
+
         List<DataItem> dataItemsGrowth = new ArrayList<>();
         List<DataItem> dataItemsFall = new ArrayList<>();
+
         DataItem maxItem;
         DataItem minItem;
 
