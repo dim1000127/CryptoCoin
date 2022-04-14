@@ -2,7 +2,9 @@ package com.example.cryptocoin.pojo.idcryptovalutepojo;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ItemID {
+import java.io.Serializable;
+
+public class ItemID implements Serializable {
     @SerializedName("id")
     private int id;
 

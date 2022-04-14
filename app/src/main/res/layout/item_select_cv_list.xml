@@ -6,11 +6,11 @@
     android:layout_height="50dp"
     android:background="@drawable/style_for_list_element">
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/image_logo_cryptovalute_list_forconvert"
         android:layout_width="@dimen/image_width_list"
         android:layout_height="match_parent"
-        android:padding="4dp"/>
+        android:padding="4dp"/>-->
 
     <TextView
         android:id="@+id/name_cryptovalute_list_forconvert"

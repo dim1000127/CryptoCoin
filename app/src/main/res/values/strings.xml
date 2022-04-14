@@ -51,4 +51,5 @@
     <string name="leadersGrowth">Лидеры роста</string>
     <string name="leaders_fall">Лидеры падения</string>
     <string name="list_tracking">Список отслеживания</string>
+    <string name="convertation">Конвертировать</string>
 </resources>

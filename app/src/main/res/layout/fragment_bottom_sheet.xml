@@ -113,6 +113,16 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_convertation_cv_bottomsheet"
+        android:text="@string/convertation"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_border"
+        android:layout_marginEnd="@dimen/margin_border"
+        android:backgroundTint="@color/primaryColor" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,10 +1,12 @@
 package com.example.cryptocoin.fragments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
+import com.example.cryptocoin.activity.ConvertCryptoValute;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -23,6 +27,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
 
     private CryptoValute dataCryptoValute;
     private Metadata metadata;
+    private String idCryptoValute;
 
     private int position;
     private ImageView imageCryptoValute;
@@ -39,6 +44,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
     private TextView textViewCirculatingSupply;
     private TextView textViewTotalSupply;
     private TextView textViewMaxSupply;
+    private Button buttonConvertation;
 
     @Override
     public int getTheme() {
@@ -69,9 +75,21 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         textViewCirculatingSupply = (TextView) view.findViewById(R.id.bottom_sheet_circulating_supply);
         textViewTotalSupply = (TextView) view.findViewById(R.id.bottom_sheet_total_supply);
         textViewMaxSupply = (TextView) view.findViewById(R.id.bottom_sheet_max_supply);
+        buttonConvertation = (Button) view.findViewById(R.id.btn_convertation_cv_bottomsheet);
+
+        buttonConvertation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ConvertCryptoValute.class);
+                intent.putExtra(Const.START_FROM_BOTTOMSHEET, Boolean.valueOf(true));
+                intent.putExtra(Const.PRICE_MESSAGE, dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPrice());
+                intent.putExtra(Const.SYMBOL_MESSAGE, dataCryptoValute.getData().get(position).getSymbol());
+                intent.putExtra(Const.LOGO_MESSAGE, metadata.getData().get(idCryptoValute).getLogo());
+                startActivity(intent);
+            }
+        });
 
         fillDataSheet();
-
         return view;
     }
 
@@ -86,7 +104,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         if(dataCryptoValute == null){
             return;
         }
-        String idCryptoValute = String.valueOf(dataCryptoValute.getData().get(position).getId());
+        idCryptoValute = String.valueOf(dataCryptoValute.getData().get(position).getId());
         Picasso.get()
                 .load(metadata.getData().get(idCryptoValute).getLogo())
                 .placeholder(R.drawable.ic_placeholder_image)

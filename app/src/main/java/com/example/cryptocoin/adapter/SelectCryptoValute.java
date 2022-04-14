@@ -5,32 +5,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
-import com.example.cryptocoin.pojo.metadatapojo.Metadata;
-import com.squareup.picasso.Picasso;
+import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
+import com.example.cryptocoin.pojo.idcryptovalutepojo.ItemID;
 
-public class SelectCryptoValute extends BaseAdapter {
+import java.util.ArrayList;
+import java.util.List;
 
-    private CryptoValute cryptoValuteList;
-    private Metadata metadata;
+public class SelectCryptoValute extends BaseAdapter implements Filterable {
 
-    public SelectCryptoValute(CryptoValute _cryptoValuteList, Metadata _metadata){
+
+    private List<ItemID> idCryptoValuteList;
+    private List<ItemID> idCryptoValuteListFiltered;
+
+    /*public SelectCryptoValute(CryptoValute _cryptoValuteList, Metadata _metadata){
         cryptoValuteList = _cryptoValuteList;
         metadata = _metadata;
+    }*/
+
+    public SelectCryptoValute(IdCryptoValute _idCryptoValuteList){
+        idCryptoValuteList = _idCryptoValuteList.getData();
+        idCryptoValuteListFiltered = _idCryptoValuteList.getData();
     }
 
     @Override
     public int getCount() {
-        return cryptoValuteList.getData().size();
+        return idCryptoValuteListFiltered.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return cryptoValuteList.getData().get(i);
+        return idCryptoValuteListFiltered.get(i);
     }
 
     @Override
@@ -48,18 +58,59 @@ public class SelectCryptoValute extends BaseAdapter {
             view = inflater.inflate(R.layout.item_select_cv_list, viewGroup, false);
         }
 
-        ImageView imageViewCryptoValuteLogo = (ImageView) view.findViewById(R.id.image_logo_cryptovalute_list_forconvert);
+        //ImageView imageViewCryptoValuteLogo = (ImageView) view.findViewById(R.id.image_logo_cryptovalute_list_forconvert);
+        LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout_list_select_cryptovalute);
         TextView textViewNameCryptoValute = (TextView) view.findViewById(R.id.name_cryptovalute_list_forconvert);
         TextView textViewSymbolCryptoValute = (TextView) view.findViewById(R.id.symbol_cryptovalute_list_forconvert);
 
-        String idCryptoValute = String.valueOf(cryptoValuteList.getData().get(i).getId());
-
-        Picasso.get()
+        String idCryptoValuteItem = String.valueOf(idCryptoValuteListFiltered.get(i).getId());
+        layout.setTag(idCryptoValuteItem);
+        /*Picasso.get()
                 .load(metadata.getData().get(idCryptoValute).getLogo())
-                .into(imageViewCryptoValuteLogo);
-        textViewNameCryptoValute.setText(cryptoValuteList.getData().get(i).getName());
-        textViewSymbolCryptoValute.setText(cryptoValuteList.getData().get(i).getSymbol());
+                .into(imageViewCryptoValuteLogo);*/
+        textViewNameCryptoValute.setText(idCryptoValuteListFiltered.get(i).getName());
+        textViewSymbolCryptoValute.setText(idCryptoValuteListFiltered.get(i).getSymbol());
 
         return view;
+    }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+
+                FilterResults filterResults = new FilterResults();
+
+                if(charSequence == null || charSequence.length() == 0){
+                    filterResults.count = idCryptoValuteList.size();
+                    filterResults.values = idCryptoValuteList;
+                }
+                else{
+                    String searchStr = charSequence.toString().toLowerCase();
+
+                    List<ItemID> resultData = new ArrayList<>();
+                    for (ItemID itemID:idCryptoValuteList){
+                        if(itemID.getName().toLowerCase().startsWith(searchStr) || itemID.getSymbol().toLowerCase().startsWith(searchStr)){
+                            resultData.add(itemID);
+                        }
+                    }
+                    filterResults.count = resultData.size();
+                    filterResults.values = resultData;
+                }
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                idCryptoValuteListFiltered = (List<ItemID>) filterResults.values;
+                //idCryptoValuteListFiltered.clear();
+                //notifyDataSetChanged();
+                //idCryptoValuteListFiltered.addAll((List<ItemID>) filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
+        return filter;
     }
 }

@@ -47,6 +47,7 @@
 
                 <ImageView
                     android:id="@+id/image_logo_first_asset"
+                    android:src="@drawable/ic_square_view"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:padding="4dp" />
@@ -94,6 +95,7 @@
 
                 <ImageView
                     android:id="@+id/image_logo_second_asset"
+                    android:src="@drawable/ic_square_view"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:padding="4dp" />

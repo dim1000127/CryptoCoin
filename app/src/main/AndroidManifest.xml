@@ -29,6 +29,7 @@
         <activity android:name=".activity.Main"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.ConvertCryptoValute"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.SelectCryptoValuteConvert"
             android:screenOrientation="portrait"/>
