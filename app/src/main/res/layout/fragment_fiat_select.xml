@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_fiat_usd_select"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="@dimen/margin_border"
+        android:layout_marginVertical="4dp"
+        android:background="@drawable/style_for_list_element"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:tag="@string/usd">
+
+        <ImageView
+            android:id="@+id/image_logo_usd_forconvert"
+            android:layout_width="@dimen/image_width_list"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/ic_usd_logo" />
+
+        <TextView
+            android:id="@+id/name_usd_forconvert"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="4dp"
+            android:text="@string/american_dollar"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/symbol_usd_forconvert"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:paddingStart="4dp"
+            android:paddingTop="3dp"
+            android:text="@string/usd"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_fiat_rub_select"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="@dimen/margin_border"
+        android:layout_marginVertical="4dp"
+        android:background="@drawable/style_for_list_element"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:tag="@string/rub">
+
+        <ImageView
+            android:id="@+id/image_logo_rub_forconvert"
+            android:layout_width="@dimen/image_width_list"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/ic_rub_logo" />
+
+        <TextView
+            android:id="@+id/name_rub_forconvert"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="4dp"
+            android:text="@string/russian_ruble"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/symbol_rub_forconvert"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:paddingStart="4dp"
+            android:paddingTop="3dp"
+            android:text="@string/rub"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</LinearLayout>

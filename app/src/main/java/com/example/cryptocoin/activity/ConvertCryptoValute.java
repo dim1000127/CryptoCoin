@@ -95,6 +95,7 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                         if (intent.getStringExtra(Const.TYPE_ASSET).equals(Const.CRYPTOVALUTE)) {
 
                             imageViewLogoFirstAsset.setImageResource(R.drawable.ic_square_view);
+                            textViewSymbolFirstAsset.setText("");
                             priceFirstAsset = 1;
                             getQuotesCVData(intent.getStringExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE),true, false);
                         } else if (intent.getStringExtra(Const.TYPE_ASSET).equals(Const.FIAT)) {
@@ -126,6 +127,7 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                         if (intent.getStringExtra(Const.TYPE_ASSET).equals(Const.CRYPTOVALUTE)) {
 
                             imageViewLogoSecondAsset.setImageResource(R.drawable.ic_square_view);
+                            textViewSymbolSecondAsset.setText("");
                             priceSecondAsset = 1;
                             getQuotesCVData(intent.getStringExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE), false, true);
 
