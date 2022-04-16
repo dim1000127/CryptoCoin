@@ -12,19 +12,20 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.SearchCryptoValuteList;
-import com.example.cryptocoin.fragments.FragmentBottomSheet;
 import com.example.cryptocoin.fragments.SearchBottomSheet;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
+import com.example.cryptocoin.pojo.idcryptovalutepojo.ItemID;
 import com.example.cryptocoin.retrofit.RetrofitIdSingleton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Comparator;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -55,10 +56,10 @@ public class SearchCryptoValute extends AppCompatActivity {
         listViewSearchCV = (ListView) findViewById(R.id.lv_search_cryptovalute);
         textViewStatuSearch = (TextView) findViewById(R.id.tv_status_search);
         searchView = findViewById(R.id.searchview);
-
+        listViewSearchCV.setEmptyView(textViewStatuSearch);
         textViewStatuSearch.setVisibility(View.GONE);
-        searchView.requestFocus();
 
+        searchView.requestFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -69,10 +70,6 @@ public class SearchCryptoValute extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 if(idCryptoValute != null){
                     adapterIdCryptoValute.getFilter().filter(s);
-                    listViewSearchCV.setVisibility(View.VISIBLE);
-                    if(s.trim().length()==0){
-                        listViewSearchCV.setVisibility(View.GONE);
-                    }
                 }
                 return true;
             }
@@ -89,6 +86,7 @@ public class SearchCryptoValute extends AppCompatActivity {
                 searchBottomSheet.show(getSupportFragmentManager(), searchBottomSheet.getTag());
             }
         });
+
         getIdCryptoValute();
     }
 
@@ -114,10 +112,10 @@ public class SearchCryptoValute extends AppCompatActivity {
                     @Override
                     public void onNext(IdCryptoValute _idCryptoValute) {
                         idCryptoValute = _idCryptoValute;
-
-                        adapterIdCryptoValute = new SearchCryptoValuteList(SearchCryptoValute.this,idCryptoValute);
+                        idCryptoValute.getData().sort(Comparator.comparing(ItemID::getName));
+                        adapterIdCryptoValute = new SearchCryptoValuteList(idCryptoValute);
                         listViewSearchCV.setAdapter(adapterIdCryptoValute);
-                        listViewSearchCV.setVisibility(View.GONE);
+
                     }
                 });
     }

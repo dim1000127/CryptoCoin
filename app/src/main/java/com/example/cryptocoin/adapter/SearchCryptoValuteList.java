@@ -19,12 +19,10 @@ import java.util.List;
 
 public class SearchCryptoValuteList extends BaseAdapter implements Filterable {
 
-    private Context context;
     private List<ItemID> idCryptoValuteList;
     private List<ItemID> idCryptoValuteListFiltered;
 
-    public SearchCryptoValuteList (Context _context,IdCryptoValute _idCryptoValuteList){
-        context = _context;
+    public SearchCryptoValuteList (IdCryptoValute _idCryptoValuteList){
         idCryptoValuteList = _idCryptoValuteList.getData();
         idCryptoValuteListFiltered = _idCryptoValuteList.getData();
     }
@@ -46,7 +44,7 @@ public class SearchCryptoValuteList extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        //Context context = viewGroup.getContext();
+        Context context = viewGroup.getContext();
 
         if (view == null){
             LayoutInflater inflater = (LayoutInflater)
@@ -97,9 +95,6 @@ public class SearchCryptoValuteList extends BaseAdapter implements Filterable {
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 idCryptoValuteListFiltered = (List<ItemID>) filterResults.values;
-                //idCryptoValuteListFiltered.clear();
-                //notifyDataSetChanged();
-                //idCryptoValuteListFiltered.addAll((List<ItemID>) filterResults.values);
                 notifyDataSetChanged();
             }
         };

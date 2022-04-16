@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +20,11 @@ import androidx.fragment.app.Fragment;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.SelectCryptoValute;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
+import com.example.cryptocoin.pojo.idcryptovalutepojo.ItemID;
 import com.example.cryptocoin.retrofit.RetrofitIdSingleton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Comparator;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -34,6 +38,7 @@ public class FragmentCryptoValuteSelect extends Fragment {
     private SearchView searchView;
     private ListView listViewSelectCryptoValute;
     private SelectCryptoValute adapterSelectCryptoValute;
+    private TextView textViewStatusSearch;
 
     private IdCryptoValute idCryptoValute = null;
 
@@ -60,7 +65,10 @@ public class FragmentCryptoValuteSelect extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cryptovalute_select, container, false);
 
         searchView = (SearchView) getActivity().findViewById(R.id.searchview_select);
+        textViewStatusSearch = (TextView) view.findViewById(R.id.tv_status_search_select);
         listViewSelectCryptoValute = (ListView) view.findViewById(R.id.listview_select_cryptovalute);
+        listViewSelectCryptoValute.setEmptyView(textViewStatusSearch);
+        textViewStatusSearch.setVisibility(View.GONE);
 
         listViewSelectCryptoValute.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,6 +128,7 @@ public class FragmentCryptoValuteSelect extends Fragment {
                     @Override
                     public void onNext(IdCryptoValute _idCryptoValute) {
                         idCryptoValute = _idCryptoValute;
+                        idCryptoValute.getData().sort(Comparator.comparing(ItemID::getName));
                         adapterSelectCryptoValute = new SelectCryptoValute(idCryptoValute);
                         listViewSelectCryptoValute.setAdapter(adapterSelectCryptoValute);
                     }

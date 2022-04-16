@@ -31,7 +31,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parentRelativeListSearch"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -44,21 +44,28 @@
         <ListView
             android:id="@+id/lv_search_cryptovalute"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:divider="@null"
             android:dividerHeight="8dp"
             android:drawSelectorOnTop="true"
             android:paddingStart="@dimen/margin_border"
             android:paddingEnd="@dimen/margin_border"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_status_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:paddingTop="50dp"
             android:text="@string/unsuccesful_search"
             android:textColor="@color/colorSecondaryText"
-            android:textSize="14sp" />
-    </RelativeLayout>
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -171,6 +171,8 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
         toolbar.setTitle("Конвертер валют");
 
         mSettings = getSharedPreferences(Const.APP_PREFERENCES, Context.MODE_PRIVATE);
+        idFirstAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_FIRST_ASSET, "1");
+        idSecondAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_SECOND_ASSET, "USD");
 
         layoutConvertFirstAsset = (LinearLayout) findViewById(R.id.view_select_first_asset);
         layoutConvertSecondAsset = (LinearLayout) findViewById(R.id.view_select_second_asset);
