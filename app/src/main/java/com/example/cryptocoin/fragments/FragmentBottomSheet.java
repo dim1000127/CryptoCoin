@@ -82,6 +82,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ConvertCryptoValute.class);
                 intent.putExtra(Const.START_FROM_BOTTOMSHEET, Boolean.valueOf(true));
+                intent.putExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE, String.valueOf(dataCryptoValute.getData().get(position).getId()));
                 intent.putExtra(Const.PRICE_MESSAGE, dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPrice());
                 intent.putExtra(Const.SYMBOL_MESSAGE, dataCryptoValute.getData().get(position).getSymbol());
                 intent.putExtra(Const.LOGO_MESSAGE, metadata.getData().get(idCryptoValute).getLogo());

@@ -1,7 +1,9 @@
 package com.example.cryptocoin.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -29,10 +31,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.DecimalFilter;
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
-import com.example.cryptocoin.retrofit.RetrofitIdSingleton;
+import com.example.cryptocoin.retrofit.RetrofitQuotesConvertSingleton;
 import com.example.cryptocoin.retrofit.RetrofitQuotesSingleton;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
@@ -49,7 +50,7 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
 
 
     private Subscription subscriptionQuotes;
-    private Subscription subscriptionIdList;
+    private Subscription subscriptionQuotesConvert;
 
     private TextView textViewSymbolFirstAsset;
     private TextView textViewSymbolSecondAsset;
@@ -72,10 +73,12 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
     private Button buttonCalculateConvertComma;
     private ImageButton buttonCalculateConvertBackspace;
 
-    private QuotesCryptoValute quotesCryptoValute = null;
-    private Metadata metadata = null;
-    private IdCryptoValute idCryptoValute = null;
+    //private QuotesCryptoValute quotesCryptoValute = null;
+    //private Metadata metadata = null;
+    private SharedPreferences mSettings;
 
+    public String idFirstAsset = null;
+    public String idSecondAsset = null;
     private double priceFirstAsset = 1;
     private double priceSecondAsset = 1;
     private double dollarPrice = 1;
@@ -103,18 +106,21 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                             if(symbolMessageFirstAsset.equals(Const.USD_SYMBOL)){
                                 textViewSymbolFirstAsset.setText(symbolMessageFirstAsset);
                                 priceFirstAsset = dollarPrice;
-
+                                idFirstAsset = Const.USD_SYMBOL;
                                 Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoFirstAsset);
                                 convertationFirst();
                             }
                             else if(symbolMessageFirstAsset.equals(Const.RUB_SYMBOL)){
                                 textViewSymbolFirstAsset.setText(symbolMessageFirstAsset);
                                 //priceFirstAsset = dollarPrice / rublePrice;
+                                idFirstAsset = Const.RUB_SYMBOL;
                                 Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoFirstAsset);
                                 convertationFirst();
                             }
                         }
                     }
+                    editTextValueFirstAsset.requestFocus();
+                    editTextValueFirstAsset.setSelectAllOnFocus(true);
                 }
             });
 
@@ -136,20 +142,22 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                             if(symbolMessageSecondAsset.equals(Const.USD_SYMBOL)){
                                 textViewSymbolSecondAsset.setText(symbolMessageSecondAsset);
                                 priceSecondAsset = dollarPrice;
+                                idSecondAsset = Const.USD_SYMBOL;
                                 Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
                                 convertationSecond();
                             }
                             else if(symbolMessageSecondAsset.equals(Const.RUB_SYMBOL)){
                                 textViewSymbolSecondAsset.setText(symbolMessageSecondAsset);
                                 //priceSecondAsset = dollarPrice/rublePrice;
+                                idSecondAsset = Const.RUB_SYMBOL;
                                 Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoSecondAsset);
                                 convertationSecond();
                             }
                         }
                     }
-
+                    editTextValueSecondAsset.requestFocus();
+                    editTextValueSecondAsset.setSelectAllOnFocus(true);
                 }
-
             });
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -161,6 +169,8 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Конвертер валют");
+
+        mSettings = getSharedPreferences(Const.APP_PREFERENCES, Context.MODE_PRIVATE);
 
         layoutConvertFirstAsset = (LinearLayout) findViewById(R.id.view_select_first_asset);
         layoutConvertSecondAsset = (LinearLayout) findViewById(R.id.view_select_second_asset);
@@ -243,67 +253,79 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
         editTextValueSecondAsset.setFilters(new InputFilter[] {new DecimalFilter()});
         editTextValueFirstAsset.setText("0");
         editTextValueSecondAsset.setText("0");
-        //editTextValueFirstAsset.setSelection(editTextValueFirstAsset.getText().length());
-        editTextValueFirstAsset.requestFocus();
-        editTextValueFirstAsset.setSelectAllOnFocus(true);
-        //editTextValueFirstAsset.setEnabled(false);
+
 
 
         Intent intent = getIntent();
         boolean isStartFromBottomSheet = intent.getBooleanExtra(Const.START_FROM_BOTTOMSHEET, false);
         if(isStartFromBottomSheet){
+            idFirstAsset = intent.getStringExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE);
             priceFirstAsset = intent.getDoubleExtra(Const.PRICE_MESSAGE, 1);
             textViewSymbolFirstAsset.setText(intent.getStringExtra(Const.SYMBOL_MESSAGE));
             Picasso.get()
                     .load(intent.getStringExtra(Const.LOGO_MESSAGE))
                     .into(imageViewLogoFirstAsset);
             convertationFirst();
+
+            idSecondAsset = Const.USD_SYMBOL;
+            textViewSymbolSecondAsset.setText(Const.USD_SYMBOL);
+            priceSecondAsset = 1;
+            Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
         }
         else{
-            getQuotesCVData("1", true, false);
+            if(mSettings.contains(Const.APP_PREFERENCES_ID_CV_FIRST_ASSET) &&
+                    mSettings.contains(Const.APP_PREFERENCES_ID_CV_SECOND_ASSET)) {
+                String firstAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_FIRST_ASSET, "1");
+                String secondAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_SECOND_ASSET, "USD");
+                if(firstAsset.equals(Const.USD_SYMBOL)){
+                    idFirstAsset = Const.USD_SYMBOL;
+                    textViewSymbolFirstAsset.setText(Const.USD_SYMBOL);
+                    priceFirstAsset = 1;
+                    Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoFirstAsset);
+                }else if(firstAsset.equals(Const.RUB_SYMBOL)){
+                    idFirstAsset = Const.RUB_SYMBOL;
+                    textViewSymbolFirstAsset.setText(Const.RUB_SYMBOL);
+                    //priceFirstAsset = 1;
+                    Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoFirstAsset);
+                }
+
+                if(secondAsset.equals(Const.USD_SYMBOL)){
+                    idSecondAsset = Const.USD_SYMBOL;
+                    textViewSymbolSecondAsset.setText(Const.USD_SYMBOL);
+                    priceSecondAsset = 1;
+                    Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
+                }else if(secondAsset.equals(Const.RUB_SYMBOL)){
+                    idSecondAsset = Const.RUB_SYMBOL;
+                    textViewSymbolSecondAsset.setText(Const.RUB_SYMBOL);
+                    //priceSecondAsset = 1;
+                    Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoSecondAsset);
+                }
+
+                //String idStrQuery = "";
+                if (!firstAsset.equals(Const.USD_SYMBOL) && !firstAsset.equals(Const.RUB_SYMBOL)&&
+                !secondAsset.equals(Const.USD_SYMBOL) && !secondAsset.equals(Const.RUB_SYMBOL)){
+                    String idStrQuery = firstAsset + "," + secondAsset;
+                    getQuotesConvertCVData(idStrQuery, true, true);
+
+                }
+                else if (!firstAsset.equals(Const.USD_SYMBOL) && !firstAsset.equals(Const.RUB_SYMBOL)){
+                    String idStrQuery = firstAsset;
+                    getQuotesConvertCVData(idStrQuery, true, false);
+                }
+                else if(!secondAsset.equals(Const.USD_SYMBOL) && !secondAsset.equals(Const.RUB_SYMBOL)){
+                    String idStrQuery = secondAsset;
+                    getQuotesConvertCVData(idStrQuery, false, true);
+                }
+            }
+            else{
+                getQuotesCVData("1", true, false);
+                idSecondAsset = Const.USD_SYMBOL;
+                textViewSymbolSecondAsset.setText(Const.USD_SYMBOL);
+                priceSecondAsset = 1;
+                Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
+            }
         }
-
-        textViewSymbolSecondAsset.setText(Const.USD_SYMBOL);
-        priceSecondAsset = 1;
-        Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
-
-        //getCryptoValuteData();
-        //getIdCryptoValute();
     }
-
-    /*private void getCryptoValuteData(){
-        if (subscription != null && !subscription.isUnsubscribed()){
-            subscription.unsubscribe();
-        }
-        subscription = RetrofitSingleton.getCryptoValuteObservable()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Map<String, Object>>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d("onCompleted", "onCompleted");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(Map<String, Object> _cryptoValuteMetadata) {
-                        CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
-                        Metadata _metadata = (Metadata) _cryptoValuteMetadata.get(Const.METADATA_KEY_MAP);
-                        dataCryptoValute = _cryptoValute;
-                        metadata = _metadata;
-                        textViewSymbolFirstAsset.setText(dataCryptoValute.getData().get(0).getSymbol());
-                        textViewSymbolSecondAsset.setText(Const.USD_SYMBOL);
-                        priceFirstAsset = dataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
-                        String idCryptoConvert = String.valueOf(dataCryptoValute.getData().get(0).getId());
-                        Picasso.get().load(metadata.getData().get(idCryptoConvert).getLogo()).into(imageViewLogoFirstAsset);
-                        Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
-                    }
-                });
-    }*/
 
     private void getQuotesCVData(String id, boolean firstAsset, boolean secondAsset) {
         if (subscriptionQuotes != null && !subscriptionQuotes.isUnsubscribed()){
@@ -327,8 +349,8 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
 
                     @Override
                     public void onNext(Map<String, Object> _quotesCVMetadata) {
-                        quotesCryptoValute = (QuotesCryptoValute) _quotesCVMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
-                        metadata = (Metadata) _quotesCVMetadata.get(Const.METADATA_KEY_MAP);
+                        QuotesCryptoValute quotesCryptoValute = (QuotesCryptoValute) _quotesCVMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
+                        Metadata metadata = (Metadata) _quotesCVMetadata.get(Const.METADATA_KEY_MAP);
 
                         if (firstAsset){
                             symbolMessageFirstAsset = quotesCryptoValute.getData().get(id).getSymbol();
@@ -339,8 +361,7 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                                     .load(metadata.getData().get(id).getLogo())
                                     .into(imageViewLogoFirstAsset);
                             convertationFirst();
-
-                            //editTextValueFirstAsset.setEnabled(true);
+                            idFirstAsset = id;
                         }
                         if(secondAsset){
                             symbolMessageSecondAsset = quotesCryptoValute.getData().get(id).getSymbol();
@@ -351,21 +372,21 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                                     .load(metadata.getData().get(id).getLogo())
                                     .into(imageViewLogoSecondAsset);
                             convertationSecond();
-
-                            //editTextValueSecondAsset.setEnabled(true);
+                            idSecondAsset = id;
                         }
                     }
                 });
     }
 
-    private void getIdCryptoValute() {
-        if (subscriptionIdList != null && !subscriptionIdList.isUnsubscribed()){
-            subscriptionIdList.unsubscribe();
+    private void getQuotesConvertCVData(String id, boolean firstAsset, boolean secondAsset) {
+        if (subscriptionQuotesConvert != null && !subscriptionQuotesConvert.isUnsubscribed()){
+            subscriptionQuotesConvert.unsubscribe();
         }
-        subscriptionIdList = RetrofitIdSingleton.getIdCryptoValuteObservable()
+
+        subscriptionQuotesConvert = RetrofitQuotesConvertSingleton.getQuotesConvertCVObservable(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<IdCryptoValute>() {
+                .subscribe(new Subscriber<Map<String, Object>>() {
                     @Override
                     public void onCompleted() {
                         Log.d("onCompleted", "onCompleted");
@@ -378,8 +399,57 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                     }
 
                     @Override
-                    public void onNext(IdCryptoValute _idCryptoValute) {
-                        idCryptoValute = _idCryptoValute;
+                    public void onNext(Map<String, Object> _quotesCVMetadata) {
+                        QuotesCryptoValute quotesCryptoValute = (QuotesCryptoValute) _quotesCVMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
+                        Metadata metadata = (Metadata) _quotesCVMetadata.get(Const.METADATA_KEY_MAP);
+
+                        if (firstAsset && !secondAsset){
+                            symbolMessageFirstAsset = quotesCryptoValute.getData().get(id).getSymbol();
+                            priceFirstAsset = quotesCryptoValute.getData().get(id).getQuote().getUsdDataCoin().getPrice();
+                            textViewSymbolFirstAsset.setText(symbolMessageFirstAsset);
+
+                            Picasso.get()
+                                    .load(metadata.getData().get(id).getLogo())
+                                    .into(imageViewLogoFirstAsset);
+                            convertationFirst();
+                            idFirstAsset = id;
+                        }
+                        if(!firstAsset && secondAsset){
+                            symbolMessageSecondAsset = quotesCryptoValute.getData().get(id).getSymbol();
+                            priceSecondAsset = quotesCryptoValute.getData().get(id).getQuote().getUsdDataCoin().getPrice();
+                            textViewSymbolSecondAsset.setText(symbolMessageSecondAsset);
+
+                            Picasso.get()
+                                    .load(metadata.getData().get(id).getLogo())
+                                    .into(imageViewLogoSecondAsset);
+                            convertationSecond();
+                            idSecondAsset = id;
+                        }
+                        if(firstAsset && secondAsset){
+                            String[] idStr = id.split(",");
+
+                            symbolMessageFirstAsset = quotesCryptoValute.getData().get(idStr[0]).getSymbol();
+                            priceFirstAsset = quotesCryptoValute.getData().get(idStr[0]).getQuote().getUsdDataCoin().getPrice();
+                            textViewSymbolFirstAsset.setText(symbolMessageFirstAsset);
+
+                            Picasso.get()
+                                    .load(metadata.getData().get(idStr[0]).getLogo())
+                                    .into(imageViewLogoFirstAsset);
+                            convertationFirst();
+                            idFirstAsset = idStr[0];
+
+                            symbolMessageSecondAsset = quotesCryptoValute.getData().get(idStr[1]).getSymbol();
+                            priceSecondAsset = quotesCryptoValute.getData().get(idStr[1]).getQuote().getUsdDataCoin().getPrice();
+                            textViewSymbolSecondAsset.setText(symbolMessageSecondAsset);
+
+                            Picasso.get()
+                                    .load(metadata.getData().get(idStr[1]).getLogo())
+                                    .into(imageViewLogoSecondAsset);
+                            convertationSecond();
+                            idSecondAsset = idStr[1];
+                        }
+                        editTextValueFirstAsset.requestFocus();
+                        editTextValueFirstAsset.setSelectAllOnFocus(true);
                     }
                 });
     }
@@ -586,42 +656,15 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
     }
 
     private void convertFirstAssetSelect(){
-        //if(idCryptoValute != null){
-            Intent intent = new Intent(ConvertCryptoValute.this, SelectCryptoValuteConvert.class);
-            //intent.putExtra(Const.IDCRYPTOVALUTE_INTENT, (Serializable) idCryptoValute);
-            //intent.putExtra(Const.ASSET_NUMBER_INTENT, numberCryptoConvert);
-            firstStartForResult.launch(intent);
-        //}
+        Intent intent = new Intent(ConvertCryptoValute.this, SelectCryptoValuteConvert.class);
+        firstStartForResult.launch(intent);
     }
 
     private void convertSecondAssetSelect(){
-        //if(idCryptoValute != null){
-            Intent intent = new Intent(ConvertCryptoValute.this, SelectCryptoValuteConvert.class);
-            //intent.putExtra(Const.IDCRYPTOVALUTE_INTENT, (Serializable) idCryptoValute);
-            //intent.putExtra(Const.ASSET_NUMBER_INTENT, numberCryptoConvert);
-            secondStartForResult.launch(intent);
-        //}
+        Intent intent = new Intent(ConvertCryptoValute.this, SelectCryptoValuteConvert.class);
+        secondStartForResult.launch(intent);
     }
 
-    /*private void convertFirstAssetSelect(){
-        if(dataCryptoValute!=null && metadata != null){
-            Intent intent = new Intent(ConvertCryptoValute.this, SelectCryptoValuteConvert.class);
-            intent.putExtra(Const.CRYPTOVALUTE_INTENT, (Serializable) dataCryptoValute);
-            intent.putExtra(Const.METADATA_INTENT, (Serializable) metadata);
-            //intent.putExtra(Const.ASSET_NUMBER_INTENT, numberCryptoConvert);
-            firstStartForResult.launch(intent);
-        }
-    }
-
-    private void convertSecondAssetSelect(){
-        if(dataCryptoValute!=null && metadata != null){
-            Intent intent = new Intent(ConvertCryptoValute.this, SelectCryptoValuteConvert.class);
-            intent.putExtra(Const.CRYPTOVALUTE_INTENT, (Serializable) dataCryptoValute);
-            intent.putExtra(Const.METADATA_INTENT, (Serializable) metadata);
-            //intent.putExtra(Const.ASSET_NUMBER_INTENT, numberCryptoConvert);
-            secondStartForResult.launch(intent);
-        }
-    }*/
 
     private void updateTextFirstAsset(String strToAdd){
         isConvertSecond = true;
@@ -700,6 +743,15 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
     private boolean checkStrCorrect(String str){ ;
         if (str.matches(Const.REGEX_EDITTEXT_CONVERT)) { return true; }
         else { return false; }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(Const.APP_PREFERENCES_ID_CV_FIRST_ASSET, idFirstAsset);
+        editor.putString(Const.APP_PREFERENCES_ID_CV_SECOND_ASSET, idSecondAsset);
+        editor.apply();
     }
 
     @Override

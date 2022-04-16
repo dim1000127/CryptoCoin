@@ -90,6 +90,7 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
                 if(quotesCryptoValute != null && metadata != null) {
                     Intent intent = new Intent(getActivity(), ConvertCryptoValute.class);
                     intent.putExtra(Const.START_FROM_BOTTOMSHEET, Boolean.valueOf(true));
+                    intent.putExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE, id);
                     intent.putExtra(Const.PRICE_MESSAGE, quotesCryptoValute.getData().get(id).getQuote().getUsdDataCoin().getPrice());
                     intent.putExtra(Const.SYMBOL_MESSAGE, quotesCryptoValute.getData().get(id).getSymbol());
                     intent.putExtra(Const.LOGO_MESSAGE, metadata.getData().get(id).getLogo());
