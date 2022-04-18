@@ -19,6 +19,7 @@ import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.activity.ConvertCryptoValute;
 import com.example.cryptocoin.adapter.GrowthFallRecyclerView;
+import com.example.cryptocoin.adapter.GrowthFallRecyclerViewEmpty;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
@@ -56,6 +57,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         recyclerViewLeadersGrowth = (RecyclerView) rootView.findViewById(R.id.rvLeadersGrowth);
         recyclerViewLeadersFall = (RecyclerView) rootView.findViewById(R.id.rvLeadersFall);
         recyclerViewLeadersCap = (RecyclerView) rootView.findViewById(R.id.rvLeadersCap);
+        fillRecyclerViewEmpty();
+
         swipeRefreshLayoutHome = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayoutHome);
         swipeRefreshLayoutHome.setOnRefreshListener(this);
 
@@ -112,6 +115,23 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         getCryptoValuteData();
 
         return  rootView;
+    }
+
+    private void fillRecyclerViewEmpty() {
+        LinearLayoutManager horizontalLayoutManagerGrowth
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewLeadersGrowth.setLayoutManager(horizontalLayoutManagerGrowth);
+        LinearLayoutManager horizontalLayoutManagerFall
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewLeadersFall.setLayoutManager(horizontalLayoutManagerFall);
+        LinearLayoutManager horizontalLayoutManagerCap
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewLeadersCap.setLayoutManager(horizontalLayoutManagerCap);
+
+        GrowthFallRecyclerViewEmpty growthFallRecyclerViewEmpty = new GrowthFallRecyclerViewEmpty();
+        recyclerViewLeadersGrowth.setAdapter(growthFallRecyclerViewEmpty);
+        recyclerViewLeadersFall.setAdapter(growthFallRecyclerViewEmpty);
+        recyclerViewLeadersCap.setAdapter(growthFallRecyclerViewEmpty);
     }
 
     @Override

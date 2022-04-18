@@ -1,6 +1,7 @@
 package com.example.cryptocoin.activity;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +19,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cryptocoin.R;
+import com.example.cryptocoin.adapter.CryptoValuteListEmpty;
 import com.example.cryptocoin.adapter.SearchCryptoValuteList;
+import com.example.cryptocoin.adapter.SelectSearchCVListEmpty;
 import com.example.cryptocoin.fragments.SearchBottomSheet;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.ItemID;
@@ -54,9 +57,10 @@ public class SearchCryptoValute extends AppCompatActivity {
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint_search_layout);
         listViewSearchCV = (ListView) findViewById(R.id.lv_search_cryptovalute);
+        listViewSearchCV.setEmptyView(textViewStatuSearch);
+        fillEmptySearchList();
         textViewStatuSearch = (TextView) findViewById(R.id.tv_status_search);
         searchView = findViewById(R.id.searchview);
-        listViewSearchCV.setEmptyView(textViewStatuSearch);
         textViewStatuSearch.setVisibility(View.GONE);
 
         searchView.requestFocus();
@@ -90,6 +94,14 @@ public class SearchCryptoValute extends AppCompatActivity {
         getIdCryptoValute();
     }
 
+    private void fillEmptySearchList(){
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
+        SelectSearchCVListEmpty adapterCVSearchListEmpty = new SelectSearchCVListEmpty(Math.round(dpHeight/60)+2);
+        listViewSearchCV.setAdapter(adapterCVSearchListEmpty);
+        listViewSearchCV.setEnabled(false);
+    }
+
     private void getIdCryptoValute() {
         if (subscription != null && !subscription.isUnsubscribed()){
             subscription.unsubscribe();
@@ -115,7 +127,7 @@ public class SearchCryptoValute extends AppCompatActivity {
                         idCryptoValute.getData().sort(Comparator.comparing(ItemID::getName));
                         adapterIdCryptoValute = new SearchCryptoValuteList(idCryptoValute);
                         listViewSearchCV.setAdapter(adapterIdCryptoValute);
-
+                        listViewSearchCV.setEnabled(true);
                     }
                 });
     }

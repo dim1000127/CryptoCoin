@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_list_search_cryptovalute"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/style_for_list_element"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:src="@drawable/ic_rectangle_view"
+        android:paddingStart="4dp"
+        android:scaleX="1.4"
+        android:gravity="center"
+        android:layout_width="70dp"
+        android:layout_height="35dp"/>
+
+    <ImageView
+        android:src="@drawable/ic_rectangle_view"
+        android:paddingStart="4dp"
+        android:scaleX="1.2"
+        android:gravity="center|left"
+        android:layout_width="70dp"
+        android:layout_height="25dp"/>
+</LinearLayout>

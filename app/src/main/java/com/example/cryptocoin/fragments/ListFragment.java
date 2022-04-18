@@ -1,6 +1,7 @@
 package com.example.cryptocoin.fragments;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.CryptoValuteList;
+import com.example.cryptocoin.adapter.CryptoValuteListEmpty;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
@@ -51,9 +53,12 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         listViewTop = (ListView) view.findViewById(R.id.listview_top100_cryptovalute);
+        fillEmptyList();
+
         buttonListTop = (ImageButton) view.findViewById(R.id.button_list_up);
         swipeRefreshLayoutList = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutList);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.parentRelativeList);
+
         swipeRefreshLayoutList.setOnRefreshListener(this);
         buttonListTop.setVisibility(View.GONE);
 
@@ -102,6 +107,14 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         getCryptoValuteData();
         return  view;
+    }
+
+    private void fillEmptyList(){
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
+        CryptoValuteListEmpty adapterCVListEmpty = new CryptoValuteListEmpty(Math.round(dpHeight/60)+2);
+        listViewTop.setAdapter(adapterCVListEmpty);
+        listViewTop.setEnabled(false);
     }
 
     @Override
@@ -167,6 +180,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 {
                                     adapterCryptoValutePrice = new CryptoValuteList(_cryptoValute, metadata);
                                     listViewTop.setAdapter(adapterCryptoValutePrice);
+                                    listViewTop.setEnabled(true);
                                     oldDataCryptoValute = _cryptoValute;
                                     swipeRefreshLayoutList.setRefreshing(false);
                                 }
@@ -175,6 +189,7 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             {
                                 adapterCryptoValutePrice = new CryptoValuteList(_cryptoValute, metadata);
                                 listViewTop.setAdapter(adapterCryptoValutePrice);
+                                listViewTop.setEnabled(true);
                                 oldDataCryptoValute = _cryptoValute;
                                 swipeRefreshLayoutList.setRefreshing(false);
                             }

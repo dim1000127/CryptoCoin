@@ -2,6 +2,7 @@ package com.example.cryptocoin.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,9 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.cryptocoin.R;
+import com.example.cryptocoin.adapter.CryptoValuteListEmpty;
 import com.example.cryptocoin.adapter.SelectCryptoValute;
+import com.example.cryptocoin.adapter.SelectSearchCVListEmpty;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.ItemID;
 import com.example.cryptocoin.retrofit.RetrofitIdSingleton;
@@ -68,6 +71,7 @@ public class FragmentCryptoValuteSelect extends Fragment {
         textViewStatusSearch = (TextView) view.findViewById(R.id.tv_status_search_select);
         listViewSelectCryptoValute = (ListView) view.findViewById(R.id.listview_select_cryptovalute);
         listViewSelectCryptoValute.setEmptyView(textViewStatusSearch);
+        fillEmptySelectList();
         textViewStatusSearch.setVisibility(View.GONE);
 
         listViewSelectCryptoValute.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -106,6 +110,14 @@ public class FragmentCryptoValuteSelect extends Fragment {
         return view;
     }
 
+    private void fillEmptySelectList(){
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
+        SelectSearchCVListEmpty adapterCVSelectListEmpty = new SelectSearchCVListEmpty(Math.round(dpHeight/60)+2);
+        listViewSelectCryptoValute.setAdapter(adapterCVSelectListEmpty);
+        listViewSelectCryptoValute.setEnabled(false);
+    }
+
     private void getIdCryptoValute() {
         if (subscription != null && !subscription.isUnsubscribed()){
             subscription.unsubscribe();
@@ -131,6 +143,7 @@ public class FragmentCryptoValuteSelect extends Fragment {
                         idCryptoValute.getData().sort(Comparator.comparing(ItemID::getName));
                         adapterSelectCryptoValute = new SelectCryptoValute(idCryptoValute);
                         listViewSelectCryptoValute.setAdapter(adapterSelectCryptoValute);
+                        listViewSelectCryptoValute.setEnabled(true);
                     }
                 });
     }

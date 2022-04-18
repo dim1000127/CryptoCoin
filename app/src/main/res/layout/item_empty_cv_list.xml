@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:weightSum="100"
+    android:background="@drawable/style_for_list_element">
+
+    <ImageView
+        android:id="@+id/position_in_top"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_square_view"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_weight="8"/>
+
+    <ImageView
+        android:id="@+id/image_logo_cryptovalute_list"
+        android:src="@drawable/ic_square_view"
+        android:padding="4dp"
+        android:layout_width="@dimen/image_width_list"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="35"
+        android:gravity="center" >
+        <ImageView
+            android:src="@drawable/ic_rectangle_view"
+            android:scaleX="1.4"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="30"
+        android:gravity="center" >
+        <ImageView
+            android:src="@drawable/ic_rectangle_view"
+            android:scaleX="1.4"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_marginHorizontal="15dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="27"
+        android:gravity="center">
+
+        <ImageView
+            android:src="@drawable/ic_rectangle_view"
+            android:scaleX="1.4"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"/>
+    </RelativeLayout>
+</LinearLayout>

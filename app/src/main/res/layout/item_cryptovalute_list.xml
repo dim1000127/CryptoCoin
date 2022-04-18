@@ -10,8 +10,8 @@
     <TextView
         android:id="@+id/position_in_top"
         android:gravity="center"
-        android:text="@string/empty"
         android:textColor="@color/colorSecondaryText"
+        android:textSize="12sp"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="8"/>
@@ -32,7 +32,6 @@
         <TextView
             android:id="@+id/name_cryptovalute_list_top"
             android:textSize="16sp"
-            android:text="@string/empty"
             android:textColor="@color/colorPrimaryText"
             android:gravity="center_vertical"
             android:maxLines="1"
@@ -43,8 +42,8 @@
 
         <TextView
             android:id="@+id/symbol_cryptovalute_list_top"
-            android:text="@string/empty"
             android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="4dp"/>
@@ -54,7 +53,6 @@
     <TextView
         android:id="@+id/price_cryptovalute_list_top"
         android:gravity="center"
-        android:text="@string/empty"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryText"
         android:layout_width="0dp"
@@ -74,8 +72,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="@string/empty"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/style_arrow_green" />
+            android:textSize="16sp"/>
     </RelativeLayout>
 </LinearLayout>

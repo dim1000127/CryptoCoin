@@ -13,44 +13,40 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/rv_imageCryptovalute"
+            android:src="@drawable/ic_square_view"
             android:layout_width="20dp"
             android:layout_height="20dp" />
 
-        <TextView
-            android:id="@+id/rv_symbolCrypto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="@string/empty"
-            android:textColor="@color/colorSecondaryText" />
+        <ImageView
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="25dp"
+            android:layout_height="15dp" />
 
-        <TextView
-            android:id="@+id/rv_percent_change_24hCrypto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="@string/empty" />
+        <ImageView
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_marginStart="30dp"
+            android:layout_width="40dp"
+            android:layout_height="15dp" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/rv_priceCryptoValute"
+    <ImageView
+        android:src="@drawable/ic_rectangle_view"
+        android:scaleX="1.6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:gravity="center|bottom"
-        android:text="@string/empty"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -38,6 +38,9 @@
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_list.xml" value="0.23615160349854228" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_cryptovalute_list.xml" value="0.21052631578947367" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_cv_list.xml" value="0.5" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_recyclerview_home.xml" value="0.5" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_searchselect_cv_list.xml" value="0.67" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_recyclerview_home.xml" value="0.1" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_search_cv_list.xml" value="0.21052631578947367" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_select_cv_list.xml" value="0.33" />
