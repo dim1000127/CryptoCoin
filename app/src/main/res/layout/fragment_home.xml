@@ -19,7 +19,7 @@
             android:layout_marginEnd="@dimen/margin_border" />
 
         <Button
-            android:id="@+id/btn_open_list_tracking"
+            android:id="@+id/btn_open_watchlist"
             android:text="@string/list_tracking"
             android:textAllCaps="false"
             android:layout_width="match_parent"

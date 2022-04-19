@@ -17,21 +17,16 @@ import androidx.core.content.res.ResourcesCompat;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.activity.ConvertCryptoValute;
-import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
-import com.example.cryptocoin.pojo.metadatapojo.Metadata;
-import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
+import com.example.cryptocoin.pojo.metadatapojo.Item;
+import com.example.cryptocoin.pojo.quotescryptovalute.QuotesItem;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
+public class FragmentWatchListBotomSheet extends BottomSheetDialogFragment {
 
-public class FragmentBottomSheet extends BottomSheetDialogFragment {
+    private QuotesItem quotesItem;
+    private Item metadataItem;
 
-    private CryptoValute dataCryptoValute;
-    private QuotesCryptoValute quotesCryptoValute;
-    private Metadata metadata;
-    private String idCryptoValute;
-
-    private int position;
     private ImageView imageCryptoValute;
     private TextView textViewNameCV;
     private TextView textViewSymbolCV;
@@ -53,10 +48,9 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         return R.style.BottomSheetDialogTheme;
     }
 
-    public FragmentBottomSheet(CryptoValute _cryptoValute, Metadata _metadata, int _position) {
-        dataCryptoValute = _cryptoValute;
-        metadata = _metadata;
-        position = _position;
+    public FragmentWatchListBotomSheet(QuotesItem quotesItem, Item metadataItem) {
+        this.quotesItem = quotesItem;
+        this.metadataItem = metadataItem;
     }
 
     @Override
@@ -84,10 +78,10 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ConvertCryptoValute.class);
                 intent.putExtra(Const.START_FROM_BOTTOMSHEET, Boolean.valueOf(true));
-                intent.putExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE, String.valueOf(dataCryptoValute.getData().get(position).getId()));
-                intent.putExtra(Const.PRICE_MESSAGE, dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPrice());
-                intent.putExtra(Const.SYMBOL_MESSAGE, dataCryptoValute.getData().get(position).getSymbol());
-                intent.putExtra(Const.LOGO_MESSAGE, metadata.getData().get(idCryptoValute).getLogo());
+                intent.putExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE, String.valueOf(quotesItem.getId()));
+                intent.putExtra(Const.PRICE_MESSAGE, quotesItem.getQuote().getUsdDataCoin().getPrice());
+                intent.putExtra(Const.SYMBOL_MESSAGE, quotesItem.getSymbol());
+                intent.putExtra(Const.LOGO_MESSAGE, metadataItem.getLogo());
                 startActivity(intent);
             }
         });
@@ -99,25 +93,24 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        
+
         return super.onCreateDialog(savedInstanceState);
     }
 
     private void fillDataSheet(){
-        if(dataCryptoValute == null){
+        if(quotesItem == null || metadataItem == null){
             return;
         }
-        idCryptoValute = String.valueOf(dataCryptoValute.getData().get(position).getId());
         Picasso.get()
-                .load(metadata.getData().get(idCryptoValute).getLogo())
+                .load(metadataItem.getLogo())
                 .placeholder(R.drawable.ic_placeholder_image)
                 .into(imageCryptoValute);
 
-        textViewNameCV.setText(dataCryptoValute.getData().get(position).getName());
-        String symbolCV = dataCryptoValute.getData().get(position).getSymbol();
+        textViewNameCV.setText(quotesItem.getName());
+        String symbolCV = quotesItem.getSymbol();
         textViewSymbolCV.setText(symbolCV);
 
-        double priceCV = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPrice();
+        double priceCV = quotesItem.getQuote().getUsdDataCoin().getPrice();
         if(priceCV <= 1){
             textViewPriceCV.setText(String.format("$%,.6f", priceCV));
         }
@@ -125,7 +118,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
             textViewPriceCV.setText(String.format("$%,.2f", priceCV));
         }
 
-        double percentChange24h = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPercentChange24h();
+        double percentChange24h = quotesItem.getQuote().getUsdDataCoin().getPercentChange24h();
         double valChange24h = (priceCV * percentChange24h)/100;
         if(valChange24h >= 0){
             if(valChange24h <=1) {
@@ -155,32 +148,32 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
             textViewPercentChange24h.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_red, 0, 0, 0);
         }
 
-        double percentChange1h = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPercentChange1h();
+        double percentChange1h = quotesItem.getQuote().getUsdDataCoin().getPercentChange1h();
         textViewPercentChange1h.setText(String.format("%.2f%%", percentChange1h));
         if(percentChange1h>=0){ textViewPercentChange1h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewPercentChange1h.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
 
-        double percentChange7d = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getPercentChange7d();
+        double percentChange7d = quotesItem.getQuote().getUsdDataCoin().getPercentChange7d();
         textViewPercentChange7d.setText(String.format("%.2f%%", percentChange7d));
         if(percentChange7d >=0){ textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
 
-        double volume24h = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getVolume24h();
+        double volume24h = quotesItem.getQuote().getUsdDataCoin().getVolume24h();
         textViewVolume24h.setText(String.format("$%,.2f", volume24h));
-        double dominance = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getMarketCapDominance();
+        double dominance = quotesItem.getQuote().getUsdDataCoin().getMarketCapDominance();
         textViewDominance.setText(String.format("%.2f%%", dominance));
-        double marketCap = dataCryptoValute.getData().get(position).getQuote().getUsdDataCoin().getMarketCap();
+        double marketCap = quotesItem.getQuote().getUsdDataCoin().getMarketCap();
         textViewMarketCap.setText(String.format("$%,.2f", marketCap));
 
-        double circulatingSupply = dataCryptoValute.getData().get(position).getCirculatingSupply();
+        double circulatingSupply = quotesItem.getCirculatingSupply();
         if (circulatingSupply == 0) { textViewCirculatingSupply.setText("Нет данных"); }
         else{ textViewCirculatingSupply.setText(String.format("%,.0f", circulatingSupply) + " " + symbolCV); }
 
-        double totalSupply = dataCryptoValute.getData().get(position).getTotalSupply();
+        double totalSupply = quotesItem.getTotalSupply();
         if (totalSupply == 0) { textViewTotalSupply.setText("Нет данных"); }
         else{ textViewTotalSupply.setText(String.format("%,.0f", totalSupply) + " " + symbolCV); }
 
-        double maxSupply = dataCryptoValute.getData().get(position).getMaxSupply();
+        double maxSupply = quotesItem.getMaxSupply();
         if (maxSupply == 0){ textViewMaxSupply.setText("Нет данных"); }
         else{ textViewMaxSupply.setText(String.format("%,.0f", maxSupply) + " " + symbolCV); }
     }

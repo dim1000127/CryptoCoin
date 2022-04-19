@@ -2,6 +2,7 @@ package com.example.cryptocoin;
 
 import android.app.Application;
 
+import com.example.cryptocoin.retrofit.RetrofitQuotesWatchList;
 import com.example.cryptocoin.retrofit.RetrofitIdSingleton;
 import com.example.cryptocoin.retrofit.RetrofitQuotesConvertSingleton;
 import com.example.cryptocoin.retrofit.RetrofitQuotesSingleton;
@@ -16,5 +17,6 @@ public class MyApplication extends Application {
         RetrofitIdSingleton.initIdRetrofit();
         RetrofitQuotesSingleton.initQuotes();
         RetrofitQuotesConvertSingleton.initQuotesConvert();
+        RetrofitQuotesWatchList.initQuotesWatchList();
     }
 }

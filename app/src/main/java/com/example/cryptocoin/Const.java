@@ -7,6 +7,7 @@ public class Const {
     public static final String APP_PREFERENCES = "MYSETTINGS";
     public static final String APP_PREFERENCES_ID_CV_FIRST_ASSET = "APP_PREFERENCES_ID_CV_FIRST_ASSET";
     public static final String APP_PREFERENCES_ID_CV_SECOND_ASSET = "APP_PREFERENCES_ID_CV_SECOND_ASSET";
+    public static final String APP_PREFERENCES_ARRAY_ID_WATCHLIST = "APP_PREFERENCES_ARRAY_ID_WATCHLIST";
 
     public static final String CRYPTOVALUTE_INTENT = "CRYPTOVALUTE";
     public static final String IDCRYPTOVALUTE_INTENT = "IDCRYPTOVALUTE";
@@ -30,5 +31,6 @@ public class Const {
     public static final String SYMBOL_MESSAGE="SYMBOL_MESSAGE";
     public static final String LOGO_MESSAGE="LOGO_MESSAGE";
     public static final String TYPE_ASSET = "ASSET";
+    public static final String ARRAY_ID_MESSAGE = "ARRAY_ID_MESSAGE";
     public static final String ID_CRYPTOVALUTE_ITEM_MESSAGE = "IDCRYPTOVALUTEITEMMESSAGE";
 }

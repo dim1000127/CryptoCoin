@@ -6,14 +6,14 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.cryptocoin.fragments.HomeFragment"
+        android:name="com.example.cryptocoin.fragments.FragmentHome"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.cryptocoin.fragments.ListFragment"
+        android:name="com.example.cryptocoin.fragments.FragmentList"
         android:label="ListFragment" />
     <fragment
         android:id="@+id/bookLearnFragment"
-        android:name="com.example.cryptocoin.fragments.BookLearnFragment"
+        android:name="com.example.cryptocoin.fragments.FragmentBookLearn"
         android:label="BookLearnFragment" />
 </navigation>

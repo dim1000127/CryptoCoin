@@ -52,4 +52,5 @@
     <string name="leaders_fall">Лидеры падения</string>
     <string name="list_tracking">Список отслеживания</string>
     <string name="convertation">Конвертировать</string>
+    <string name="watchlist_empty">Список наблюдения пуст\nДобавьте актив</string>
 </resources>

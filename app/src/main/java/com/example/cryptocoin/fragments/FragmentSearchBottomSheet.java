@@ -31,7 +31,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SearchBottomSheet extends BottomSheetDialogFragment {
+public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
 
     private String id = "1";
     private Subscription subscription;
@@ -59,7 +59,7 @@ public class SearchBottomSheet extends BottomSheetDialogFragment {
         return R.style.BottomSheetDialogTheme;
     }
 
-    public SearchBottomSheet(String id) {
+    public FragmentSearchBottomSheet(String id) {
         this.id = id;
     }
 

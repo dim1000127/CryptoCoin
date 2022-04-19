@@ -18,6 +18,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.activity.ConvertCryptoValute;
+import com.example.cryptocoin.activity.WatchList;
 import com.example.cryptocoin.adapter.GrowthFallRecyclerView;
 import com.example.cryptocoin.adapter.GrowthFallRecyclerViewEmpty;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
@@ -35,7 +36,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private Subscription subscription;
 
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private CryptoValute oldDataCryptoValute;
 
     private Button buttonOpenConvertCryptoValute;
+    private Button buttonOpenWatchList;
     private SwipeRefreshLayout swipeRefreshLayoutHome;
     private RecyclerView recyclerViewLeadersGrowth;
     private RecyclerView recyclerViewLeadersFall;
@@ -69,6 +71,15 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ConvertCryptoValute.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonOpenWatchList = (Button) rootView.findViewById(R.id.btn_open_watchlist);
+        buttonOpenWatchList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), WatchList.class);
                 startActivity(intent);
             }
         });

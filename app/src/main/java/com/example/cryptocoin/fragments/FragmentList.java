@@ -33,7 +33,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
-public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private Subscription subscription;
     private CryptoValuteList adapterCryptoValutePrice;

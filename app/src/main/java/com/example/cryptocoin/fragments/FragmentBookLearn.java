@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.cryptocoin.R;
 
-public class BookLearnFragment extends Fragment {
+public class FragmentBookLearn extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){

@@ -19,10 +19,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.adapter.CryptoValuteListEmpty;
 import com.example.cryptocoin.adapter.SearchCryptoValuteList;
 import com.example.cryptocoin.adapter.SelectSearchCVListEmpty;
-import com.example.cryptocoin.fragments.SearchBottomSheet;
+import com.example.cryptocoin.fragments.FragmentSearchBottomSheet;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.ItemID;
 import com.example.cryptocoin.retrofit.RetrofitIdSingleton;
@@ -56,10 +55,10 @@ public class SearchCryptoValute extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint_search_layout);
+        textViewStatuSearch = (TextView) findViewById(R.id.tv_status_search);
         listViewSearchCV = (ListView) findViewById(R.id.lv_search_cryptovalute);
         listViewSearchCV.setEmptyView(textViewStatuSearch);
         fillEmptySearchList();
-        textViewStatuSearch = (TextView) findViewById(R.id.tv_status_search);
         searchView = findViewById(R.id.searchview);
         textViewStatuSearch.setVisibility(View.GONE);
 
@@ -86,8 +85,8 @@ public class SearchCryptoValute extends AppCompatActivity {
                 String id = layout.getTag().toString();
                 /*Snackbar.make(constraintLayout, "Идентификатор токена: "+id,Snackbar.LENGTH_SHORT)
                         .show();*/
-                SearchBottomSheet searchBottomSheet = new SearchBottomSheet(id);
-                searchBottomSheet.show(getSupportFragmentManager(), searchBottomSheet.getTag());
+                FragmentSearchBottomSheet fragmentSearchBottomSheet = new FragmentSearchBottomSheet(id);
+                fragmentSearchBottomSheet.show(getSupportFragmentManager(), fragmentSearchBottomSheet.getTag());
             }
         });
 

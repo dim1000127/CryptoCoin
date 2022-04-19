@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/lightgray">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout_addwatchlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_add_watchlist"
+            style="@style/Toolbar"
+            app:title="@string/app_name">
+
+            <SearchView
+                android:id="@+id/searchview_add_watchlist"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginEnd="@dimen/margin_border"
+                android:queryHint="@string/search_hint"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@android:color/transparent"
+                android:background="@drawable/background_searchview"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentRelativeListAddWatchList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout_addwatchlist">
+
+        <ListView
+            android:id="@+id/lv_add_watchlist"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:divider="@null"
+            android:dividerHeight="8dp"
+            android:drawSelectorOnTop="true"
+            android:paddingStart="@dimen/margin_border"
+            android:paddingEnd="@dimen/margin_border"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_status_search_add_watchlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:text="@string/unsuccesful_search"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

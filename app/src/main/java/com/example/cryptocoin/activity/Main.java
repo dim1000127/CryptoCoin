@@ -11,21 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.cryptocoin.R;
-import com.example.cryptocoin.fragments.BookLearnFragment;
-import com.example.cryptocoin.fragments.HomeFragment;
-import com.example.cryptocoin.fragments.ListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.io.IOException;
 
 public class Main extends AppCompatActivity {
 

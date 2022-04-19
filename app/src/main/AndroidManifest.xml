@@ -35,6 +35,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.SearchCryptoValute"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.WatchList"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AddWatchList"
+            android:screenOrientation="portrait"/>
             <!--android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
