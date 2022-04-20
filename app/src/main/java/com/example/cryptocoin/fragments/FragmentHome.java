@@ -198,28 +198,10 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                         Metadata _metadata = (Metadata) _cryptoValuteMetadata.get(Const.METADATA_KEY_MAP);
 
                         if (isAdded()) {
-                            if (oldDataCryptoValute != null) {
-                                double oldPrice = oldDataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
-                                double newPrice = _cryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
-                                if (oldPrice == newPrice) {
-                                    Snackbar.make(swipeRefreshLayoutHome, R.string.actual_data, Snackbar.LENGTH_SHORT).show();
-                                    swipeRefreshLayoutHome.setRefreshing(false);
-                                }
-                                else
-                                {
-                                    fillBlocksTopThree(_cryptoValute, _metadata);
-                                    fillRVGrowthFall(_cryptoValute, _metadata);
-                                    oldDataCryptoValute = _cryptoValute;
-                                    swipeRefreshLayoutHome.setRefreshing(false);
-                                }
-                            }
-                            else
-                            {
-                                fillBlocksTopThree(_cryptoValute, _metadata);
-                                fillRVGrowthFall(_cryptoValute, _metadata);
-                                oldDataCryptoValute = _cryptoValute;
-                                swipeRefreshLayoutHome.setRefreshing(false);
-                            }
+                            fillBlocksTopThree(_cryptoValute, _metadata);
+                            fillRVGrowthFall(_cryptoValute, _metadata);
+                            oldDataCryptoValute = _cryptoValute;
+                            swipeRefreshLayoutHome.setRefreshing(false);
                         }
                     }
                 });

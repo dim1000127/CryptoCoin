@@ -167,32 +167,13 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
                     public void onNext(Map<String, Object> _cryptoValuteMetadata) {
                         CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
                         metadata = (Metadata) _cryptoValuteMetadata.get(Const.METADATA_KEY_MAP);
-
                         if (isAdded()) {
-                            if (oldDataCryptoValute != null) {
-                                double oldPrice = oldDataCryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
-                                double newPrice = _cryptoValute.getData().get(0).getQuote().getUsdDataCoin().getPrice();
-                                if (oldPrice == newPrice) {
-                                    Snackbar.make(relativeLayout, R.string.actual_data, Snackbar.LENGTH_SHORT).show();
-                                    swipeRefreshLayoutList.setRefreshing(false);
-                                }
-                                else
-                                {
-                                    adapterCryptoValutePrice = new CryptoValuteList(_cryptoValute, metadata);
-                                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                                    listViewTop.setEnabled(true);
-                                    oldDataCryptoValute = _cryptoValute;
-                                    swipeRefreshLayoutList.setRefreshing(false);
-                                }
-                            }
-                            else
-                            {
-                                adapterCryptoValutePrice = new CryptoValuteList(_cryptoValute, metadata);
-                                listViewTop.setAdapter(adapterCryptoValutePrice);
-                                listViewTop.setEnabled(true);
-                                oldDataCryptoValute = _cryptoValute;
-                                swipeRefreshLayoutList.setRefreshing(false);
-                            }
+                            adapterCryptoValutePrice = new CryptoValuteList(_cryptoValute, metadata);
+                            listViewTop.setAdapter(adapterCryptoValutePrice);
+                            listViewTop.setEnabled(true);
+                            oldDataCryptoValute = _cryptoValute;
+                            swipeRefreshLayoutList.setRefreshing(false);
+
                         }
                     }
                 });

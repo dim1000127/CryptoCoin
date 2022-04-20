@@ -22,16 +22,18 @@ public class WatchListCV extends BaseAdapter {
     private QuotesCryptoValute quotesCryptoValute;
     private Metadata metadata;
     private ArrayList<String> idArray;
+    private boolean[] selections;
 
     public WatchListCV(QuotesCryptoValute quotesCryptoValute, Metadata metadata, ArrayList<String> idArray){
         this.quotesCryptoValute = quotesCryptoValute;
         this.metadata = metadata;
         this.idArray = idArray;
+        this.selections = new boolean[idArray.size()];
     }
 
     @Override
     public int getCount() {
-        return quotesCryptoValute.getData().size();
+        return idArray.size();
     }
 
     @Override
@@ -42,6 +44,30 @@ public class WatchListCV extends BaseAdapter {
     @Override
     public long getItemId(int i) {
         return i;
+    }
+
+    public void deleteItem(String id){
+        idArray.remove(id);
+        selections = new boolean[idArray.size()];
+    }
+
+    public void switchSelection(int position){
+        selections[position] = !selections[position];
+        notifyDataSetChanged();
+    }
+
+    public int getCountSelection(){
+        int count = 0;
+        for (int i = 0; i < selections.length; i++){
+            if(selections[i]){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean getValueSelection(int position){
+        return selections[position];
     }
 
     @Override
@@ -55,6 +81,7 @@ public class WatchListCV extends BaseAdapter {
         }
 
         String idItem = idArray.get(i);
+        boolean isSelected = selections[i];
 
         String idCryptoValute = String.valueOf(quotesCryptoValute.getData().get(idItem).getId());
         ImageView imageViewCryptoValuteLogo = (ImageView) view.findViewById(R.id.image_logo_cryptovalute_watchlist);
@@ -63,9 +90,17 @@ public class WatchListCV extends BaseAdapter {
         TextView textViewPriceCryptoValute = (TextView) view.findViewById(R.id.price_cryptovalute_watchlist);
         TextView textViewPercentChange = (TextView) view.findViewById(R.id.percent_change_cryptovalute_watchlist);
 
-        Picasso.get()
-                .load(metadata.getData().get(idCryptoValute).getLogo())
-                .into(imageViewCryptoValuteLogo);;
+        if(isSelected) {
+            Picasso.get()
+                    .load(R.drawable.ic_baseline_done_circle)
+                    .into(imageViewCryptoValuteLogo);
+        }
+        else{
+            Picasso.get()
+                    .load(metadata.getData().get(idCryptoValute).getLogo())
+                    .into(imageViewCryptoValuteLogo);
+        }
+
         textViewNameCryptoValute.setText(quotesCryptoValute.getData().get(idItem).getName());
         textViewSymbolCryptoValute.setText(quotesCryptoValute.getData().get(idItem).getSymbol());
         double priceCryptoValute = quotesCryptoValute.getData().get(idItem).getQuote().getUsdDataCoin().getPrice();

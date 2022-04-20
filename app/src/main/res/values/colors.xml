@@ -8,6 +8,7 @@
 
     <color name="primaryColor">#388ACC</color>
     <color name="primaryColorHighlight">#4C9ADA</color>
+    <color name="secondaryColor">#8aaecb</color>
 
     <color name="black">#FF000000</color>
     <color name="colorPrimaryText">#212121</color>
