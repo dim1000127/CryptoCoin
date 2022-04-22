@@ -7,16 +7,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/bottom_sheet_name_cv"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/empty"
-        android:textSize="16sp"
-        android:padding="15dp"
-        android:textColor="@color/colorPrimaryText"
-        android:textStyle="bold"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/bottom_sheet_name_cv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="15dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/img_bottom_sheet_name_cv"
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="50dp"
+            android:layout_height="24sp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -32,6 +43,7 @@
 
         <ImageView
             android:id="@+id/bottom_sheet_image_cv"
+            android:src="@drawable/ic_square_view"
             android:layout_margin="15dp"
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -45,26 +57,49 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/bottom_sheet_symbol_cv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/empty"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorSecondaryText"/>
 
-                <TextView
-                    android:id="@+id/bottom_sheet_price_cv"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/empty"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textStyle="bold"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/bottom_sheet_symbol_cv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/img_bottom_sheet_symbol_cv"
+                        android:layout_width="20dp"
+                        android:layout_height="12sp"
+                        android:layout_gravity="center|start"
+                        android:src="@drawable/ic_rectangle_view" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/bottom_sheet_price_cv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/img_bottom_sheet_price_cv"
+                        android:layout_width="30dp"
+                        android:layout_height="20sp"
+                        android:layout_gravity="center|start"
+                        android:src="@drawable/ic_rectangle_view" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -80,14 +115,25 @@
                     android:textSize="12sp"
                     android:textColor="@color/colorSecondaryText"/>
 
-                <TextView
-                    android:id="@+id/bottom_sheet_value_change24h"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/empty"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textStyle="bold"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/bottom_sheet_value_change24h"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/img_bottom_sheet_value_change24h"
+                        android:layout_width="20dp"
+                        android:layout_height="12sp"
+                        android:layout_gravity="center|start"
+                        android:src="@drawable/ic_rectangle_view" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -105,11 +151,17 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:gravity="center|end"
-                android:text="@string/empty"
                 android:textColor="@color/green"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/style_arrow_green" />
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_percent_change24h"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"/>
         </RelativeLayout>
     </LinearLayout>
 
@@ -158,10 +210,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/empty"
             android:textColor="@color/colorPrimaryText"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_bottom_sheet_percent_change1h"
+            android:layout_width="30dp"
+            android:layout_height="16sp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_rectangle_view" />
     </RelativeLayout>
 
     <View
@@ -189,10 +247,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/empty"
             android:textColor="@color/colorPrimaryText"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_bottom_sheet_percent_change7d"
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="30dp"
+            android:layout_height="16sp"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <View
@@ -220,10 +284,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/empty"
             android:textColor="@color/colorPrimaryText"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_bottom_sheet_volume24h"
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="30dp"
+            android:layout_height="16sp"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <View
@@ -251,10 +321,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/empty"
             android:textColor="@color/colorPrimaryText"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_bottom_sheet_dominance"
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="30dp"
+            android:layout_height="16sp"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <View
@@ -282,10 +358,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/empty"
             android:textColor="@color/colorPrimaryText"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_bottom_sheet_market_cap"
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="30dp"
+            android:layout_height="16sp"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <TextView
@@ -316,10 +398,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/empty"
             android:textColor="@color/colorPrimaryText"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_bottom_sheet_circulating_supply"
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="30dp"
+            android:layout_height="16sp"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <View
@@ -347,10 +435,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/empty"
             android:textColor="@color/colorPrimaryText"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_bottom_sheet_total_supply"
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="30dp"
+            android:layout_height="16sp"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <View
@@ -377,10 +471,16 @@
             android:id="@+id/bottom_sheet_max_supply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/empty"
-            android:textSize="12sp"
+            android:layout_alignParentEnd="true"
             android:textColor="@color/colorPrimaryText"
-            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_bottom_sheet_max_supply"
+            android:src="@drawable/ic_rectangle_view"
+            android:layout_width="30dp"
+            android:layout_height="16sp"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 

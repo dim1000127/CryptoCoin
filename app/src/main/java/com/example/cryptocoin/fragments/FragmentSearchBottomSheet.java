@@ -39,6 +39,19 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
     private Metadata metadata;
 
     private ImageView imageCryptoValute;
+    private ImageView imageNameCv;
+    private ImageView imageViewSymbolCv;
+    private ImageView imageViewPriceCv;
+    private ImageView imageViewValChange24h;
+    private ImageView imageViewPercentChange24h;
+    private ImageView imageViewPercentChange1h;
+    private ImageView imageViewPercentChange7d;
+    private ImageView imageViewVolume24h;
+    private ImageView imageViewDominance;
+    private ImageView imageViewMarketCap;
+    private ImageView imageViewCirculatingSupply;
+    private ImageView imageViewTotalSupply;
+    private ImageView imageViewMaxSupply;
     private TextView textViewNameCV;
     private TextView textViewSymbolCV;
     private TextView textViewPriceCV;
@@ -69,6 +82,19 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.fragment_bottom_sheet, container, false);
 
         imageCryptoValute = (ImageView) view.findViewById(R.id.bottom_sheet_image_cv);
+        imageNameCv = (ImageView) view.findViewById(R.id.img_bottom_sheet_name_cv);
+        imageViewSymbolCv = (ImageView) view.findViewById(R.id.img_bottom_sheet_symbol_cv);
+        imageViewPriceCv = (ImageView) view.findViewById(R.id.img_bottom_sheet_price_cv);
+        imageViewValChange24h = (ImageView) view.findViewById(R.id.img_bottom_sheet_value_change24h);
+        imageViewPercentChange24h = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change24h);
+        imageViewPercentChange1h = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change1h);
+        imageViewPercentChange7d = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change7d);
+        imageViewVolume24h = (ImageView) view.findViewById(R.id.img_bottom_sheet_volume24h);
+        imageViewDominance = (ImageView) view.findViewById(R.id.img_bottom_sheet_dominance);
+        imageViewMarketCap = (ImageView) view.findViewById(R.id.img_bottom_sheet_market_cap);
+        imageViewCirculatingSupply = (ImageView) view.findViewById(R.id.img_bottom_sheet_circulating_supply);
+        imageViewTotalSupply = (ImageView) view.findViewById(R.id.img_bottom_sheet_total_supply);
+        imageViewMaxSupply = (ImageView) view.findViewById(R.id.img_bottom_sheet_max_supply);
         textViewNameCV = (TextView) view.findViewById(R.id.bottom_sheet_name_cv);
         textViewSymbolCV = (TextView) view.findViewById(R.id.bottom_sheet_symbol_cv);
         textViewPriceCV = (TextView) view.findViewById(R.id.bottom_sheet_price_cv);
@@ -146,6 +172,20 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
         if(quotesCryptoValute == null || metadata == null){
             return;
         }
+
+        imageNameCv.setVisibility(View.GONE);
+        imageViewSymbolCv.setVisibility(View.GONE);
+        imageViewPriceCv.setVisibility(View.GONE);
+        imageViewValChange24h.setVisibility(View.GONE);
+        imageViewPercentChange24h.setVisibility(View.GONE);
+        imageViewPercentChange1h.setVisibility(View.GONE);
+        imageViewPercentChange7d.setVisibility(View.GONE);
+        imageViewVolume24h.setVisibility(View.GONE);
+        imageViewDominance.setVisibility(View.GONE);
+        imageViewMarketCap.setVisibility(View.GONE);
+        imageViewCirculatingSupply.setVisibility(View.GONE);
+        imageViewTotalSupply.setVisibility(View.GONE);
+        imageViewMaxSupply.setVisibility(View.GONE);
 
         String idCryptoValute = String.valueOf(quotesCryptoValute.getData().get(id).getId());
         Picasso.get()
