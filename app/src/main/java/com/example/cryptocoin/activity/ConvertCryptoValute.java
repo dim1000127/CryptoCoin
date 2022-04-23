@@ -273,6 +273,8 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
             textViewSymbolSecondAsset.setText(Const.USD_SYMBOL);
             priceSecondAsset = 1;
             Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
+            editTextValueFirstAsset.requestFocus();
+            editTextValueFirstAsset.setSelectAllOnFocus(true);
         }
         else{
             if(mSettings.contains(Const.APP_PREFERENCES_ID_CV_FIRST_ASSET) &&

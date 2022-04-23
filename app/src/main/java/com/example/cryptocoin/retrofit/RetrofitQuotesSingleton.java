@@ -1,19 +1,10 @@
 package com.example.cryptocoin.retrofit;
 
-import android.os.Build;
-import android.util.Log;
-
-import androidx.annotation.RequiresApi;
-
 import com.example.cryptocoin.Const;
-import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
-import com.example.cryptocoin.pojo.quotescryptovalute.QuotesItem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Retrofit;

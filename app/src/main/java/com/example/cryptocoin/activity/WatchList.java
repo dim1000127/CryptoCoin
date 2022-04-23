@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,14 +29,12 @@ import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.WatchListCV;
 import com.example.cryptocoin.adapter.WatchListCVEmpty;
-import com.example.cryptocoin.fragments.FragmentSearchBottomSheet;
-import com.example.cryptocoin.fragments.FragmentWatchListBotomSheet;
+import com.example.cryptocoin.fragments.FragmentBottomSheet;
+import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
 import com.example.cryptocoin.pojo.metadatapojo.Item;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
-import com.example.cryptocoin.pojo.quotescryptovalute.QuotesItem;
 import com.example.cryptocoin.retrofit.RetrofitQuotesWatchList;
-import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -165,9 +162,9 @@ public class WatchList extends AppCompatActivity implements SwipeRefreshLayout.O
                 }
                 else{
                     String id = arrayIdCVWatchList.get(i);
-                    QuotesItem quotesItem = quotesCryptoValute.getData().get(id);
+                    DataItem dataItem = quotesCryptoValute.getData().get(id);
                     Item metadataItem = metadata.getData().get(id);
-                    FragmentWatchListBotomSheet fragmentWatchListBottomSheet = new FragmentWatchListBotomSheet(quotesItem, metadataItem);
+                    FragmentBottomSheet fragmentWatchListBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
                     fragmentWatchListBottomSheet.show(getSupportFragmentManager(), fragmentWatchListBottomSheet.getTag());
                 }
                 if(adapterWatchList.getCountSelection() == 0){

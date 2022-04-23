@@ -63,7 +63,7 @@ public class CryptoValuteList extends BaseAdapter{
         Picasso.get()
                 .load(metadata.getData().get(idCryptoValute).getLogo())
                 .into(imageViewCryptoValuteLogo);
-        textViewPositionInTop.setText(String.valueOf(i+1));
+        textViewPositionInTop.setText(String.valueOf(cryptoValuteList.getData().get(i).getCmcRank()));
         textViewNameCryptoValute.setText(cryptoValuteList.getData().get(i).getName());
         textViewSymbolCryptoValute.setText(cryptoValuteList.getData().get(i).getSymbol());
         double priceCryptoValute = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPrice();

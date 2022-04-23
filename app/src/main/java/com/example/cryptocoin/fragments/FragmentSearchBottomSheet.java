@@ -46,6 +46,7 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
     private ImageView imageViewPercentChange24h;
     private ImageView imageViewPercentChange1h;
     private ImageView imageViewPercentChange7d;
+    private ImageView imageViewPercentChange30d;
     private ImageView imageViewVolume24h;
     private ImageView imageViewDominance;
     private ImageView imageViewMarketCap;
@@ -59,6 +60,7 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
     private TextView textViewPercentChange24h;
     private TextView textViewPercentChange1h;
     private TextView textViewPercentChange7d;
+    private TextView textViewPercentChange30d;
     private TextView textViewVolume24h;
     private TextView textViewDominance;
     private TextView textViewMarketCap;
@@ -89,6 +91,7 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
         imageViewPercentChange24h = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change24h);
         imageViewPercentChange1h = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change1h);
         imageViewPercentChange7d = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change7d);
+        imageViewPercentChange30d = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change30d);
         imageViewVolume24h = (ImageView) view.findViewById(R.id.img_bottom_sheet_volume24h);
         imageViewDominance = (ImageView) view.findViewById(R.id.img_bottom_sheet_dominance);
         imageViewMarketCap = (ImageView) view.findViewById(R.id.img_bottom_sheet_market_cap);
@@ -102,6 +105,7 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
         textViewPercentChange24h = (TextView) view.findViewById(R.id.bottom_sheet_percent_change24h);
         textViewPercentChange1h = (TextView) view.findViewById(R.id.bottom_sheet_percent_change1h);
         textViewPercentChange7d = (TextView) view.findViewById(R.id.bottom_sheet_percent_change7d);
+        textViewPercentChange30d = (TextView) view.findViewById(R.id.bottom_sheet_percent_change30d);
         textViewVolume24h = (TextView) view.findViewById(R.id.bottom_sheet_volume24h);
         textViewDominance = (TextView) view.findViewById(R.id.bottom_sheet_dominance);
         textViewMarketCap = (TextView) view.findViewById(R.id.bottom_sheet_market_cap);
@@ -180,6 +184,7 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
         imageViewPercentChange24h.setVisibility(View.GONE);
         imageViewPercentChange1h.setVisibility(View.GONE);
         imageViewPercentChange7d.setVisibility(View.GONE);
+        imageViewPercentChange30d.setVisibility(View.GONE);
         imageViewVolume24h.setVisibility(View.GONE);
         imageViewDominance.setVisibility(View.GONE);
         imageViewMarketCap.setVisibility(View.GONE);
@@ -243,6 +248,11 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
         textViewPercentChange7d.setText(String.format("%.2f%%", percentChange7d));
         if(percentChange7d >=0){ textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
         else {textViewPercentChange7d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
+
+        double percentChange30d = quotesCryptoValute.getData().get(id).getQuote().getUsdDataCoin().getPercentChange30d();
+        textViewPercentChange30d.setText(String.format("%.2f%%", percentChange30d));
+        if(percentChange30d >=0){ textViewPercentChange30d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.green, null)); }
+        else {textViewPercentChange30d.setTextColor(ResourcesCompat.getColor(getResources(), R.color.red, null)); }
 
         double volume24h = quotesCryptoValute.getData().get(id).getQuote().getUsdDataCoin().getVolume24h();
         textViewVolume24h.setText(String.format("$%,.2f", volume24h));

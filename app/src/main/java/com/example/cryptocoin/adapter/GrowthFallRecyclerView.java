@@ -24,9 +24,17 @@ public class GrowthFallRecyclerView extends RecyclerView.Adapter<GrowthFallRecyc
     private List<DataItem> cryptoValute;
     private Metadata metadata;
 
-    public GrowthFallRecyclerView(List<DataItem> cryptoValute, Metadata metadata){
+
+    public interface OnDatalickListener{
+        void onDataClick(DataItem dataItem, int position);
+    }
+
+    private final OnDatalickListener onClickListener;
+
+    public GrowthFallRecyclerView(List<DataItem> cryptoValute, Metadata metadata, OnDatalickListener onClickListener){
         this.cryptoValute = cryptoValute;
         this.metadata = metadata;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -59,12 +67,20 @@ public class GrowthFallRecyclerView extends RecyclerView.Adapter<GrowthFallRecyc
         if(cryptoPercentChange >=0){ holder.textViewChange24hCrypto.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.green, null)); }
         else {holder.textViewChange24hCrypto.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.red, null)); }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickListener.onDataClick(cryptoValute.get(position), position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return cryptoValute.size();
     }
+
+    public DataItem getItem(int position) {return cryptoValute.get(position);}
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewCrypto;

@@ -54,4 +54,5 @@
     <string name="convertation">Конвертировать</string>
     <string name="watchlist_empty">Список наблюдения пуст\nДобавьте актив</string>
     <string name="delete">Удалить</string>
+    <string name="change_30d">Изменение за 30д</string>
 </resources>

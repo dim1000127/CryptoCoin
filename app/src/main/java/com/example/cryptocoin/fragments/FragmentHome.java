@@ -23,6 +23,7 @@ import com.example.cryptocoin.adapter.GrowthFallRecyclerView;
 import com.example.cryptocoin.adapter.GrowthFallRecyclerViewEmpty;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
+import com.example.cryptocoin.pojo.metadatapojo.Item;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,6 +45,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     private GrowthFallRecyclerView adapterRVFall;
     private GrowthFallRecyclerView adapterRVCap;
     private CryptoValute oldDataCryptoValute;
+    private Metadata oldMetadata;
 
     private Button buttonOpenConvertCryptoValute;
     private Button buttonOpenWatchList;
@@ -51,6 +53,10 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     private RecyclerView recyclerViewLeadersGrowth;
     private RecyclerView recyclerViewLeadersFall;
     private RecyclerView recyclerViewLeadersCap;
+
+    private GrowthFallRecyclerView.OnDatalickListener dataClickListenerLeadersCap;
+    private GrowthFallRecyclerView.OnDatalickListener dataClickListenerLeadersFall;
+    private GrowthFallRecyclerView.OnDatalickListener dataClickListenerLeadersGrowth;
 
     @Nullable
     @Override
@@ -83,6 +89,37 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                 startActivity(intent);
             }
         });
+
+
+        dataClickListenerLeadersCap = new GrowthFallRecyclerView.OnDatalickListener() {
+            @Override
+            public void onDataClick(DataItem dataItem, int position) {
+                String idItem = String.valueOf(dataItem.getId());
+                Item metadataItem = oldMetadata.getData().get(idItem);
+                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
+                fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
+            }
+        };
+
+        dataClickListenerLeadersFall = new GrowthFallRecyclerView.OnDatalickListener() {
+            @Override
+            public void onDataClick(DataItem dataItem, int position) {
+                String idItem = String.valueOf(dataItem.getId());
+                Item metadataItem = oldMetadata.getData().get(idItem);
+                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
+                fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
+            }
+        };
+
+        dataClickListenerLeadersGrowth = new GrowthFallRecyclerView.OnDatalickListener() {
+            @Override
+            public void onDataClick(DataItem dataItem, int position) {
+                String idItem = String.valueOf(dataItem.getId());
+                Item metadataItem = oldMetadata.getData().get(idItem);
+                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
+                fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
+            }
+        };
 
         recyclerViewLeadersCap.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -122,6 +159,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                     swipeRefreshLayoutHome.setEnabled(true);
             }
         });
+
 
         getCryptoValuteData();
 
@@ -201,6 +239,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                             fillBlocksTopThree(_cryptoValute, _metadata);
                             fillRVGrowthFall(_cryptoValute, _metadata);
                             oldDataCryptoValute = _cryptoValute;
+                            oldMetadata =_metadata;
                             swipeRefreshLayoutHome.setRefreshing(false);
                         }
                     }
@@ -244,13 +283,13 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         LinearLayoutManager horizontalLayoutManagerGrowth
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewLeadersGrowth.setLayoutManager(horizontalLayoutManagerGrowth);
-        adapterRVGrowth = new GrowthFallRecyclerView(dataItemsGrowth, metadata);
+        adapterRVGrowth = new GrowthFallRecyclerView(dataItemsGrowth, metadata, dataClickListenerLeadersGrowth);
         recyclerViewLeadersGrowth.setAdapter(adapterRVGrowth);
 
         LinearLayoutManager horizontalLayoutManagerFall
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewLeadersFall.setLayoutManager(horizontalLayoutManagerFall);
-        adapterRVFall = new GrowthFallRecyclerView(dataItemsFall, metadata);
+        adapterRVFall = new GrowthFallRecyclerView(dataItemsFall, metadata, dataClickListenerLeadersFall);
         recyclerViewLeadersFall.setAdapter(adapterRVFall);
     }
 
@@ -262,7 +301,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         LinearLayoutManager horizontalLayoutManagerCap
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewLeadersCap.setLayoutManager(horizontalLayoutManagerCap);
-        adapterRVCap = new GrowthFallRecyclerView(dataItemsCV, metadata);
+        adapterRVCap = new GrowthFallRecyclerView(dataItemsCV, metadata, dataClickListenerLeadersCap);
         recyclerViewLeadersCap.setAdapter(adapterRVCap);
     }
 }

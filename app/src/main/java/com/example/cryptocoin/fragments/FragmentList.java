@@ -21,6 +21,8 @@ import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.CryptoValuteList;
 import com.example.cryptocoin.adapter.CryptoValuteListEmpty;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
+import com.example.cryptocoin.pojo.metadatapojo.Item;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
@@ -87,7 +89,10 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
         listViewTop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(oldDataCryptoValute, metadata, i);
+                String idItem = String.valueOf(oldDataCryptoValute.getData().get(i).getId());
+                DataItem dataItem = oldDataCryptoValute.getData().get(i);
+                Item metadataItem = metadata.getData().get(idItem);
+                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
                 fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
             }
         });
