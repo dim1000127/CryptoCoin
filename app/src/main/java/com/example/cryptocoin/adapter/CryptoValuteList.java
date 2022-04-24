@@ -21,6 +21,11 @@ public class CryptoValuteList extends BaseAdapter{
     private CryptoValute cryptoValuteList;
     private Metadata metadata;
 
+    private boolean isChange1h = false;
+    private boolean isChange24h = true;
+    private boolean isChange7d = false;
+    private boolean isChange30d = false;
+
     public CryptoValuteList(CryptoValute _cryptoValuteList, Metadata _metadata){
         cryptoValuteList = _cryptoValuteList;
         metadata = _metadata;
@@ -39,6 +44,13 @@ public class CryptoValuteList extends BaseAdapter{
     @Override
     public long getItemId(int i) {
         return i;
+    }
+
+    public void setIsChange(boolean isChange1h, boolean isChange24h, boolean isChange7d, boolean isChange30d){
+        this.isChange1h = isChange1h;
+        this.isChange24h = isChange24h;
+        this.isChange7d = isChange7d;
+        this.isChange30d = isChange30d;
     }
 
     @Override
@@ -66,6 +78,7 @@ public class CryptoValuteList extends BaseAdapter{
         textViewPositionInTop.setText(String.valueOf(cryptoValuteList.getData().get(i).getCmcRank()));
         textViewNameCryptoValute.setText(cryptoValuteList.getData().get(i).getName());
         textViewSymbolCryptoValute.setText(cryptoValuteList.getData().get(i).getSymbol());
+
         double priceCryptoValute = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPrice();
         if(priceCryptoValute<=1){
             textViewPriceCryptoValute.setText(String.format("$%,.6f", priceCryptoValute));
@@ -73,9 +86,24 @@ public class CryptoValuteList extends BaseAdapter{
         else {
             textViewPriceCryptoValute.setText(String.format("$%,.2f", priceCryptoValute));
         }
-        double percentChange24H = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPercentChange24h();
-        textViewPercentChange.setText(String.format("%.2f%%", percentChange24H));
-        if(percentChange24H>=0){
+
+        double percentChange = 0;
+
+        if(isChange1h){
+            percentChange = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPercentChange1h();
+        }
+        if (isChange24h){
+            percentChange = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPercentChange24h();
+        }
+        if (isChange7d){
+            percentChange = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPercentChange7d();
+        }
+
+        if (isChange30d){
+            percentChange = cryptoValuteList.getData().get(i).getQuote().getUsdDataCoin().getPercentChange30d();
+        }
+        textViewPercentChange.setText(String.format("%.2f%%", percentChange));
+        if(percentChange>=0){
             textViewPercentChange.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.green, null));
             textViewPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_green, 0, 0, 0);
         }

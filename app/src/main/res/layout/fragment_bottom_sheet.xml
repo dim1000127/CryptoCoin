@@ -20,12 +20,13 @@
             android:padding="15dp"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="bold"/>
+
         <ImageView
             android:id="@+id/img_bottom_sheet_name_cv"
-            android:src="@drawable/ic_rectangle_view"
             android:layout_width="50dp"
             android:layout_height="24sp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_rectangle_view" />
 
     </RelativeLayout>
 

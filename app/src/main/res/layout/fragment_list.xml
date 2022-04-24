@@ -5,21 +5,61 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayoutList"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listview_top100_cryptovalute"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:dividerHeight="8dp"
-            android:drawSelectorOnTop="true"
-            android:paddingStart="@dimen/margin_border"
-            android:paddingEnd="@dimen/margin_border"
-            android:scrollbars="none" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
+                android:id="@+id/layout_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_border">
+                    <TextView
+                        android:id="@+id/tv_list_percent_change_select"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_24h"
+                        android:padding="4dp"
+                        android:layout_marginEnd="@dimen/margin_border"
+                        android:background="@drawable/style_for_list_element"/>
+
+                    <TextView
+                        android:id="@+id/tv_list_sort_by_select"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sort_by"
+                        android:padding="4dp"
+                        android:background="@drawable/style_for_list_element"/>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <ListView
+                android:id="@+id/listview_top100_cryptovalute"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="8dp"
+                android:drawSelectorOnTop="true"
+                android:paddingStart="@dimen/margin_border"
+                android:paddingEnd="@dimen/margin_border"
+                android:scrollbars="none" />
+        </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageButton

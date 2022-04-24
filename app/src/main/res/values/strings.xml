@@ -55,4 +55,24 @@
     <string name="watchlist_empty">Список наблюдения пуст\nДобавьте актив</string>
     <string name="delete">Удалить</string>
     <string name="change_30d">Изменение за 30д</string>
+    <string name="_1h">% 1ч</string>
+    <string name="_24h">% 24ч</string>
+    <string name="_7d">% 7д</string>
+    <string name="_30d">% 30д</string>
+    <string name="sort_by">Сорт. по: Рейтинг</string>
+    <string name="sort_by_select">Сортировать по</string>
+    <string name="_24">24 ч</string>
+    <string name="_1">1 ч</string>
+    <string name="_7">7 д</string>
+    <string name="_30">30 д</string>
+    <string name="price_change_timeframe">Период изменения цены</string>
+    <string name="rating">Рейтинг</string>
+    <string name="price">Цена</string>
+    <string name="name">Название</string>
+    <string name="percent_change">% Изменение</string>
+
+    <string name="sort_by_rating">Сорт. по: Рейтинг</string>
+    <string name="sort_by_name">Сорт. по: Название</string>
+    <string name="sort_by_price">Сорт. по: Цена</string>
+    <string name="sort_by_percent_change">Сорт. по: % Изменение</string>
 </resources>

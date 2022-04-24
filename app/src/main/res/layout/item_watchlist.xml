@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/name_cryptovalute_watchlist"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimaryText"
             android:gravity="center_vertical"
             android:maxLines="1"
@@ -44,7 +44,7 @@
     <TextView
         android:id="@+id/price_cryptovalute_watchlist"
         android:gravity="center"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textColor="@color/colorPrimaryText"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -63,6 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:textSize="14sp" />
     </RelativeLayout>
 </LinearLayout>
