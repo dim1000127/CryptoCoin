@@ -798,6 +798,14 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
         if (subscriptionQuotes != null && !subscriptionQuotes.isUnsubscribed()) {
             subscriptionQuotes.unsubscribe();
         }
+
+        if(subscriptionQuotesConvert!=null && !subscriptionQuotesConvert.isUnsubscribed()){
+            subscriptionQuotesConvert.unsubscribe();
+        }
+
+        if(subscriptionRuble != null && !subscriptionRuble.isUnsubscribed()){
+            subscriptionRuble.unsubscribe();
+        }
     }
 
     @Override

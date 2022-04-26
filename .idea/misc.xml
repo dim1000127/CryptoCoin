@@ -41,10 +41,10 @@
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_select_cv_convert.xml" value="0.3353884093711467" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_watchlist.xml" value="0.25" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_booklearn.xml" value="0.25" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.9" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.5457348406988695" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_cryptovalute_select.xml" value="0.33" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_fiat_select.xml" value="0.33" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_home.xml" value="0.5" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_list.xml" value="0.1" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_add_watchlist.xml" value="0.5" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_cryptovalute_list.xml" value="0.21052631578947367" />
@@ -53,7 +53,7 @@
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_searchselect_cv_list.xml" value="0.67" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_watchlist.xml" value="0.22521367521367522" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_listview.xml" value="0.18888888888888888" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_recyclerview_home.xml" value="0.1" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_recyclerview_home.xml" value="0.9" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_search_cv_list.xml" value="0.21052631578947367" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_select_cv_list.xml" value="0.33" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_watchlist.xml" value="0.67" />

@@ -75,4 +75,8 @@
     <string name="sort_by_name">Сорт. по: Название</string>
     <string name="sort_by_price">Сорт. по: Цена</string>
     <string name="sort_by_percent_change">Сорт. по: % Изменение</string>
+    <string name="global_metrics">Глобальные показатели</string>
+    <string name="volume24h">Объём за 24ч</string>
+    <string name="dominance_btc">Доминир. BTC</string>
+    <string name="dominance_eth">Доминир. ETH</string>
 </resources>

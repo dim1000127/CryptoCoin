@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,10 +25,14 @@ import com.example.cryptocoin.adapter.GrowthFallRecyclerView;
 import com.example.cryptocoin.adapter.GrowthFallRecyclerViewEmpty;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
+import com.example.cryptocoin.pojo.globalmetricspojo.GlobalMetrics;
 import com.example.cryptocoin.pojo.metadatapojo.Item;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
+import com.example.cryptocoin.retrofit.RetrofitGlobalMetrics;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +46,8 @@ import rx.schedulers.Schedulers;
 public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private Subscription subscription;
+    private Subscription subscriptionGlobalMetrics;
+
 
     private GrowthFallRecyclerView adapterRVGrowth;
     private GrowthFallRecyclerView adapterRVFall;
@@ -53,6 +61,16 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     private RecyclerView recyclerViewLeadersGrowth;
     private RecyclerView recyclerViewLeadersFall;
     private RecyclerView recyclerViewLeadersCap;
+    private TextView textViewMarcetCap;
+    private TextView textViewMarketCapPercentChange;
+    private TextView textViewVolume24h;
+    private TextView textViewVolume24hPercentChange;
+    private TextView textViewDominanceBtc;
+    private TextView textViewDominanceEth;
+    private TextView textViewMarketcapEmpty;
+    private TextView textViewVolume24hEmpty;
+    private TextView textViewDominanceBtcEmpty;
+    private TextView textViewDominanceEthEmpty;
 
     private GrowthFallRecyclerView.OnDatalickListener dataClickListenerLeadersCap;
     private GrowthFallRecyclerView.OnDatalickListener dataClickListenerLeadersFall;
@@ -66,6 +84,17 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         recyclerViewLeadersFall = (RecyclerView) rootView.findViewById(R.id.rvLeadersFall);
         recyclerViewLeadersCap = (RecyclerView) rootView.findViewById(R.id.rvLeadersCap);
         fillRecyclerViewEmpty();
+
+        textViewMarcetCap = (TextView) rootView.findViewById(R.id.tv_market_cap);
+        textViewMarketCapPercentChange = (TextView) rootView.findViewById(R.id.tv_market_cap_percent_change);
+        textViewVolume24h = (TextView) rootView.findViewById(R.id.tv_volume_24h);
+        textViewVolume24hPercentChange = (TextView) rootView.findViewById(R.id.tv_volume_24h_percent_change);
+        textViewDominanceBtc = (TextView) rootView.findViewById(R.id.tv_dominance_btc);
+        textViewDominanceEth = (TextView) rootView.findViewById(R.id.tv_dominance_eth);
+        textViewMarketcapEmpty = (TextView) rootView.findViewById(R.id.tv_market_cap_empty);
+        textViewVolume24hEmpty = (TextView) rootView.findViewById(R.id.tv_volume24h_empty);
+        textViewDominanceBtcEmpty = (TextView) rootView.findViewById(R.id.tv_dominance_btc_empty);
+        textViewDominanceEthEmpty = (TextView) rootView.findViewById(R.id.tv_dominance_eth_empty);
 
         swipeRefreshLayoutHome = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayoutHome);
         swipeRefreshLayoutHome.setOnRefreshListener(this);
@@ -162,9 +191,79 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
         getCryptoValuteData();
+        getGlobalMetrics();
 
         return  rootView;
     }
+
+    private void getGlobalMetrics() {
+        if (subscriptionGlobalMetrics != null && !subscriptionGlobalMetrics.isUnsubscribed()){
+            subscriptionGlobalMetrics.unsubscribe();
+        }
+        subscriptionGlobalMetrics = RetrofitGlobalMetrics.getGlobalMetricsObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GlobalMetrics>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(GlobalMetrics globalMetrics) {
+                        fillGlobalMetrics(globalMetrics);
+                    }
+                });
+    }
+
+    private void fillGlobalMetrics(GlobalMetrics globalMetrics) {
+
+        textViewMarketcapEmpty.setVisibility(View.GONE);
+        textViewVolume24hEmpty.setVisibility(View.GONE);
+        textViewDominanceBtcEmpty.setVisibility(View.GONE);
+        textViewDominanceEthEmpty.setVisibility(View.GONE);
+
+        double marketCap = globalMetrics.getDataGlobalMetrics().getQuoteGlobalMetrics().getUsdGlobalMetrics().getTotalMarketCap();
+        textViewMarcetCap.setText(String.format("$%,.2f", marketCap));
+
+        double percentChangeMarketCap = globalMetrics.getDataGlobalMetrics().getQuoteGlobalMetrics().getUsdGlobalMetrics().getTotalMarketCapPercentChange();
+        textViewMarketCapPercentChange.setText(String.format("%.2f%%", percentChangeMarketCap));
+        if(percentChangeMarketCap>=0){
+            textViewMarketCapPercentChange.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.green, null));
+            textViewMarketCapPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_green, 0, 0, 0);
+        }
+        else {
+            textViewMarketCapPercentChange.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.red, null));
+            textViewMarketCapPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_red,0,0,0);
+        }
+
+
+        double volume24h = globalMetrics.getDataGlobalMetrics().getQuoteGlobalMetrics().getUsdGlobalMetrics().getTotalVolume24h();
+        textViewVolume24h.setText(String.format("$%,.2f",volume24h));
+
+        double percentChangeVolume24h = globalMetrics.getDataGlobalMetrics().getQuoteGlobalMetrics().getUsdGlobalMetrics().getTotalVolume24hPercentChange();
+        textViewVolume24hPercentChange.setText(String.format("%.2f%%", percentChangeVolume24h));
+        if(percentChangeVolume24h>=0){
+            textViewVolume24hPercentChange.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.green, null));
+            textViewVolume24hPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_green, 0, 0, 0);
+        }
+        else {
+            textViewVolume24hPercentChange.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.red, null));
+            textViewVolume24hPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_red,0,0,0);
+        }
+
+        double dominanceBTC = globalMetrics.getDataGlobalMetrics().getBtcDominance();
+        textViewDominanceBtc.setText(String.format("%.2f%%", dominanceBTC));
+
+        double dominanceETH = globalMetrics.getDataGlobalMetrics().getEthDominance();
+        textViewDominanceEth.setText(String.format("%.2f%%", dominanceETH));
+    }
+
 
     private void fillRecyclerViewEmpty() {
         LinearLayoutManager horizontalLayoutManagerGrowth
@@ -189,12 +288,18 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
+
+        if(subscriptionGlobalMetrics != null && !subscriptionGlobalMetrics.isUnsubscribed()){
+            subscriptionGlobalMetrics.unsubscribe();
+        }
     }
 
     @Override
     public void onRefresh() {
         RetrofitSingleton.resetCryptoValuteObservable();
+        RetrofitGlobalMetrics.resetGlobalMetricsObservable();
         getCryptoValuteData();
+        getGlobalMetrics();
     }
 
 
