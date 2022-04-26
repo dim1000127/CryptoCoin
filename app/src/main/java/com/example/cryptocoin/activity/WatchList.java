@@ -10,9 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
@@ -23,25 +26,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
+import com.example.cryptocoin.adapter.CryptoValuteList;
 import com.example.cryptocoin.adapter.WatchListCV;
 import com.example.cryptocoin.adapter.WatchListCVEmpty;
 import com.example.cryptocoin.fragments.FragmentBottomSheet;
+import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
 import com.example.cryptocoin.pojo.metadatapojo.Item;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
 import com.example.cryptocoin.retrofit.RetrofitQuotesWatchList;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -193,7 +206,30 @@ public class WatchList extends AppCompatActivity implements SwipeRefreshLayout.O
                 return true;
             }
         });
+
+        listViewWatch.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                if (listViewWatch.getChildAt(0) != null) {
+                    swipeRefreshLayout.setEnabled(listViewWatch.getFirstVisiblePosition() == 0 && listViewWatch.getChildAt(0).getTop() == 0);
+                }
+            }
+        });
     }
+
+    /*Map<String, DataItem> sortedMap = quotesCryptoValute.getData().entrySet()
+            .stream()
+            .sorted(Collections.reverseOrder(Map.Entry.comparingByValue(Comparator.comparing(DataItem::getCmcRank))))
+            .collect(Collectors
+                    .toMap(Map.Entry::getKey,
+                            Map.Entry::getValue,
+                            (e1, e2) -> e1,
+                            LinkedHashMap::new));*/
 
     private void getQuotesWatchListCV(String id) {
         if (subscription != null && !subscription.isUnsubscribed()){

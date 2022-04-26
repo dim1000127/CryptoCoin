@@ -1,7 +1,9 @@
 package com.example.cryptocoin.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,6 +54,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
     private TextView textViewNameCV;
     private TextView textViewSymbolCV;
     private TextView textViewPriceCV;
+    private TextView textViewCmcRank;
     private TextView textViewValChange24h;
     private TextView textViewPercentChange24h;
     private TextView textViewPercentChange1h;
@@ -97,6 +100,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         textViewNameCV = (TextView) view.findViewById(R.id.bottom_sheet_name_cv);
         textViewSymbolCV = (TextView) view.findViewById(R.id.bottom_sheet_symbol_cv);
         textViewPriceCV = (TextView) view.findViewById(R.id.bottom_sheet_price_cv);
+        textViewCmcRank = (TextView) view.findViewById(R.id.bottom_sheet_cmc_rank);
         textViewValChange24h = (TextView) view.findViewById(R.id.bottom_sheet_value_change24h);
         textViewPercentChange24h = (TextView) view.findViewById(R.id.bottom_sheet_percent_change24h);
         textViewPercentChange1h = (TextView) view.findViewById(R.id.bottom_sheet_percent_change1h);
@@ -170,6 +174,9 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         else {
             textViewPriceCV.setText(String.format("$%,.2f", priceCV));
         }
+
+        String cmcRank = "#"+dataItem.getCmcRank();
+        textViewCmcRank.setText(cmcRank);
 
         double percentChange24h = dataItem.getQuote().getUsdDataCoin().getPercentChange24h();
         double valChange24h = (priceCV * percentChange24h)/100;

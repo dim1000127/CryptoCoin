@@ -38,7 +38,7 @@
             <ListView
                 android:id="@+id/lv_watchlist"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:divider="@null"
                 android:dividerHeight="8dp"
                 android:drawSelectorOnTop="true"

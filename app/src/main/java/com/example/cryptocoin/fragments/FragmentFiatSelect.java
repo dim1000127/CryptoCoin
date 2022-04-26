@@ -55,8 +55,8 @@ public class FragmentFiatSelect extends Fragment {
         layoutFiatRubSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(layoutFiatRubSelect, R.string.soon, Snackbar.LENGTH_SHORT).show();
-                //onSelectFiatListener.onSelectFiatRub();
+                //Snackbar.make(layoutFiatRubSelect, R.string.soon, Snackbar.LENGTH_SHORT).show();
+                onSelectFiatListener.onSelectFiatRub();
             }
         });
         return   view;

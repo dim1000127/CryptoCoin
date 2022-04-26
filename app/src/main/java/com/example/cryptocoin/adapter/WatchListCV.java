@@ -24,6 +24,7 @@ public class WatchListCV extends BaseAdapter {
     private ArrayList<String> idArray;
     private boolean[] selections;
 
+
     public WatchListCV(QuotesCryptoValute quotesCryptoValute, Metadata metadata, ArrayList<String> idArray){
         this.quotesCryptoValute = quotesCryptoValute;
         this.metadata = metadata;

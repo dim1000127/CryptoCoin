@@ -33,8 +33,10 @@ import com.example.cryptocoin.DecimalFilter;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
+import com.example.cryptocoin.pojo.rublepojo.RubleExchange;
 import com.example.cryptocoin.retrofit.RetrofitQuotesConvertSingleton;
 import com.example.cryptocoin.retrofit.RetrofitQuotesSingleton;
+import com.example.cryptocoin.retrofit.RetrofitRuble;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
@@ -47,10 +49,9 @@ import rx.schedulers.Schedulers;
 
 public class ConvertCryptoValute extends AppCompatActivity implements View.OnClickListener {
 
-
-
     private Subscription subscriptionQuotes;
     private Subscription subscriptionQuotesConvert;
+    private Subscription subscriptionRuble;
 
     private TextView textViewSymbolFirstAsset;
     private TextView textViewSymbolSecondAsset;
@@ -79,10 +80,12 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
 
     public String idFirstAsset = null;
     public String idSecondAsset = null;
+    private String firstAssetSettings = "BTC";
+    private String secondAssetSetting = Const.USD_SYMBOL;
     private double priceFirstAsset = 1;
     private double priceSecondAsset = 1;
     private double dollarPrice = 1;
-    //private double rublePrice = 75;
+    private double rublePrice = 75;
     private String idCryptoValuteAsset = "1";
     private String symbolMessageFirstAsset = null;
     private String symbolMessageSecondAsset = null;
@@ -112,7 +115,7 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                             }
                             else if(symbolMessageFirstAsset.equals(Const.RUB_SYMBOL)){
                                 textViewSymbolFirstAsset.setText(symbolMessageFirstAsset);
-                                //priceFirstAsset = dollarPrice / rublePrice;
+                                priceFirstAsset = dollarPrice / rublePrice;
                                 idFirstAsset = Const.RUB_SYMBOL;
                                 Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoFirstAsset);
                                 convertationFirst();
@@ -148,7 +151,7 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                             }
                             else if(symbolMessageSecondAsset.equals(Const.RUB_SYMBOL)){
                                 textViewSymbolSecondAsset.setText(symbolMessageSecondAsset);
-                                //priceSecondAsset = dollarPrice/rublePrice;
+                                priceSecondAsset = dollarPrice/rublePrice;
                                 idSecondAsset = Const.RUB_SYMBOL;
                                 Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoSecondAsset);
                                 convertationSecond();
@@ -169,6 +172,8 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Конвертер валют");
+
+        getRublePrice();
 
         mSettings = getSharedPreferences(Const.APP_PREFERENCES, Context.MODE_PRIVATE);
         idFirstAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_FIRST_ASSET, "1");
@@ -281,27 +286,29 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                     mSettings.contains(Const.APP_PREFERENCES_ID_CV_SECOND_ASSET)) {
                 String firstAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_FIRST_ASSET, "1");
                 String secondAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_SECOND_ASSET, "USD");
+                firstAssetSettings = firstAsset;
+                secondAssetSetting = secondAsset;
                 if(firstAsset.equals(Const.USD_SYMBOL)){
                     idFirstAsset = Const.USD_SYMBOL;
                     textViewSymbolFirstAsset.setText(Const.USD_SYMBOL);
-                    priceFirstAsset = 1;
+                    priceFirstAsset = dollarPrice;
                     Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoFirstAsset);
                 }else if(firstAsset.equals(Const.RUB_SYMBOL)){
                     idFirstAsset = Const.RUB_SYMBOL;
                     textViewSymbolFirstAsset.setText(Const.RUB_SYMBOL);
-                    //priceFirstAsset = 1;
+                    priceFirstAsset = dollarPrice / rublePrice;
                     Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoFirstAsset);
                 }
 
                 if(secondAsset.equals(Const.USD_SYMBOL)){
                     idSecondAsset = Const.USD_SYMBOL;
                     textViewSymbolSecondAsset.setText(Const.USD_SYMBOL);
-                    priceSecondAsset = 1;
+                    priceSecondAsset = dollarPrice;
                     Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
                 }else if(secondAsset.equals(Const.RUB_SYMBOL)){
                     idSecondAsset = Const.RUB_SYMBOL;
                     textViewSymbolSecondAsset.setText(Const.RUB_SYMBOL);
-                    //priceSecondAsset = 1;
+                    priceSecondAsset = dollarPrice / rublePrice;
                     Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoSecondAsset);
                 }
 
@@ -325,10 +332,37 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                 getQuotesCVData("1", true, false);
                 idSecondAsset = Const.USD_SYMBOL;
                 textViewSymbolSecondAsset.setText(Const.USD_SYMBOL);
-                priceSecondAsset = 1;
+                priceSecondAsset = dollarPrice;
                 Picasso.get().load(R.drawable.ic_usd_logo).into(imageViewLogoSecondAsset);
             }
         }
+    }
+
+    private void getRublePrice() {
+        if (subscriptionRuble != null && !subscriptionRuble.isUnsubscribed()){
+            subscriptionRuble.unsubscribe();
+        }
+
+        subscriptionRuble = RetrofitRuble.getRubleExchangeObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<RubleExchange>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(RubleExchange rubleExchange) {
+                        rublePrice = rubleExchange.getValute().getValuteDataUSD().getValue();
+                        if(firstAssetSettings.equals(Const.RUB_SYMBOL)){priceFirstAsset = dollarPrice / rublePrice;}
+                        if(secondAssetSetting.equals(Const.RUB_SYMBOL)){priceSecondAsset = dollarPrice / rublePrice;}
+                    }
+                });
     }
 
     private void getQuotesCVData(String id, boolean firstAsset, boolean secondAsset) {

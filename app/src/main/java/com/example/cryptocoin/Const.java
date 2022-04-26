@@ -2,6 +2,7 @@ package com.example.cryptocoin;
 
 public class Const {
     public static final String BASE_URL = "https://pro-api.coinmarketcap.com";
+    public static final String BASE_URL_CB = "https://www.cbr-xml-daily.ru";
 
     //константы для настроек
     public static final String APP_PREFERENCES = "MYSETTINGS";

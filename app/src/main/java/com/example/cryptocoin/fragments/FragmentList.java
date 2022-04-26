@@ -105,12 +105,13 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
                 firstVisibleElemList = i;
                 if(i == 0) {
                     buttonListTop.setVisibility(View.GONE);
-                    swipeRefreshLayoutList.setEnabled(true);
                 }
                 else
                 {
                     buttonListTop.setVisibility(View.VISIBLE);
-                    swipeRefreshLayoutList.setEnabled(false);
+                }
+                if (listViewTop.getChildAt(0) != null) {
+                    swipeRefreshLayoutList.setEnabled(listViewTop.getFirstVisiblePosition() == 0 && listViewTop.getChildAt(0).getTop() == 0);
                 }
             }
         });

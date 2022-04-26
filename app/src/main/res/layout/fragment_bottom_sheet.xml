@@ -80,6 +80,17 @@
                         android:layout_height="12sp"
                         android:layout_gravity="center|start"
                         android:src="@drawable/ic_rectangle_view" />
+
+                    <TextView
+                        android:id="@+id/bottom_sheet_cmc_rank"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_marginStart="4dp"
+                        android:padding="1dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_tv_cmc_rank"/>
                 </LinearLayout>
 
                 <LinearLayout
