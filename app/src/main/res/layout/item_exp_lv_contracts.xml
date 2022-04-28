@@ -30,7 +30,7 @@
             <TextView
                 android:id="@+id/tv_contracts"
                 android:layout_width="100dp"
-                android:gravity="center"
+                android:gravity="center_vertical|end"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="12sp"
