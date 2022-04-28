@@ -79,4 +79,5 @@
     <string name="volume24h">Объём за 24ч</string>
     <string name="dominance_btc">Доминир. BTC</string>
     <string name="dominance_eth">Доминир. ETH</string>
+    <string name="address_contracts">Контракты</string>
 </resources>

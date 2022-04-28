@@ -1,15 +1,14 @@
 package com.example.cryptocoin.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,21 +19,26 @@ import androidx.core.content.res.ResourcesCompat;
 import com.example.cryptocoin.Const;
 import com.example.cryptocoin.R;
 import com.example.cryptocoin.activity.ConvertCryptoValute;
-import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
+import com.example.cryptocoin.adapter.ExpListContracts;
 import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
+import com.example.cryptocoin.pojo.metadatapojo.ContractAddress;
 import com.example.cryptocoin.pojo.metadatapojo.Item;
-import com.example.cryptocoin.pojo.metadatapojo.Metadata;
-import com.example.cryptocoin.pojo.quotescryptovalute.QuotesCryptoValute;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FragmentBottomSheet extends BottomSheetDialogFragment {
 
     private DataItem dataItem;
     private Item metadataItem;
+
+    private List<List<ContractAddress>> listGroups = new ArrayList<>();
+    private List<ContractAddress> listChild;
+
+    private ExpListContracts adapterExpListContracts;
 
     private ImageView imageCryptoValute;
     private ImageView imageNameCv;
@@ -66,6 +70,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
     private TextView textViewCirculatingSupply;
     private TextView textViewTotalSupply;
     private TextView textViewMaxSupply;
+    private ExpandableListView expandableListViewContracts;
     private Button buttonConvertation;
 
     @Override
@@ -112,6 +117,7 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         textViewCirculatingSupply = (TextView) view.findViewById(R.id.bottom_sheet_circulating_supply);
         textViewTotalSupply = (TextView) view.findViewById(R.id.bottom_sheet_total_supply);
         textViewMaxSupply = (TextView) view.findViewById(R.id.bottom_sheet_max_supply);
+        expandableListViewContracts = (ExpandableListView) view.findViewById(R.id.expandeble_lv_contracts);
         buttonConvertation = (Button) view.findViewById(R.id.btn_convertation_cv_bottomsheet);
 
         buttonConvertation.setOnClickListener(new View.OnClickListener() {
@@ -127,8 +133,52 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
+        expandableListViewContracts.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                setListViewHeight(expandableListView, i);
+                return false;
+            }
+        });
+
         fillDataSheet();
         return view;
+    }
+
+    private void setListViewHeight(ExpandableListView listView,
+                                   int group) {
+        ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
+                View.MeasureSpec.EXACTLY);
+        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+            View groupItem = listAdapter.getGroupView(i, false, null, listView);
+            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+            totalHeight += groupItem.getMeasuredHeight();
+
+            if (((listView.isGroupExpanded(i)) && (i != group))
+                    || ((!listView.isGroupExpanded(i)) && (i == group))) {
+                for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
+                    View listItem = listAdapter.getChildView(i, j, false, null,
+                            listView);
+                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+                    totalHeight += listItem.getMeasuredHeight();
+
+                }
+            }
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        int height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+        if (height < 10)
+            height = 200;
+        params.height = height;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+
     }
 
     @NonNull
@@ -241,5 +291,16 @@ public class FragmentBottomSheet extends BottomSheetDialogFragment {
         double maxSupply = dataItem.getMaxSupply();
         if (maxSupply == 0){ textViewMaxSupply.setText("Нет данных"); }
         else{ textViewMaxSupply.setText(String.format("%,.0f", maxSupply) + " " + symbolCV); }
+
+        listChild = metadataItem.getContractAddress();
+        if (listChild.size() != 0){
+            listGroups.add(listChild);
+            adapterExpListContracts = new ExpListContracts(listGroups);
+            expandableListViewContracts.setAdapter(adapterExpListContracts);
+        }
+        else{
+            expandableListViewContracts.setVisibility(View.GONE);
+        }
+
     }
 }

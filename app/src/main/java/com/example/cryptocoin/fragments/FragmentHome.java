@@ -32,9 +32,8 @@ import com.example.cryptocoin.retrofit.RetrofitGlobalMetrics;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -235,11 +234,9 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         textViewMarketCapPercentChange.setText(String.format("%.2f%%", percentChangeMarketCap));
         if(percentChangeMarketCap>=0){
             textViewMarketCapPercentChange.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.green, null));
-            textViewMarketCapPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_green, 0, 0, 0);
         }
         else {
             textViewMarketCapPercentChange.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.red, null));
-            textViewMarketCapPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_red,0,0,0);
         }
 
 
@@ -250,11 +247,9 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         textViewVolume24hPercentChange.setText(String.format("%.2f%%", percentChangeVolume24h));
         if(percentChangeVolume24h>=0){
             textViewVolume24hPercentChange.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.green, null));
-            textViewVolume24hPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_green, 0, 0, 0);
         }
         else {
             textViewVolume24hPercentChange.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.red, null));
-            textViewVolume24hPercentChange.setCompoundDrawablesWithIntrinsicBounds(R.drawable.style_arrow_red,0,0,0);
         }
 
         double dominanceBTC = globalMetrics.getDataGlobalMetrics().getBtcDominance();
@@ -339,7 +334,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                     public void onNext(Map<String, Object> _cryptoValuteMetadata) {
                         CryptoValute _cryptoValute = (CryptoValute) _cryptoValuteMetadata.get(Const.CRYPTOVALUTE_KEY_MAP);
                         Metadata _metadata = (Metadata) _cryptoValuteMetadata.get(Const.METADATA_KEY_MAP);
-
+                        _cryptoValute.getData().sort(Comparator.comparing(DataItem::getCmcRank));
                         if (isAdded()) {
                             fillBlocksTopThree(_cryptoValute, _metadata);
                             fillRVGrowthFall(_cryptoValute, _metadata);
@@ -399,7 +394,6 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     private void fillBlocksTopThree(CryptoValute dataCryptoValute, Metadata metadata){
-
         List<DataItem> dataItemsCV = new ArrayList<>();
         dataItemsCV = dataCryptoValute.getData().subList(0,5);
 

@@ -24,16 +24,12 @@ import com.example.cryptocoin.R;
 import com.example.cryptocoin.adapter.CryptoValuteList;
 import com.example.cryptocoin.adapter.CryptoValuteListEmpty;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
-import com.example.cryptocoin.pojo.cryptovalutepojo.DataCoin;
 import com.example.cryptocoin.pojo.cryptovalutepojo.DataItem;
-import com.example.cryptocoin.pojo.idcryptovalutepojo.ItemID;
 import com.example.cryptocoin.pojo.metadatapojo.Item;
 import com.example.cryptocoin.pojo.metadatapojo.Metadata;
 import com.example.cryptocoin.retrofit.RetrofitSingleton;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
-
-import org.w3c.dom.Text;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -157,6 +153,7 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
                 showDialogSelectSortBy();
             }
         });
+
         textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
 
         getCryptoValuteData();
@@ -656,7 +653,6 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
                             listViewTop.setEnabled(true);
                             oldDataCryptoValute = _cryptoValute;
                             swipeRefreshLayoutList.setRefreshing(false);
-
                         }
                     }
                 });

@@ -39,4 +39,8 @@ public class Item implements Serializable {
     public String getCategory() { return category; }
 
     public String getLogo() { return logo; }
+
+    public List<ContractAddress> getContractAddress() {
+        return contractAddress;
+    }
 }

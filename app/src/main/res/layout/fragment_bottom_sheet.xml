@@ -187,357 +187,372 @@
         android:layout_marginEnd="@dimen/margin_border"
         android:backgroundTint="@color/primaryColor" />
 
-    <TextView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/bottom_sheet_nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/more_info"
-        android:textColor="@color/colorPrimaryText"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:paddingHorizontal="15dp"
-        android:paddingTop="15dp"/>
-
-    <!--<View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/colorDivider"/>-->
-
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/change_1h"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/bottom_sheet_percent_change1h"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/img_bottom_sheet_percent_change1h"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_rectangle_view" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/colorDivider"/>
-
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/change_7d"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/bottom_sheet_percent_change7d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/img_bottom_sheet_percent_change7d"
-            android:src="@drawable/ic_rectangle_view"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/colorDivider"/>
-
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/change_30d"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/bottom_sheet_percent_change30d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/img_bottom_sheet_percent_change30d"
-            android:src="@drawable/ic_rectangle_view"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/colorDivider"/>
-
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/volume_24h"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/bottom_sheet_volume24h"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/img_bottom_sheet_volume24h"
-            android:src="@drawable/ic_rectangle_view"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/colorDivider"/>
-
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/dominance"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/bottom_sheet_dominance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/img_bottom_sheet_dominance"
-            android:src="@drawable/ic_rectangle_view"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/colorDivider"/>
-
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/market_cap"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/bottom_sheet_market_cap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/img_bottom_sheet_market_cap"
-            android:src="@drawable/ic_rectangle_view"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
-
-    <TextView
+        android:scrollbars="none">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/offer"
-        android:textColor="@color/colorPrimaryText"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:paddingHorizontal="15dp"
-        android:paddingTop="15dp"/>
-
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/circulating_supply"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp"/>
-
-        <TextView
-            android:id="@+id/bottom_sheet_circulating_supply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:text="@string/more_info"
             android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="15dp"/>
 
-        <ImageView
-            android:id="@+id/img_bottom_sheet_circulating_supply"
-            android:src="@drawable/ic_rectangle_view"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorDivider"/>-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/colorDivider"/>
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/change_1h"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bottom_sheet_percent_change1h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_percent_change1h"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_rectangle_view" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorDivider"/>
+
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/change_7d"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bottom_sheet_percent_change7d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_percent_change7d"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorDivider"/>
+
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/change_30d"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bottom_sheet_percent_change30d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_percent_change30d"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorDivider"/>
+
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/volume_24h"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bottom_sheet_volume24h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_volume24h"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorDivider"/>
+
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/dominance"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bottom_sheet_dominance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_dominance"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorDivider"/>
+
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/market_cap"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bottom_sheet_market_cap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_market_cap"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/total_supply"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/bottom_sheet_total_supply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:text="@string/offer"
             android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="15dp"/>
 
-        <ImageView
-            android:id="@+id/img_bottom_sheet_total_supply"
-            android:src="@drawable/ic_rectangle_view"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:background="@color/colorDivider"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/circulating_supply"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
 
-    <RelativeLayout
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/bottom_sheet_circulating_supply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/img_bottom_sheet_circulating_supply"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorDivider"/>
+
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/total_supply"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bottom_sheet_total_supply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_total_supply"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorDivider"/>
+
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/max_supply"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/bottom_sheet_max_supply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_max_supply"
+                android:src="@drawable/ic_rectangle_view"
+                android:layout_width="30dp"
+                android:layout_height="16sp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <ExpandableListView
+            android:id="@+id/expandeble_lv_contracts"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/max_supply"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="12sp" />
+            android:layout_marginBottom="8dp"
+            android:layoutDirection="rtl"
+            android:indicatorLeft="6dp"/>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/bottom_sheet_max_supply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="12sp"
-            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/img_bottom_sheet_max_supply"
-            android:src="@drawable/ic_rectangle_view"
-            android:layout_width="30dp"
-            android:layout_height="16sp"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/colorDivider"/>
 </LinearLayout>
