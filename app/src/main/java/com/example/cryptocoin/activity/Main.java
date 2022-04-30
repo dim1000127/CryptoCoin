@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -48,18 +47,21 @@ public class Main extends AppCompatActivity {
                         if(menuItemSearch != null) {
                             menuItemSearch.setVisible(true);
                         }
+                        //toolbar.setVisibility(View.VISIBLE);
                     }
                     else if (navDestination.getId() == R.id.listFragment){
                         toolbar.setTitle("Топ криптовалют");
                         if(menuItemSearch != null) {
                             menuItemSearch.setVisible(true);
                         }
+                        //toolbar.setVisibility(View.VISIBLE);
                     }
                     else if(navDestination.getId() == R.id.bookLearnFragment) {
                         toolbar.setTitle("Обучение");
                         if(menuItemSearch != null) {
                             menuItemSearch.setVisible(false);
                         }
+                        //toolbar.setVisibility(View.GONE);
                     }
                 }
             };

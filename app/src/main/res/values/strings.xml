@@ -80,4 +80,13 @@
     <string name="dominance_btc">Доминир. BTC</string>
     <string name="dominance_eth">Доминир. ETH</string>
     <string name="address_contracts">Контракты</string>
+    <string name="what_is_cryptocurrency">Что такое криптовалюта?</string>
+    <string name="what_is_blockchain">Что такое блокчейн?</string>
+    <string name="consensus_algorithm">Алгоритм консенсуса в блокчейне</string>
+    <string name="transaction_fees">Комиссии за транзакции в блокчейне</string>
+    <string name="advantages_and_disadvantages_blockchain">Преимущества и недостатки блокчейна</string>
+    <string name="attack_51">Атака 51%</string>
+    <string name="themes">Темы</string>
+    <string name="cryptocoin_learn">CryptoCoin Learn</string>
+    <string name="cryptocoin_learn_description">CryptoCoin Learn - это Ваш учебник, который поможет получить начальные знания о мире криптовалют</string>
 </resources>
