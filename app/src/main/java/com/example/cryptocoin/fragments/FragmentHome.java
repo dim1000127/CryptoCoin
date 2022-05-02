@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,6 +71,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     private TextView textViewVolume24hEmpty;
     private TextView textViewDominanceBtcEmpty;
     private TextView textViewDominanceEthEmpty;
+    private NestedScrollView nestedScrollView;
 
     private GrowthFallRecyclerView.OnDatalickListener dataClickListenerLeadersCap;
     private GrowthFallRecyclerView.OnDatalickListener dataClickListenerLeadersFall;
@@ -94,7 +96,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         textViewVolume24hEmpty = (TextView) rootView.findViewById(R.id.tv_volume24h_empty);
         textViewDominanceBtcEmpty = (TextView) rootView.findViewById(R.id.tv_dominance_btc_empty);
         textViewDominanceEthEmpty = (TextView) rootView.findViewById(R.id.tv_dominance_eth_empty);
-
+        nestedScrollView = (NestedScrollView) rootView.findViewById(R.id.layout_home_nestedScrollView);
         swipeRefreshLayoutHome = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayoutHome);
         swipeRefreshLayoutHome.setOnRefreshListener(this);
 
@@ -154,11 +156,15 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+                if(newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                     swipeRefreshLayoutHome.setEnabled(false);
+                    nestedScrollView.setEnabled(false);
+                }
 
-                if(newState == RecyclerView.SCROLL_STATE_IDLE)
+                if(newState == RecyclerView.SCROLL_STATE_IDLE) {
                     swipeRefreshLayoutHome.setEnabled(true);
+                    nestedScrollView.setEnabled(true);
+                }
             }
         });
 
@@ -167,11 +173,15 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+                if(newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                     swipeRefreshLayoutHome.setEnabled(false);
+                    nestedScrollView.setEnabled(false);
+                }
 
-                if(newState == RecyclerView.SCROLL_STATE_IDLE)
+                if(newState == RecyclerView.SCROLL_STATE_IDLE) {
                     swipeRefreshLayoutHome.setEnabled(true);
+                    nestedScrollView.setEnabled(true);
+                }
             }
         });
 
@@ -180,11 +190,15 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                if(newState == RecyclerView.SCROLL_STATE_DRAGGING)
+                if(newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                     swipeRefreshLayoutHome.setEnabled(false);
+                    nestedScrollView.setEnabled(false);
+                }
 
-                if(newState == RecyclerView.SCROLL_STATE_IDLE)
+                if(newState == RecyclerView.SCROLL_STATE_IDLE) {
                     swipeRefreshLayoutHome.setEnabled(true);
+                    nestedScrollView.setEnabled(true);
+                }
             }
         });
 
@@ -323,7 +337,9 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                                         public void onClick(View v) {
                                             swipeRefreshLayoutHome.setRefreshing(true);
                                             RetrofitSingleton.resetCryptoValuteObservable();
+                                            RetrofitGlobalMetrics.resetGlobalMetricsObservable();
                                             getCryptoValuteData();
+                                            getGlobalMetrics();
                                         }
                                     })
                                     .show();

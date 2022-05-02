@@ -46,10 +46,11 @@ public class GrowthFallRecyclerView extends RecyclerView.Adapter<GrowthFallRecyc
 
     @Override
     public void onBindViewHolder(@NonNull GrowthFallRecyclerView.ViewHolder holder, int position) {
-        String idCrypto = String.valueOf(cryptoValute.get(position).getId());
-        String cryptoSymbol = String.valueOf(cryptoValute.get(position).getSymbol());
-        double cryptoPrice = cryptoValute.get(position).getQuote().getUsdDataCoin().getPrice();
-        double cryptoPercentChange = cryptoValute.get(position).getQuote().getUsdDataCoin().getPercentChange24h();
+        String idCrypto = String.valueOf(cryptoValute.get(holder.getAdapterPosition()).getId());
+        String cryptoSymbol = String.valueOf(cryptoValute.get(holder.getAdapterPosition()).getSymbol());
+        String cryptoName = String.valueOf(cryptoValute.get(holder.getAdapterPosition()).getName());
+        double cryptoPrice = cryptoValute.get(holder.getAdapterPosition()).getQuote().getUsdDataCoin().getPrice();
+        double cryptoPercentChange = cryptoValute.get(holder.getAdapterPosition()).getQuote().getUsdDataCoin().getPercentChange24h();
 
         Picasso.get()
                 .load(metadata.getData().get(idCrypto).getLogo())
@@ -67,12 +68,15 @@ public class GrowthFallRecyclerView extends RecyclerView.Adapter<GrowthFallRecyc
         if(cryptoPercentChange >=0){ holder.textViewChange24hCrypto.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.green, null)); }
         else {holder.textViewChange24hCrypto.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.red, null)); }
 
+        holder.textViewNameCryptoValute.setText(cryptoName);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickListener.onDataClick(cryptoValute.get(position), position);
+                onClickListener.onDataClick(cryptoValute.get(holder.getAdapterPosition()), holder.getAdapterPosition());
             }
         });
+
     }
 
     @Override
@@ -87,6 +91,7 @@ public class GrowthFallRecyclerView extends RecyclerView.Adapter<GrowthFallRecyc
         TextView textViewSymbolCrypto;
         TextView textViewPrice;
         TextView textViewChange24hCrypto;
+        TextView textViewNameCryptoValute;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,6 +100,7 @@ public class GrowthFallRecyclerView extends RecyclerView.Adapter<GrowthFallRecyc
             textViewSymbolCrypto = itemView.findViewById(R.id.rv_symbolCrypto);
             textViewPrice= itemView.findViewById(R.id.rv_priceCryptoValute);
             textViewChange24hCrypto = itemView.findViewById(R.id.rv_percent_change_24hCrypto);
+            textViewNameCryptoValute = itemView.findViewById(R.id.rv_nameCryptoValute);
         }
     }
 }

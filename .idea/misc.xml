@@ -5,6 +5,12 @@
       <map>
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_cryptocoin_learn.xml" value="0.3067510548523207" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_learn_advantag_disadvantag.xml" value="0.3067510548523207" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_learn_attack51.xml" value="0.3067510548523207" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_learn_blockchain.xml" value="0.3067510548523207" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_learn_consensus.xml" value="0.3067510548523207" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_learn_cryptocurrence.xml" value="0.3067510548523207" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_learn_fees.xml" value="0.3067510548523207" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_searchview.xml" value="0.11574074074074074" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_searchview_select.xml" value="0.32747747747747746" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/background_splash.xml" value="0.176" />
@@ -34,6 +40,12 @@
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/tab_indicator.xml" value="0.29444444444444445" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/drawable/view_icon.xml" value="0.26614583333333336" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_add_cv_watchlist.xml" value="0.22" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_booklearn_advantag_disadvantag.xml" value="0.29743589743589743" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_booklearn_attack51.xml" value="0.29743589743589743" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_booklearn_blockchain.xml" value="0.29743589743589743" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_booklearn_consensus.xml" value="0.29743589743589743" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_booklearn_cryptocurrence.xml" value="0.29743589743589743" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_booklearn_fees.xml" value="0.29743589743589743" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_convert_cryptovalute.xml" value="0.536" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_convert_cv.xml" value="0.22" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/activity_for_select_cryptovalute_convert.xml" value="0.25" />
@@ -45,18 +57,18 @@
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_cryptovalute_select.xml" value="0.33" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_fiat_select.xml" value="0.33" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/fragment_list.xml" value="0.1" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_add_watchlist.xml" value="0.5" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_cryptovalute_list.xml" value="0.21052631578947367" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_cv_list.xml" value="0.5" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_recyclerview_home.xml" value="0.5" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_recyclerview_home.xml" value="0.5231481481481481" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_searchselect_cv_list.xml" value="0.67" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_empty_watchlist.xml" value="0.22521367521367522" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_exp_lv_contracts.xml" value="0.5" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_exp_lv_group.xml" value="0.22136752136752136" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_listview.xml" value="0.18888888888888888" />
-        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_recyclerview_home.xml" value="0.9" />
+        <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_recyclerview_home.xml" value="0.75" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_search_cv_list.xml" value="0.21052631578947367" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_select_cv_list.xml" value="0.33" />
         <entry key="..\:/Games/CryptoCoin/CryptoCoin/app/src/main/res/layout/item_watchlist.xml" value="0.67" />

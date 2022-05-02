@@ -39,6 +39,18 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.AddWatchList"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LearnCryptoCurrence"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LearnBlockchain"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LearnConsensus"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LearnAdvantagesDisadvantages"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LearnFees"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LearnAttack51"
+            android:screenOrientation="portrait"/>
             <!--android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>

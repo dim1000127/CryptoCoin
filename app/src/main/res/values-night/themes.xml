@@ -53,6 +53,12 @@
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
+    <style name="ToolbarTransparent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@null</item>
+    </style>
+
     <style name="TabLayoutTheme" parent="Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/TabTextAppearanceStyle</item>
     </style>
