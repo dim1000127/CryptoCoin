@@ -81,74 +81,59 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        recyclerViewLeadersGrowth = (RecyclerView) rootView.findViewById(R.id.rvLeadersGrowth);
-        recyclerViewLeadersFall = (RecyclerView) rootView.findViewById(R.id.rvLeadersFall);
-        recyclerViewLeadersCap = (RecyclerView) rootView.findViewById(R.id.rvLeadersCap);
+        recyclerViewLeadersGrowth = rootView.findViewById(R.id.rvLeadersGrowth);
+        recyclerViewLeadersFall = rootView.findViewById(R.id.rvLeadersFall);
+        recyclerViewLeadersCap = rootView.findViewById(R.id.rvLeadersCap);
         fillRecyclerViewEmpty();
 
-        textViewMarcetCap = (TextView) rootView.findViewById(R.id.tv_market_cap);
-        textViewMarketCapPercentChange = (TextView) rootView.findViewById(R.id.tv_market_cap_percent_change);
-        textViewVolume24h = (TextView) rootView.findViewById(R.id.tv_volume_24h);
-        textViewVolume24hPercentChange = (TextView) rootView.findViewById(R.id.tv_volume_24h_percent_change);
-        textViewDominanceBtc = (TextView) rootView.findViewById(R.id.tv_dominance_btc);
-        textViewDominanceEth = (TextView) rootView.findViewById(R.id.tv_dominance_eth);
-        textViewMarketcapEmpty = (TextView) rootView.findViewById(R.id.tv_market_cap_empty);
-        textViewVolume24hEmpty = (TextView) rootView.findViewById(R.id.tv_volume24h_empty);
-        textViewDominanceBtcEmpty = (TextView) rootView.findViewById(R.id.tv_dominance_btc_empty);
-        textViewDominanceEthEmpty = (TextView) rootView.findViewById(R.id.tv_dominance_eth_empty);
-        nestedScrollView = (NestedScrollView) rootView.findViewById(R.id.layout_home_nestedScrollView);
-        swipeRefreshLayoutHome = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayoutHome);
+        textViewMarcetCap = rootView.findViewById(R.id.tv_market_cap);
+        textViewMarketCapPercentChange = rootView.findViewById(R.id.tv_market_cap_percent_change);
+        textViewVolume24h = rootView.findViewById(R.id.tv_volume_24h);
+        textViewVolume24hPercentChange = rootView.findViewById(R.id.tv_volume_24h_percent_change);
+        textViewDominanceBtc = rootView.findViewById(R.id.tv_dominance_btc);
+        textViewDominanceEth = rootView.findViewById(R.id.tv_dominance_eth);
+        textViewMarketcapEmpty = rootView.findViewById(R.id.tv_market_cap_empty);
+        textViewVolume24hEmpty = rootView.findViewById(R.id.tv_volume24h_empty);
+        textViewDominanceBtcEmpty = rootView.findViewById(R.id.tv_dominance_btc_empty);
+        textViewDominanceEthEmpty = rootView.findViewById(R.id.tv_dominance_eth_empty);
+        nestedScrollView = rootView.findViewById(R.id.layout_home_nestedScrollView);
+        swipeRefreshLayoutHome = rootView.findViewById(R.id.swipeRefreshLayoutHome);
         swipeRefreshLayoutHome.setOnRefreshListener(this);
 
         oldDataCryptoValute = null;
 
-        buttonOpenConvertCryptoValute = (Button) rootView.findViewById(R.id.btn_open_convert_cryptovalute);
-        buttonOpenConvertCryptoValute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ConvertCryptoValute.class);
-                startActivity(intent);
-            }
+        buttonOpenConvertCryptoValute = rootView.findViewById(R.id.btn_open_convert_cryptovalute);
+        buttonOpenConvertCryptoValute.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), ConvertCryptoValute.class);
+            startActivity(intent);
         });
 
-        buttonOpenWatchList = (Button) rootView.findViewById(R.id.btn_open_watchlist);
-        buttonOpenWatchList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), WatchList.class);
-                startActivity(intent);
-            }
+        buttonOpenWatchList = rootView.findViewById(R.id.btn_open_watchlist);
+        buttonOpenWatchList.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), WatchList.class);
+            startActivity(intent);
         });
 
 
-        dataClickListenerLeadersCap = new GrowthFallRecyclerView.OnDatalickListener() {
-            @Override
-            public void onDataClick(DataItem dataItem, int position) {
-                String idItem = String.valueOf(dataItem.getId());
-                Item metadataItem = oldMetadata.getData().get(idItem);
-                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
-                fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
-            }
+        dataClickListenerLeadersCap = (dataItem, position) -> {
+            String idItem = String.valueOf(dataItem.getId());
+            Item metadataItem = oldMetadata.getData().get(idItem);
+            FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
+            fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
         };
 
-        dataClickListenerLeadersFall = new GrowthFallRecyclerView.OnDatalickListener() {
-            @Override
-            public void onDataClick(DataItem dataItem, int position) {
-                String idItem = String.valueOf(dataItem.getId());
-                Item metadataItem = oldMetadata.getData().get(idItem);
-                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
-                fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
-            }
+        dataClickListenerLeadersFall = (dataItem, position) -> {
+            String idItem = String.valueOf(dataItem.getId());
+            Item metadataItem = oldMetadata.getData().get(idItem);
+            FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
+            fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
         };
 
-        dataClickListenerLeadersGrowth = new GrowthFallRecyclerView.OnDatalickListener() {
-            @Override
-            public void onDataClick(DataItem dataItem, int position) {
-                String idItem = String.valueOf(dataItem.getId());
-                Item metadataItem = oldMetadata.getData().get(idItem);
-                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
-                fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
-            }
+        dataClickListenerLeadersGrowth = (dataItem, position) -> {
+            String idItem = String.valueOf(dataItem.getId());
+            Item metadataItem = oldMetadata.getData().get(idItem);
+            FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
+            fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
         };
 
         recyclerViewLeadersCap.addOnScrollListener(new RecyclerView.OnScrollListener() {

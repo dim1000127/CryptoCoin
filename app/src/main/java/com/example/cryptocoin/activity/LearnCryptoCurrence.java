@@ -15,12 +15,7 @@ public class LearnCryptoCurrence extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booklearn_cryptocurrence);
 
-        ImageView imageViewBack = (ImageView) findViewById(R.id.imageView_back_learn_cryptocurrence);
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        ImageView imageViewBack = findViewById(R.id.imageView_back_learn_cryptocurrence);
+        imageViewBack.setOnClickListener(view -> onBackPressed());
     }
 }

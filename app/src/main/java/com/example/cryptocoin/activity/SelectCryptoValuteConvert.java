@@ -40,23 +40,20 @@ public class SelectCryptoValuteConvert extends AppCompatActivity implements Frag
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Выбрать актив");
 
-        searchView = (SearchView) findViewById(R.id.searchview_select);
+        searchView = findViewById(R.id.searchview_select);
 
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_select);
-        ViewPager2 viewPager2 = (ViewPager2) findViewById(R.id.viewpager_select);
+        TabLayout tabLayout = findViewById(R.id.tablayout_select);
+        ViewPager2 viewPager2 = findViewById(R.id.viewpager_select);
 
         ViewPagerSelect viewPagerSelect = new ViewPagerSelect(this);
         viewPager2.setAdapter(viewPagerSelect);
 
-        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                if (position == 0) {
-                    tab.setText(getString(R.string.cryptovaluts));
-                } else if (position == 1) {
-                    tab.setText(getString(R.string.fiat));
-                }
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            if (position == 0) {
+                tab.setText(getString(R.string.cryptovaluts));
+            } else if (position == 1) {
+                tab.setText(getString(R.string.fiat));
             }
         }).attach();
 

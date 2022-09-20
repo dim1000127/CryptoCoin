@@ -54,9 +54,9 @@ public class SearchCryptoValute extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_search_cv);
         setSupportActionBar(toolbar);
 
-        constraintLayout = (ConstraintLayout) findViewById(R.id.constraint_search_layout);
-        textViewStatuSearch = (TextView) findViewById(R.id.tv_status_search);
-        listViewSearchCV = (ListView) findViewById(R.id.lv_search_cryptovalute);
+        constraintLayout = findViewById(R.id.constraint_search_layout);
+        textViewStatuSearch = findViewById(R.id.tv_status_search);
+        listViewSearchCV = findViewById(R.id.lv_search_cryptovalute);
         listViewSearchCV.setEmptyView(textViewStatuSearch);
         fillEmptySearchList();
         searchView = findViewById(R.id.searchview);
@@ -78,16 +78,11 @@ public class SearchCryptoValute extends AppCompatActivity {
             }
         });
 
-        listViewSearchCV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                LinearLayout layout = view.findViewById(R.id.layout_list_search_cryptovalute);
-                String id = layout.getTag().toString();
-                /*Snackbar.make(constraintLayout, "Идентификатор токена: "+id,Snackbar.LENGTH_SHORT)
-                        .show();*/
-                FragmentSearchBottomSheet fragmentSearchBottomSheet = new FragmentSearchBottomSheet(id);
-                fragmentSearchBottomSheet.show(getSupportFragmentManager(), fragmentSearchBottomSheet.getTag());
-            }
+        listViewSearchCV.setOnItemClickListener((adapterView, view, i, l) -> {
+            LinearLayout layout = view.findViewById(R.id.layout_list_search_cryptovalute);
+            String id = layout.getTag().toString();
+            FragmentSearchBottomSheet fragmentSearchBottomSheet = new FragmentSearchBottomSheet(id);
+            fragmentSearchBottomSheet.show(getSupportFragmentManager(), fragmentSearchBottomSheet.getTag());
         });
 
         getIdCryptoValute();

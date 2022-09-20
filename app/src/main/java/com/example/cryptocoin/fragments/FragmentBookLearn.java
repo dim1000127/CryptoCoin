@@ -23,59 +23,41 @@ public class FragmentBookLearn extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_booklearn, container, false);
-        LinearLayout layoutLearnCryptocurrence = (LinearLayout) rootView.findViewById(R.id.layout_open_learn_cryptocurrence);
-        LinearLayout layoutLearnBlockchain = (LinearLayout) rootView.findViewById(R.id.layout_open_learn_blockchain);
-        LinearLayout layoutLearnConsensus = (LinearLayout) rootView.findViewById(R.id.layout_open_learn_consensus);
-        LinearLayout layoutLearnFees = (LinearLayout) rootView.findViewById(R.id.layout_open_learn_fees);
-        LinearLayout layoutLearnAdvantagDisadvantag = (LinearLayout) rootView.findViewById(R.id.layout_open_learn_advantag_disadvantag);
-        LinearLayout layoutLearnAttack51 = (LinearLayout) rootView.findViewById(R.id.layout_open_learn_attack51);
+        LinearLayout layoutLearnCryptocurrence = rootView.findViewById(R.id.layout_open_learn_cryptocurrence);
+        LinearLayout layoutLearnBlockchain = rootView.findViewById(R.id.layout_open_learn_blockchain);
+        LinearLayout layoutLearnConsensus = rootView.findViewById(R.id.layout_open_learn_consensus);
+        LinearLayout layoutLearnFees = rootView.findViewById(R.id.layout_open_learn_fees);
+        LinearLayout layoutLearnAdvantagDisadvantag = rootView.findViewById(R.id.layout_open_learn_advantag_disadvantag);
+        LinearLayout layoutLearnAttack51 = rootView.findViewById(R.id.layout_open_learn_attack51);
 
-        layoutLearnCryptocurrence.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LearnCryptoCurrence.class);
-                startActivity(intent);
-            }
+        layoutLearnCryptocurrence.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), LearnCryptoCurrence.class);
+            startActivity(intent);
         });
 
-        layoutLearnBlockchain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LearnBlockchain.class);
-                startActivity(intent);
-            }
+        layoutLearnBlockchain.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), LearnBlockchain.class);
+            startActivity(intent);
         });
 
-        layoutLearnConsensus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LearnConsensus.class);
-                startActivity(intent);
-            }
+        layoutLearnConsensus.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), LearnConsensus.class);
+            startActivity(intent);
         });
 
-        layoutLearnFees.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LearnFees.class);
-                startActivity(intent);
-            }
+        layoutLearnFees.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), LearnFees.class);
+            startActivity(intent);
         });
 
-        layoutLearnAdvantagDisadvantag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LearnAdvantagesDisadvantages.class);
-                startActivity(intent);
-            }
+        layoutLearnAdvantagDisadvantag.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), LearnAdvantagesDisadvantages.class);
+            startActivity(intent);
         });
 
-        layoutLearnAttack51.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LearnAttack51.class);
-                startActivity(intent);
-            }
+        layoutLearnAttack51.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), LearnAttack51.class);
+            startActivity(intent);
         });
         return  rootView;
     }

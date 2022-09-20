@@ -53,7 +53,6 @@ public class RetrofitIdSingleton {
                     @Override
                     public void onError(Throwable e) {
                         observableIdCryptoValute.onError(e);
-                        //Log.d("IdCryptoValute", e.toString());
                     }
 
                     @Override

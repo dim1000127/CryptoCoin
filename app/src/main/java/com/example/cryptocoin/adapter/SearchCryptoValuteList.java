@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SearchCryptoValuteList extends BaseAdapter implements Filterable {
 
-    private List<ItemID> idCryptoValuteList;
+    private final List<ItemID> idCryptoValuteList;
     private List<ItemID> idCryptoValuteListFiltered;
 
     public SearchCryptoValuteList (IdCryptoValute _idCryptoValuteList){
@@ -52,9 +52,9 @@ public class SearchCryptoValuteList extends BaseAdapter implements Filterable {
             view = inflater.inflate(R.layout.item_search_cv_list, viewGroup, false);
         }
 
-        LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout_list_search_cryptovalute);
-        TextView textViewNameCryptoValute = (TextView) view.findViewById(R.id.name_cv_list_search);
-        TextView textViewSymbolCryptoValute = (TextView) view.findViewById(R.id.symbol_cv_list_search);
+        LinearLayout layout = view.findViewById(R.id.layout_list_search_cryptovalute);
+        TextView textViewNameCryptoValute = view.findViewById(R.id.name_cv_list_search);
+        TextView textViewSymbolCryptoValute = view.findViewById(R.id.symbol_cv_list_search);
 
         String idCryptoValuteItem = String.valueOf(idCryptoValuteListFiltered.get(i).getId());
         layout.setTag(idCryptoValuteItem);

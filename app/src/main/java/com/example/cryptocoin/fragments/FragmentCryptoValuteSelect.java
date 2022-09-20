@@ -67,29 +67,23 @@ public class FragmentCryptoValuteSelect extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_cryptovalute_select, container, false);
 
-        searchView = (SearchView) getActivity().findViewById(R.id.searchview_select);
-        textViewStatusSearch = (TextView) view.findViewById(R.id.tv_status_search_select);
-        listViewSelectCryptoValute = (ListView) view.findViewById(R.id.listview_select_cryptovalute);
+        searchView = getActivity().findViewById(R.id.searchview_select);
+        textViewStatusSearch = view.findViewById(R.id.tv_status_search_select);
+        listViewSelectCryptoValute = view.findViewById(R.id.listview_select_cryptovalute);
         listViewSelectCryptoValute.setEmptyView(textViewStatusSearch);
         fillEmptySelectList();
         textViewStatusSearch.setVisibility(View.GONE);
 
-        listViewSelectCryptoValute.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        listViewSelectCryptoValute.setOnItemClickListener((adapterView, view1, i, l) -> {
 
-                LinearLayout layout = view.findViewById(R.id.layout_list_select_cryptovalute);
-                String id = layout.getTag().toString();
-                onSelectCVListener.onSelectCV(id);
-            }
+            LinearLayout layout = view1.findViewById(R.id.layout_list_select_cryptovalute);
+            String id = layout.getTag().toString();
+            onSelectCVListener.onSelectCV(id);
         });
 
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchView.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.background_searchview, null));
-                searchView.setIconifiedByDefault(false);
-            }
+        searchView.setOnSearchClickListener(view12 -> {
+            searchView.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.background_searchview, null));
+            searchView.setIconifiedByDefault(false);
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

@@ -74,8 +74,6 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
     private Button buttonCalculateConvertComma;
     private ImageButton buttonCalculateConvertBackspace;
 
-    //private QuotesCryptoValute quotesCryptoValute = null;
-    //private Metadata metadata = null;
     private SharedPreferences mSettings;
 
     public String idFirstAsset = null;
@@ -84,9 +82,9 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
     private String secondAssetSetting = Const.USD_SYMBOL;
     private double priceFirstAsset = 1;
     private double priceSecondAsset = 1;
-    private double dollarPrice = 1;
+    private final double dollarPrice = 1;
     private double rublePrice = 75;
-    private String idCryptoValuteAsset = "1";
+    private final String idCryptoValuteAsset = "1";
     private String symbolMessageFirstAsset = null;
     private String symbolMessageSecondAsset = null;
     private boolean isConvertFirst = false;
@@ -179,26 +177,26 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
         idFirstAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_FIRST_ASSET, "1");
         idSecondAsset = mSettings.getString(Const.APP_PREFERENCES_ID_CV_SECOND_ASSET, "USD");
 
-        layoutConvertFirstAsset = (LinearLayout) findViewById(R.id.view_select_first_asset);
-        layoutConvertSecondAsset = (LinearLayout) findViewById(R.id.view_select_second_asset);
-        imageViewLogoFirstAsset = (ImageView) findViewById(R.id.image_logo_first_asset);
-        imageViewLogoSecondAsset = (ImageView) findViewById(R.id.image_logo_second_asset);
-        textViewSymbolFirstAsset = (TextView) findViewById(R.id.tv_symbol_first_asset);
-        textViewSymbolSecondAsset = (TextView) findViewById(R.id.tv_symbol_second_asset);
-        editTextValueFirstAsset = (EditText) findViewById(R.id.et_value_first_asset);
-        editTextValueSecondAsset = (EditText) findViewById(R.id.et_value_second_asset);
-        buttonCalculateConvert1 = (Button) findViewById(R.id.btn_calculate_convert_1);
-        buttonCalculateConvert2 = (Button) findViewById(R.id.btn_calculate_convert_2);
-        buttonCalculateConvert3 = (Button) findViewById(R.id.btn_calculate_convert_3);
-        buttonCalculateConvert4 = (Button) findViewById(R.id.btn_calculate_convert_4);
-        buttonCalculateConvert5 = (Button) findViewById(R.id.btn_calculate_convert_5);
-        buttonCalculateConvert6 = (Button) findViewById(R.id.btn_calculate_convert_6);
-        buttonCalculateConvert7 = (Button) findViewById(R.id.btn_calculate_convert_7);
-        buttonCalculateConvert8 = (Button) findViewById(R.id.btn_calculate_convert_8);
-        buttonCalculateConvert9 = (Button) findViewById(R.id.btn_calculate_convert_9);
-        buttonCalculateConvert0 = (Button) findViewById(R.id.btn_calculate_convert_0);
-        buttonCalculateConvertComma = (Button) findViewById(R.id.btn_calculate_convert_comma);
-        buttonCalculateConvertBackspace = (ImageButton) findViewById(R.id.btn_calculate_convert_backspace);
+        layoutConvertFirstAsset = findViewById(R.id.view_select_first_asset);
+        layoutConvertSecondAsset = findViewById(R.id.view_select_second_asset);
+        imageViewLogoFirstAsset = findViewById(R.id.image_logo_first_asset);
+        imageViewLogoSecondAsset = findViewById(R.id.image_logo_second_asset);
+        textViewSymbolFirstAsset = findViewById(R.id.tv_symbol_first_asset);
+        textViewSymbolSecondAsset = findViewById(R.id.tv_symbol_second_asset);
+        editTextValueFirstAsset = findViewById(R.id.et_value_first_asset);
+        editTextValueSecondAsset = findViewById(R.id.et_value_second_asset);
+        buttonCalculateConvert1 = findViewById(R.id.btn_calculate_convert_1);
+        buttonCalculateConvert2 = findViewById(R.id.btn_calculate_convert_2);
+        buttonCalculateConvert3 = findViewById(R.id.btn_calculate_convert_3);
+        buttonCalculateConvert4 = findViewById(R.id.btn_calculate_convert_4);
+        buttonCalculateConvert5 = findViewById(R.id.btn_calculate_convert_5);
+        buttonCalculateConvert6 = findViewById(R.id.btn_calculate_convert_6);
+        buttonCalculateConvert7 = findViewById(R.id.btn_calculate_convert_7);
+        buttonCalculateConvert8 = findViewById(R.id.btn_calculate_convert_8);
+        buttonCalculateConvert9 = findViewById(R.id.btn_calculate_convert_9);
+        buttonCalculateConvert0 = findViewById(R.id.btn_calculate_convert_0);
+        buttonCalculateConvertComma = findViewById(R.id.btn_calculate_convert_comma);
+        buttonCalculateConvertBackspace = findViewById(R.id.btn_calculate_convert_backspace);
 
         buttonCalculateConvert1.setOnClickListener(this);
         buttonCalculateConvert2.setOnClickListener(this);
@@ -312,7 +310,6 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
                     Picasso.get().load(R.drawable.ic_rub_logo).into(imageViewLogoSecondAsset);
                 }
 
-                //String idStrQuery = "";
                 if (!firstAsset.equals(Const.USD_SYMBOL) && !firstAsset.equals(Const.RUB_SYMBOL)&&
                 !secondAsset.equals(Const.USD_SYMBOL) && !secondAsset.equals(Const.RUB_SYMBOL)){
                     String idStrQuery = firstAsset + "," + secondAsset;
@@ -778,9 +775,8 @@ public class ConvertCryptoValute extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private boolean checkStrCorrect(String str){ ;
-        if (str.matches(Const.REGEX_EDITTEXT_CONVERT)) { return true; }
-        else { return false; }
+    private boolean checkStrCorrect(String str){
+        return str.matches(Const.REGEX_EDITTEXT_CONVERT);
     }
 
     @Override

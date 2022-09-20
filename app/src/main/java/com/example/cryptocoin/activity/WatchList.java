@@ -113,15 +113,15 @@ public class WatchList extends AppCompatActivity implements SwipeRefreshLayout.O
 
         arrayIdItemForDelete = new ArrayList<>();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_watchlist);
+        toolbar = findViewById(R.id.toolbar_watchlist);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Список отслеживания");
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayoutWatchList);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutWatchList);
         swipeRefreshLayout.setOnRefreshListener(this);
-        tvStatusWatchlist = (TextView) findViewById(R.id.tv_status_watchlist);
+        tvStatusWatchlist = findViewById(R.id.tv_status_watchlist);
         tvStatusWatchlist.setVisibility(View.GONE);
 
         mSettings = getSharedPreferences(Const.APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -130,7 +130,7 @@ public class WatchList extends AppCompatActivity implements SwipeRefreshLayout.O
         Type type = new TypeToken<ArrayList<String>>(){}.getType();
         arrayIdCVWatchList = gson.fromJson(strJson, type);
 
-        listViewWatch = (ListView) findViewById(R.id.lv_watchlist);
+        listViewWatch = findViewById(R.id.lv_watchlist);
 
         if (arrayIdCVWatchList == null){
             arrayIdCVWatchList = new ArrayList<>();
@@ -151,47 +151,15 @@ public class WatchList extends AppCompatActivity implements SwipeRefreshLayout.O
             getQuotesWatchListCV(idStr.toString());
         }
 
-        btnAddCvWatchlist = (Button) findViewById(R.id.btn_add_cv_watchlist);
-        btnAddCvWatchlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(WatchList.this, AddWatchList.class);
-                intent.putStringArrayListExtra(Const.ARRAY_ID_MESSAGE, arrayIdCVWatchList);
-                addWatchListStartForResult.launch(intent);
-            }
+        btnAddCvWatchlist = findViewById(R.id.btn_add_cv_watchlist);
+        btnAddCvWatchlist.setOnClickListener(view -> {
+            Intent intent = new Intent(WatchList.this, AddWatchList.class);
+            intent.putStringArrayListExtra(Const.ARRAY_ID_MESSAGE, arrayIdCVWatchList);
+            addWatchListStartForResult.launch(intent);
         });
 
-        listViewWatch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(isSelectMode) {
-                    adapterWatchList.switchSelection(i);
-                    if(adapterWatchList.getValueSelection(i)){
-                        arrayIdItemForDelete.add(arrayIdCVWatchList.get(i));
-                    }
-                    else{
-                        arrayIdItemForDelete.remove(arrayIdCVWatchList.get(i));
-                    }
-                }
-                else{
-                    String id = arrayIdCVWatchList.get(i);
-                    DataItem dataItem = quotesCryptoValute.getData().get(id);
-                    Item metadataItem = metadata.getData().get(id);
-                    FragmentBottomSheet fragmentWatchListBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
-                    fragmentWatchListBottomSheet.show(getSupportFragmentManager(), fragmentWatchListBottomSheet.getTag());
-                }
-                if(adapterWatchList.getCountSelection() == 0){
-                    isSelectMode = false;
-                    menuItemDelete.setVisible(false);
-                }
-            }
-        });
-
-        listViewWatch.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                isSelectMode = true;
-                menuItemDelete.setVisible(true);
+        listViewWatch.setOnItemClickListener((adapterView, view, i, l) -> {
+            if(isSelectMode) {
                 adapterWatchList.switchSelection(i);
                 if(adapterWatchList.getValueSelection(i)){
                     arrayIdItemForDelete.add(arrayIdCVWatchList.get(i));
@@ -199,12 +167,35 @@ public class WatchList extends AppCompatActivity implements SwipeRefreshLayout.O
                 else{
                     arrayIdItemForDelete.remove(arrayIdCVWatchList.get(i));
                 }
-                if(adapterWatchList.getCountSelection() == 0){
-                    isSelectMode = false;
-                    menuItemDelete.setVisible(false);
-                }
-                return true;
             }
+            else{
+                String id = arrayIdCVWatchList.get(i);
+                DataItem dataItem = quotesCryptoValute.getData().get(id);
+                Item metadataItem = metadata.getData().get(id);
+                FragmentBottomSheet fragmentWatchListBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
+                fragmentWatchListBottomSheet.show(getSupportFragmentManager(), fragmentWatchListBottomSheet.getTag());
+            }
+            if(adapterWatchList.getCountSelection() == 0){
+                isSelectMode = false;
+                menuItemDelete.setVisible(false);
+            }
+        });
+
+        listViewWatch.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            isSelectMode = true;
+            menuItemDelete.setVisible(true);
+            adapterWatchList.switchSelection(i);
+            if(adapterWatchList.getValueSelection(i)){
+                arrayIdItemForDelete.add(arrayIdCVWatchList.get(i));
+            }
+            else{
+                arrayIdItemForDelete.remove(arrayIdCVWatchList.get(i));
+            }
+            if(adapterWatchList.getCountSelection() == 0){
+                isSelectMode = false;
+                menuItemDelete.setVisible(false);
+            }
+            return true;
         });
 
         listViewWatch.setOnScrollListener(new AbsListView.OnScrollListener() {

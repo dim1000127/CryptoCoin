@@ -15,12 +15,7 @@ public class LearnFees extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booklearn_fees);
 
-        ImageView imageViewBack = (ImageView) findViewById(R.id.imageView_back_learn_fees);
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        ImageView imageViewBack = findViewById(R.id.imageView_back_learn_fees);
+        imageViewBack.setOnClickListener(view -> onBackPressed());
     }
 }

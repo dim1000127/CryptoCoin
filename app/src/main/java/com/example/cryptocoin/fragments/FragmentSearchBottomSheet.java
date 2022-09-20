@@ -44,7 +44,7 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
     private QuotesCryptoValute quotesCryptoValute;
     private Metadata metadata;
 
-    private List<List<ContractAddress>> listGroups = new ArrayList<>();
+    private final List<List<ContractAddress>> listGroups = new ArrayList<>();
     private List<ContractAddress> listChild;
 
     private ExpListContracts adapterExpListContracts;
@@ -96,38 +96,38 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bottom_sheet, container, false);
 
-        imageCryptoValute = (ImageView) view.findViewById(R.id.bottom_sheet_image_cv);
-        imageNameCv = (ImageView) view.findViewById(R.id.img_bottom_sheet_name_cv);
-        imageViewSymbolCv = (ImageView) view.findViewById(R.id.img_bottom_sheet_symbol_cv);
-        imageViewPriceCv = (ImageView) view.findViewById(R.id.img_bottom_sheet_price_cv);
-        imageViewValChange24h = (ImageView) view.findViewById(R.id.img_bottom_sheet_value_change24h);
-        imageViewPercentChange24h = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change24h);
-        imageViewPercentChange1h = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change1h);
-        imageViewPercentChange7d = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change7d);
-        imageViewPercentChange30d = (ImageView) view.findViewById(R.id.img_bottom_sheet_percent_change30d);
-        imageViewVolume24h = (ImageView) view.findViewById(R.id.img_bottom_sheet_volume24h);
-        imageViewDominance = (ImageView) view.findViewById(R.id.img_bottom_sheet_dominance);
-        imageViewMarketCap = (ImageView) view.findViewById(R.id.img_bottom_sheet_market_cap);
-        imageViewCirculatingSupply = (ImageView) view.findViewById(R.id.img_bottom_sheet_circulating_supply);
-        imageViewTotalSupply = (ImageView) view.findViewById(R.id.img_bottom_sheet_total_supply);
-        imageViewMaxSupply = (ImageView) view.findViewById(R.id.img_bottom_sheet_max_supply);
-        textViewNameCV = (TextView) view.findViewById(R.id.bottom_sheet_name_cv);
-        textViewSymbolCV = (TextView) view.findViewById(R.id.bottom_sheet_symbol_cv);
-        textViewPriceCV = (TextView) view.findViewById(R.id.bottom_sheet_price_cv);
-        textViewCmcRank = (TextView) view.findViewById(R.id.bottom_sheet_cmc_rank);
-        textViewValChange24h = (TextView) view.findViewById(R.id.bottom_sheet_value_change24h);
-        textViewPercentChange24h = (TextView) view.findViewById(R.id.bottom_sheet_percent_change24h);
-        textViewPercentChange1h = (TextView) view.findViewById(R.id.bottom_sheet_percent_change1h);
-        textViewPercentChange7d = (TextView) view.findViewById(R.id.bottom_sheet_percent_change7d);
-        textViewPercentChange30d = (TextView) view.findViewById(R.id.bottom_sheet_percent_change30d);
-        textViewVolume24h = (TextView) view.findViewById(R.id.bottom_sheet_volume24h);
-        textViewDominance = (TextView) view.findViewById(R.id.bottom_sheet_dominance);
-        textViewMarketCap = (TextView) view.findViewById(R.id.bottom_sheet_market_cap);
-        textViewCirculatingSupply = (TextView) view.findViewById(R.id.bottom_sheet_circulating_supply);
-        textViewTotalSupply = (TextView) view.findViewById(R.id.bottom_sheet_total_supply);
-        textViewMaxSupply = (TextView) view.findViewById(R.id.bottom_sheet_max_supply);
-        expandableListViewContracts = (ExpandableListView) view.findViewById(R.id.expandeble_lv_contracts);
-        buttonConvertation = (Button) view.findViewById(R.id.btn_convertation_cv_bottomsheet);
+        imageCryptoValute = view.findViewById(R.id.bottom_sheet_image_cv);
+        imageNameCv = view.findViewById(R.id.img_bottom_sheet_name_cv);
+        imageViewSymbolCv = view.findViewById(R.id.img_bottom_sheet_symbol_cv);
+        imageViewPriceCv = view.findViewById(R.id.img_bottom_sheet_price_cv);
+        imageViewValChange24h = view.findViewById(R.id.img_bottom_sheet_value_change24h);
+        imageViewPercentChange24h = view.findViewById(R.id.img_bottom_sheet_percent_change24h);
+        imageViewPercentChange1h = view.findViewById(R.id.img_bottom_sheet_percent_change1h);
+        imageViewPercentChange7d = view.findViewById(R.id.img_bottom_sheet_percent_change7d);
+        imageViewPercentChange30d = view.findViewById(R.id.img_bottom_sheet_percent_change30d);
+        imageViewVolume24h = view.findViewById(R.id.img_bottom_sheet_volume24h);
+        imageViewDominance = view.findViewById(R.id.img_bottom_sheet_dominance);
+        imageViewMarketCap = view.findViewById(R.id.img_bottom_sheet_market_cap);
+        imageViewCirculatingSupply = view.findViewById(R.id.img_bottom_sheet_circulating_supply);
+        imageViewTotalSupply = view.findViewById(R.id.img_bottom_sheet_total_supply);
+        imageViewMaxSupply = view.findViewById(R.id.img_bottom_sheet_max_supply);
+        textViewNameCV = view.findViewById(R.id.bottom_sheet_name_cv);
+        textViewSymbolCV = view.findViewById(R.id.bottom_sheet_symbol_cv);
+        textViewPriceCV = view.findViewById(R.id.bottom_sheet_price_cv);
+        textViewCmcRank = view.findViewById(R.id.bottom_sheet_cmc_rank);
+        textViewValChange24h = view.findViewById(R.id.bottom_sheet_value_change24h);
+        textViewPercentChange24h = view.findViewById(R.id.bottom_sheet_percent_change24h);
+        textViewPercentChange1h = view.findViewById(R.id.bottom_sheet_percent_change1h);
+        textViewPercentChange7d = view.findViewById(R.id.bottom_sheet_percent_change7d);
+        textViewPercentChange30d = view.findViewById(R.id.bottom_sheet_percent_change30d);
+        textViewVolume24h = view.findViewById(R.id.bottom_sheet_volume24h);
+        textViewDominance = view.findViewById(R.id.bottom_sheet_dominance);
+        textViewMarketCap = view.findViewById(R.id.bottom_sheet_market_cap);
+        textViewCirculatingSupply = view.findViewById(R.id.bottom_sheet_circulating_supply);
+        textViewTotalSupply = view.findViewById(R.id.bottom_sheet_total_supply);
+        textViewMaxSupply = view.findViewById(R.id.bottom_sheet_max_supply);
+        expandableListViewContracts = view.findViewById(R.id.expandeble_lv_contracts);
+        buttonConvertation = view.findViewById(R.id.btn_convertation_cv_bottomsheet);
 
         buttonConvertation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +158,7 @@ public class FragmentSearchBottomSheet extends BottomSheetDialogFragment {
 
     private void setListViewHeight(ExpandableListView listView,
                                    int group) {
-        ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
+        ExpandableListAdapter listAdapter = listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
                 View.MeasureSpec.EXACTLY);

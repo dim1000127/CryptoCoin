@@ -15,12 +15,7 @@ public class LearnAdvantagesDisadvantages extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booklearn_advantag_disadvantag);
 
-        ImageView imageViewBack = (ImageView) findViewById(R.id.imageView_back_learn_advantag_disadvantag);
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        ImageView imageViewBack = findViewById(R.id.imageView_back_learn_advantag_disadvantag);
+        imageViewBack.setOnClickListener(view -> onBackPressed());
     }
 }

@@ -21,7 +21,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Main extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
-    //private Fragment selectedFragment;
     private Toolbar toolbar;
     private MenuItem menuItemSearch;
     private NavController navController;
@@ -29,7 +28,7 @@ public class Main extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        toolbar = (Toolbar) findViewById(R.id.toolbar_main_screen);
+        toolbar = findViewById(R.id.toolbar_main_screen);
         setSupportActionBar(toolbar);
 
         navController = Navigation.findNavController(this, R.id.fragment_container);
@@ -38,7 +37,7 @@ public class Main extends AppCompatActivity {
         navController.addOnDestinationChangedListener(navControllerListener);
     }
 
-    private NavController.OnDestinationChangedListener navControllerListener =
+    private final NavController.OnDestinationChangedListener navControllerListener =
             new NavController.OnDestinationChangedListener() {
                 @Override
                 public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
@@ -47,21 +46,18 @@ public class Main extends AppCompatActivity {
                         if(menuItemSearch != null) {
                             menuItemSearch.setVisible(true);
                         }
-                        //toolbar.setVisibility(View.VISIBLE);
                     }
                     else if (navDestination.getId() == R.id.listFragment){
                         toolbar.setTitle("Топ криптовалют");
                         if(menuItemSearch != null) {
                             menuItemSearch.setVisible(true);
                         }
-                        //toolbar.setVisibility(View.VISIBLE);
                     }
                     else if(navDestination.getId() == R.id.bookLearnFragment) {
                         toolbar.setTitle("Обучение");
                         if(menuItemSearch != null) {
                             menuItemSearch.setVisible(false);
                         }
-                        //toolbar.setVisibility(View.GONE);
                     }
                 }
             };

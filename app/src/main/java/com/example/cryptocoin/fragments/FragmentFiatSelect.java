@@ -42,22 +42,13 @@ public class FragmentFiatSelect extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_fiat_select, container, false);
-        layoutFiatUsdSelect = (LinearLayout) view.findViewById(R.id.layout_fiat_usd_select);
-        layoutFiatRubSelect = (LinearLayout) view.findViewById(R.id.layout_fiat_rub_select);
+        layoutFiatUsdSelect = view.findViewById(R.id.layout_fiat_usd_select);
+        layoutFiatRubSelect = view.findViewById(R.id.layout_fiat_rub_select);
 
-        layoutFiatUsdSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSelectFiatListener.onSelectFiatUsd();
-            }
-        });
+        layoutFiatUsdSelect.setOnClickListener(view1 -> onSelectFiatListener.onSelectFiatUsd());
 
-        layoutFiatRubSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(layoutFiatRubSelect, R.string.soon, Snackbar.LENGTH_SHORT).show();
-                onSelectFiatListener.onSelectFiatRub();
-            }
+        layoutFiatRubSelect.setOnClickListener(view12 -> {
+            onSelectFiatListener.onSelectFiatRub();
         });
         return   view;
     }

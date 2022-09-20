@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 public class WatchListCV extends BaseAdapter {
 
-    private QuotesCryptoValute quotesCryptoValute;
-    private Metadata metadata;
-    private ArrayList<String> idArray;
+    private final QuotesCryptoValute quotesCryptoValute;
+    private final Metadata metadata;
+    private final ArrayList<String> idArray;
     private boolean[] selections;
 
 
@@ -59,8 +59,8 @@ public class WatchListCV extends BaseAdapter {
 
     public int getCountSelection(){
         int count = 0;
-        for (int i = 0; i < selections.length; i++){
-            if(selections[i]){
+        for (boolean selection : selections) {
+            if (selection) {
                 count++;
             }
         }
@@ -85,11 +85,11 @@ public class WatchListCV extends BaseAdapter {
         boolean isSelected = selections[i];
 
         String idCryptoValute = String.valueOf(quotesCryptoValute.getData().get(idItem).getId());
-        ImageView imageViewCryptoValuteLogo = (ImageView) view.findViewById(R.id.image_logo_cryptovalute_watchlist);
-        TextView textViewNameCryptoValute = (TextView) view.findViewById(R.id.name_cryptovalute_watchlist);
-        TextView textViewSymbolCryptoValute = (TextView) view.findViewById(R.id.symbol_cryptovalute_watchlist);
-        TextView textViewPriceCryptoValute = (TextView) view.findViewById(R.id.price_cryptovalute_watchlist);
-        TextView textViewPercentChange = (TextView) view.findViewById(R.id.percent_change_cryptovalute_watchlist);
+        ImageView imageViewCryptoValuteLogo = view.findViewById(R.id.image_logo_cryptovalute_watchlist);
+        TextView textViewNameCryptoValute = view.findViewById(R.id.name_cryptovalute_watchlist);
+        TextView textViewSymbolCryptoValute = view.findViewById(R.id.symbol_cryptovalute_watchlist);
+        TextView textViewPriceCryptoValute = view.findViewById(R.id.price_cryptovalute_watchlist);
+        TextView textViewPercentChange = view.findViewById(R.id.percent_change_cryptovalute_watchlist);
 
         if(isSelected) {
             Picasso.get()

@@ -20,13 +20,8 @@ import java.util.List;
 public class SelectCryptoValute extends BaseAdapter implements Filterable {
 
 
-    private List<ItemID> idCryptoValuteList;
+    private final List<ItemID> idCryptoValuteList;
     private List<ItemID> idCryptoValuteListFiltered;
-
-    /*public SelectCryptoValute(CryptoValute _cryptoValuteList, Metadata _metadata){
-        cryptoValuteList = _cryptoValuteList;
-        metadata = _metadata;
-    }*/
 
     public SelectCryptoValute(IdCryptoValute _idCryptoValuteList){
         idCryptoValuteList = _idCryptoValuteList.getData();
@@ -58,16 +53,12 @@ public class SelectCryptoValute extends BaseAdapter implements Filterable {
             view = inflater.inflate(R.layout.item_select_cv_list, viewGroup, false);
         }
 
-        //ImageView imageViewCryptoValuteLogo = (ImageView) view.findViewById(R.id.image_logo_cryptovalute_list_forconvert);
-        LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout_list_select_cryptovalute);
-        TextView textViewNameCryptoValute = (TextView) view.findViewById(R.id.name_cryptovalute_list_forconvert);
-        TextView textViewSymbolCryptoValute = (TextView) view.findViewById(R.id.symbol_cryptovalute_list_forconvert);
+        LinearLayout layout = view.findViewById(R.id.layout_list_select_cryptovalute);
+        TextView textViewNameCryptoValute = view.findViewById(R.id.name_cryptovalute_list_forconvert);
+        TextView textViewSymbolCryptoValute = view.findViewById(R.id.symbol_cryptovalute_list_forconvert);
 
         String idCryptoValuteItem = String.valueOf(idCryptoValuteListFiltered.get(i).getId());
         layout.setTag(idCryptoValuteItem);
-        /*Picasso.get()
-                .load(metadata.getData().get(idCryptoValute).getLogo())
-                .into(imageViewCryptoValuteLogo);*/
         textViewNameCryptoValute.setText(idCryptoValuteListFiltered.get(i).getName());
         textViewSymbolCryptoValute.setText(idCryptoValuteListFiltered.get(i).getSymbol());
 
@@ -105,9 +96,6 @@ public class SelectCryptoValute extends BaseAdapter implements Filterable {
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 idCryptoValuteListFiltered = (List<ItemID>) filterResults.values;
-                //idCryptoValuteListFiltered.clear();
-                //notifyDataSetChanged();
-                //idCryptoValuteListFiltered.addAll((List<ItemID>) filterResults.values);
                 notifyDataSetChanged();
             }
         };

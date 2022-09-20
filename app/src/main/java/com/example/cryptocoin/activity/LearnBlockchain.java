@@ -15,12 +15,7 @@ public class LearnBlockchain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booklearn_blockchain);
 
-        ImageView imageViewBack = (ImageView) findViewById(R.id.imageView_back_learn_blockchain);
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        ImageView imageViewBack = findViewById(R.id.imageView_back_learn_blockchain);
+        imageViewBack.setOnClickListener(view -> onBackPressed());
     }
 }

@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddWatchListCV extends BaseAdapter implements Filterable {
-    private List<ItemID> idCryptoValuteList;
+    private final List<ItemID> idCryptoValuteList;
     private List<ItemID> idCryptoValuteListFiltered;
-    private ArrayList<String> arrayIdWatchList;
+    private final ArrayList<String> arrayIdWatchList;
 
     public AddWatchListCV (IdCryptoValute _idCryptoValuteList, ArrayList<String> arrayIdWatchList){
         idCryptoValuteList = _idCryptoValuteList.getData();
@@ -56,10 +56,10 @@ public class AddWatchListCV extends BaseAdapter implements Filterable {
             view = inflater.inflate(R.layout.item_add_watchlist, viewGroup, false);
         }
 
-        ConstraintLayout layout = (ConstraintLayout) view.findViewById(R.id.layout_add_watchlist_cryptovalute);
-        TextView textViewNameCryptoValute = (TextView) view.findViewById(R.id.name_cv_add_watchlist);
-        TextView textViewSymbolCryptoValute = (TextView) view.findViewById(R.id.symbol_cv_add_watchlist);
-        ImageView imageViewDone = (ImageView) view.findViewById(R.id.image_baseline_done);
+        ConstraintLayout layout = view.findViewById(R.id.layout_add_watchlist_cryptovalute);
+        TextView textViewNameCryptoValute = view.findViewById(R.id.name_cv_add_watchlist);
+        TextView textViewSymbolCryptoValute = view.findViewById(R.id.symbol_cv_add_watchlist);
+        ImageView imageViewDone = view.findViewById(R.id.image_baseline_done);
 
         String idCryptoValuteItem = String.valueOf(idCryptoValuteListFiltered.get(i).getId());
         layout.setTag(idCryptoValuteItem);

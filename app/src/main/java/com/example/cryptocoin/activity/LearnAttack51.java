@@ -15,12 +15,7 @@ public class LearnAttack51 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booklearn_attack51);
 
-        ImageView imageViewBack = (ImageView) findViewById(R.id.imageView_back_learn_attach51);
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        ImageView imageViewBack = findViewById(R.id.imageView_back_learn_attach51);
+        imageViewBack.setOnClickListener(view -> onBackPressed());
     }
 }

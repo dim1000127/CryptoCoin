@@ -51,7 +51,7 @@ public class AddWatchList extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_cv_watchlist);
-        toolbar = (Toolbar) findViewById(R.id.toolbar_add_watchlist);
+        toolbar = findViewById(R.id.toolbar_add_watchlist);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -60,28 +60,25 @@ public class AddWatchList extends AppCompatActivity {
         Intent intent = getIntent();
         arrayIdWatchList = intent.getStringArrayListExtra(Const.ARRAY_ID_MESSAGE);
 
-        tvStatusSearch = (TextView) findViewById(R.id.tv_status_search_add_watchlist);
-        searchView = (SearchView) findViewById(R.id.searchview_add_watchlist);
-        listViewSelectWatchList = (ListView) findViewById(R.id.lv_add_watchlist);
+        tvStatusSearch = findViewById(R.id.tv_status_search_add_watchlist);
+        searchView = findViewById(R.id.searchview_add_watchlist);
+        listViewSelectWatchList = findViewById(R.id.lv_add_watchlist);
         listViewSelectWatchList.setEmptyView(tvStatusSearch);
         fillEmptySelectWatchList();
 
-        listViewSelectWatchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ConstraintLayout layout = view.findViewById(R.id.layout_add_watchlist_cryptovalute);
-                String id = layout.getTag().toString();
+        listViewSelectWatchList.setOnItemClickListener((adapterView, view, i, l) -> {
+            ConstraintLayout layout = view.findViewById(R.id.layout_add_watchlist_cryptovalute);
+            String id = layout.getTag().toString();
 
-                if(arrayIdWatchList.contains(id)){
-                    Snackbar.make(toolbar, "Этот актив уже находится в списке отслеживания", Snackbar.LENGTH_SHORT)
-                            .show();
-                }
-                else{
-                    Intent data = new Intent();
-                    data.putExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE, id);
-                    setResult(RESULT_OK, data);
-                    finish();
-                }
+            if(arrayIdWatchList.contains(id)){
+                Snackbar.make(toolbar, "Этот актив уже находится в списке отслеживания", Snackbar.LENGTH_SHORT)
+                        .show();
+            }
+            else{
+                Intent data = new Intent();
+                data.putExtra(Const.ID_CRYPTOVALUTE_ITEM_MESSAGE, id);
+                setResult(RESULT_OK, data);
+                finish();
             }
         });
 

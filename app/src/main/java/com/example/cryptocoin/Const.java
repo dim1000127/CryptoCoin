@@ -9,12 +9,7 @@ public class Const {
     public static final String APP_PREFERENCES_ID_CV_FIRST_ASSET = "APP_PREFERENCES_ID_CV_FIRST_ASSET";
     public static final String APP_PREFERENCES_ID_CV_SECOND_ASSET = "APP_PREFERENCES_ID_CV_SECOND_ASSET";
     public static final String APP_PREFERENCES_ARRAY_ID_WATCHLIST = "APP_PREFERENCES_ARRAY_ID_WATCHLIST";
-
-    public static final String CRYPTOVALUTE_INTENT = "CRYPTOVALUTE";
-    public static final String IDCRYPTOVALUTE_INTENT = "IDCRYPTOVALUTE";
-    public static final String METADATA_INTENT = "METADATA";
-    public static final String ASSET_NUMBER_INTENT = "CONVERTNUMBER";
-
+    
     public static final String CRYPTOVALUTE_KEY_MAP = "CRYPTOVALUTE";
     public static final String METADATA_KEY_MAP = "METADATA";
 

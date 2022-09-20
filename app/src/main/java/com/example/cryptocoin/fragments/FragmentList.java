@@ -75,14 +75,14 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        listViewTop = (ListView) view.findViewById(R.id.listview_top100_cryptovalute);
+        listViewTop = view.findViewById(R.id.listview_top100_cryptovalute);
         fillEmptyList();
 
-        buttonListTop = (ImageButton) view.findViewById(R.id.button_list_up);
-        swipeRefreshLayoutList = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutList);
-        relativeLayout = (RelativeLayout) view.findViewById(R.id.parentRelativeList);
-        textViewPercentChangeSelect = (TextView) view.findViewById(R.id.tv_list_percent_change_select);
-        textViewSortBySelect = (TextView) view.findViewById(R.id.tv_list_sort_by_select);
+        buttonListTop = view.findViewById(R.id.button_list_up);
+        swipeRefreshLayoutList = view.findViewById(R.id.swipeRefreshLayoutList);
+        relativeLayout = view.findViewById(R.id.parentRelativeList);
+        textViewPercentChangeSelect = view.findViewById(R.id.tv_list_percent_change_select);
+        textViewSortBySelect = view.findViewById(R.id.tv_list_sort_by_select);
 
         swipeRefreshLayoutList.setOnRefreshListener(this);
         buttonListTop.setVisibility(View.GONE);
@@ -112,47 +112,27 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
 
-        listViewTop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String idItem = String.valueOf(oldDataCryptoValute.getData().get(i).getId());
-                DataItem dataItem = oldDataCryptoValute.getData().get(i);
-                Item metadataItem = metadata.getData().get(idItem);
-                FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
-                fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
+        listViewTop.setOnItemClickListener((adapterView, view1, i, l) -> {
+            String idItem = String.valueOf(oldDataCryptoValute.getData().get(i).getId());
+            DataItem dataItem = oldDataCryptoValute.getData().get(i);
+            Item metadataItem = metadata.getData().get(idItem);
+            FragmentBottomSheet fragmentBottomSheet = new FragmentBottomSheet(dataItem, metadataItem);
+            fragmentBottomSheet.show(getActivity().getSupportFragmentManager(),fragmentBottomSheet.getTag());
+        });
+
+        buttonListTop.setOnClickListener(view14 -> {
+            if (firstVisibleElemList >= 10) {
+                listViewTop.setSelection(1);
+                listViewTop.smoothScrollToPosition(0);
+            }
+            else {
+                listViewTop.smoothScrollToPosition(0);
             }
         });
 
-        buttonListTop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (firstVisibleElemList >= 10) {
-                    listViewTop.setSelection(1);
-                    listViewTop.smoothScrollToPosition(0);
-                }
-                else {
-                    listViewTop.smoothScrollToPosition(0);
-                }
-            }
-        });
+        textViewPercentChangeSelect.setOnClickListener(view12 -> showDialogSelectPercentChange());
 
-        textViewPercentChangeSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Snackbar.make(relativeLayout, "Выберите процентное изменение", Snackbar.LENGTH_LONG)
-                        .show();*/
-                showDialogSelectPercentChange();
-            }
-        });
-
-        textViewSortBySelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Snackbar.make(relativeLayout, "Выберите поле для сортировки", Snackbar.LENGTH_LONG)
-                        .show();*/
-                showDialogSelectSortBy();
-            }
-        });
+        textViewSortBySelect.setOnClickListener(view13 -> showDialogSelectSortBy());
 
         textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
 
@@ -164,14 +144,14 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetDialogTheme);
         bottomSheetDialog.setContentView(R.layout.modal_bottom_sheet_sort_by);
 
-        RelativeLayout selectRating = (RelativeLayout) bottomSheetDialog.findViewById(R.id.rl_select_rating_sort_by);
-        RelativeLayout selectName = (RelativeLayout) bottomSheetDialog.findViewById(R.id.rl_select_name_sort_by);
-        RelativeLayout selectPrice = (RelativeLayout)  bottomSheetDialog.findViewById(R.id.rl_select_price_sort_by);
-        RelativeLayout selectPercentChange = (RelativeLayout) bottomSheetDialog.findViewById(R.id.rl_select_percent_change_sort_by);
-        TextView tvSelectRating = (TextView) bottomSheetDialog.findViewById(R.id.tv_sort_by_rating);
-        TextView tvSelectName = (TextView) bottomSheetDialog.findViewById(R.id.tv_sort_by_name);
-        TextView tvSelectPrice = (TextView) bottomSheetDialog.findViewById(R.id.tv_sort_by_price);
-        TextView tvSelectPercentChangew = (TextView) bottomSheetDialog.findViewById(R.id.tv_sort_by_percent_change);
+        RelativeLayout selectRating = bottomSheetDialog.findViewById(R.id.rl_select_rating_sort_by);
+        RelativeLayout selectName = bottomSheetDialog.findViewById(R.id.rl_select_name_sort_by);
+        RelativeLayout selectPrice = bottomSheetDialog.findViewById(R.id.rl_select_price_sort_by);
+        RelativeLayout selectPercentChange = bottomSheetDialog.findViewById(R.id.rl_select_percent_change_sort_by);
+        TextView tvSelectRating = bottomSheetDialog.findViewById(R.id.tv_sort_by_rating);
+        TextView tvSelectName = bottomSheetDialog.findViewById(R.id.tv_sort_by_name);
+        TextView tvSelectPrice = bottomSheetDialog.findViewById(R.id.tv_sort_by_price);
+        TextView tvSelectPercentChangew = bottomSheetDialog.findViewById(R.id.tv_sort_by_percent_change);
 
         if(isSortByRating){
             tvSelectRating.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.primaryColor, null));
@@ -212,154 +192,142 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
 
         bottomSheetDialog.show();
 
-        selectRating.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isSortByRatingUp){
-                    //сортировка по убыванию
-                    oldDataCryptoValute.getData().sort(Comparator.comparing(DataItem::getCmcRank).reversed());
-                    adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    isSortByRatingUp = false;
-                    textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_down, 0);
-                }
-                else{
-                    //сортировка по возрастанию
-                    oldDataCryptoValute.getData().sort(Comparator.comparing(DataItem::getCmcRank));
-                    adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
-                    isSortByRatingUp = true;
-                }
-                isSortByPriceUp = false;
-                isSortByNameUp = false;
-                isSortByPercentChangeUp = false;
-                isSortByRating = true;
-                isSortByName = false;
-                isSortByPrice = false;
-                isSortByPercentChange = false;
-                textViewSortBySelect.setText(getString(R.string.sort_by_rating));
-                bottomSheetDialog.dismiss();
+        selectRating.setOnClickListener(view -> {
+            if (isSortByRatingUp){
+                //сортировка по убыванию
+                oldDataCryptoValute.getData().sort(Comparator.comparing(DataItem::getCmcRank).reversed());
+                adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
+                isSortByRatingUp = false;
+                textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_down, 0);
             }
+            else{
+                //сортировка по возрастанию
+                oldDataCryptoValute.getData().sort(Comparator.comparing(DataItem::getCmcRank));
+                adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
+                textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
+                isSortByRatingUp = true;
+            }
+            isSortByPriceUp = false;
+            isSortByNameUp = false;
+            isSortByPercentChangeUp = false;
+            isSortByRating = true;
+            isSortByName = false;
+            isSortByPrice = false;
+            isSortByPercentChange = false;
+            textViewSortBySelect.setText(getString(R.string.sort_by_rating));
+            bottomSheetDialog.dismiss();
         });
 
-        selectName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isSortByNameUp){
-                    //сортировка по убыванию
-                    oldDataCryptoValute.getData().sort(Comparator.comparing(DataItem::getName).reversed());
-                    adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_down, 0);
-                    isSortByNameUp = false;
-                }
-                else{
-                    //сортировка по возрастанию
-                    oldDataCryptoValute.getData().sort(Comparator.comparing(DataItem::getName));
-                    adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
-                    isSortByNameUp = true;
-                }
-                isSortByRatingUp = false;
-                isSortByPriceUp = false;
-                isSortByPercentChangeUp = false;
-                isSortByRating = false;
-                isSortByName = true;
-                isSortByPrice = false;
-                isSortByPercentChange = false;
-                textViewSortBySelect.setText(getString(R.string.sort_by_name));
-                bottomSheetDialog.dismiss();
+        selectName.setOnClickListener(view -> {
+            if (isSortByNameUp){
+                //сортировка по убыванию
+                oldDataCryptoValute.getData().sort(Comparator.comparing(DataItem::getName).reversed());
+                adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
+                textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_down, 0);
+                isSortByNameUp = false;
             }
+            else{
+                //сортировка по возрастанию
+                oldDataCryptoValute.getData().sort(Comparator.comparing(DataItem::getName));
+                adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
+                textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
+                isSortByNameUp = true;
+            }
+            isSortByRatingUp = false;
+            isSortByPriceUp = false;
+            isSortByPercentChangeUp = false;
+            isSortByRating = false;
+            isSortByName = true;
+            isSortByPrice = false;
+            isSortByPercentChange = false;
+            textViewSortBySelect.setText(getString(R.string.sort_by_name));
+            bottomSheetDialog.dismiss();
         });
 
-        selectPrice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isSortByPriceUp){
-                    //сортировка по убыванию
-                    oldDataCryptoValute.getData().sort(new Comparator<DataItem>() {
-                        @Override
-                        public int compare(DataItem dataItem, DataItem t1) {
-                            return Double.compare(t1.getQuote().getUsdDataCoin().getPrice(), dataItem.getQuote().getUsdDataCoin().getPrice());
-                        }
+        selectPrice.setOnClickListener(view -> {
+            if (isSortByPriceUp){
+                //сортировка по убыванию
+                oldDataCryptoValute.getData().sort(new Comparator<DataItem>() {
+                    @Override
+                    public int compare(DataItem dataItem, DataItem t1) {
+                        return Double.compare(t1.getQuote().getUsdDataCoin().getPrice(), dataItem.getQuote().getUsdDataCoin().getPrice());
+                    }
 
-                        @Override
-                        public boolean equals(Object o) {
-                            return false;
-                        }
-                    });
-                    adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_down, 0);
-                    isSortByPriceUp = false;
-                }
-                else{
-                    //сортировка по возрастанию
-                    oldDataCryptoValute.getData().sort(new Comparator<DataItem>() {
-                        @Override
-                        public int compare(DataItem dataItem, DataItem t1) {
-                            return Double.compare(dataItem.getQuote().getUsdDataCoin().getPrice(), t1.getQuote().getUsdDataCoin().getPrice());
-                        }
-
-                        @Override
-                        public boolean equals(Object o) {
-                            return false;
-                        }
-                    });
-                    adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
-                    isSortByPriceUp = true;
-                }
-                isSortByRatingUp = false;
-                isSortByNameUp = false;
-                isSortByPercentChangeUp = false;
-                isSortByRating = false;
-                isSortByName = false;
-                isSortByPrice = true;
-                isSortByPercentChange = false;
-                textViewSortBySelect.setText(getString(R.string.sort_by_price));
-                bottomSheetDialog.dismiss();
+                    @Override
+                    public boolean equals(Object o) {
+                        return false;
+                    }
+                });
+                adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
+                textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_down, 0);
+                isSortByPriceUp = false;
             }
+            else{
+                //сортировка по возрастанию
+                oldDataCryptoValute.getData().sort(new Comparator<DataItem>() {
+                    @Override
+                    public int compare(DataItem dataItem, DataItem t1) {
+                        return Double.compare(dataItem.getQuote().getUsdDataCoin().getPrice(), t1.getQuote().getUsdDataCoin().getPrice());
+                    }
+
+                    @Override
+                    public boolean equals(Object o) {
+                        return false;
+                    }
+                });
+                adapterCryptoValutePrice = new CryptoValuteList(oldDataCryptoValute, metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
+                textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
+                isSortByPriceUp = true;
+            }
+            isSortByRatingUp = false;
+            isSortByNameUp = false;
+            isSortByPercentChangeUp = false;
+            isSortByRating = false;
+            isSortByName = false;
+            isSortByPrice = true;
+            isSortByPercentChange = false;
+            textViewSortBySelect.setText(getString(R.string.sort_by_price));
+            bottomSheetDialog.dismiss();
         });
 
-        selectPercentChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isSortByPercentChangeUp){
-                    //сортировка по убыванию
-                    adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChange(oldDataCryptoValute), metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_down, 0);
-                    isSortByPercentChangeUp = false;
-                }
-                else{
-                    //сортировка по возрастанию
-                    adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChange(oldDataCryptoValute), metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                    textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
-                    isSortByPercentChangeUp = true;
-                }
-                isSortByRatingUp = false;
-                isSortByNameUp = false;
-                isSortByPriceUp = false;
-                isSortByRating = false;
-                isSortByName = false;
-                isSortByPrice = false;
-                isSortByPercentChange = true;
-                textViewSortBySelect.setText(getString(R.string.sort_by_percent_change));
-                bottomSheetDialog.dismiss();
+        selectPercentChange.setOnClickListener(view -> {
+            if (isSortByPercentChangeUp){
+                //сортировка по убыванию
+                adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChange(oldDataCryptoValute), metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
+                textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_down, 0);
+                isSortByPercentChangeUp = false;
             }
+            else{
+                //сортировка по возрастанию
+                adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChange(oldDataCryptoValute), metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
+                textViewSortBySelect.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.style_ic_up, 0);
+                isSortByPercentChangeUp = true;
+            }
+            isSortByRatingUp = false;
+            isSortByNameUp = false;
+            isSortByPriceUp = false;
+            isSortByRating = false;
+            isSortByName = false;
+            isSortByPrice = false;
+            isSortByPercentChange = true;
+            textViewSortBySelect.setText(getString(R.string.sort_by_percent_change));
+            bottomSheetDialog.dismiss();
         });
     }
 
@@ -420,18 +388,18 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetDialogTheme);
         bottomSheetDialog.setContentView(R.layout.modal_bottom_sheet_percent_change);
 
-        RelativeLayout select1h = (RelativeLayout) bottomSheetDialog.findViewById(R.id.rl_select_1h_percent_change);
-        RelativeLayout select24h = (RelativeLayout) bottomSheetDialog.findViewById(R.id.rl_select_24hd_percent_change);
-        RelativeLayout select7d = (RelativeLayout)  bottomSheetDialog.findViewById(R.id.rl_select_7d_percent_change);
-        RelativeLayout select30d = (RelativeLayout) bottomSheetDialog.findViewById(R.id.rl_select_30d_percent_change);
-        TextView tvSelect1h = (TextView) bottomSheetDialog.findViewById(R.id.tv_select_1h);
-        TextView tvSelect24h = (TextView) bottomSheetDialog.findViewById(R.id.tv_select_24h);
-        TextView tvSelect7d = (TextView) bottomSheetDialog.findViewById(R.id.tv_select_7d);
-        TextView tvSelect30d = (TextView) bottomSheetDialog.findViewById(R.id.tv_select_30d);
-        ImageView imageSelect1h = (ImageView) bottomSheetDialog.findViewById(R.id.image_baseline_done_select_1h);
-        ImageView imageSelect24h = (ImageView) bottomSheetDialog.findViewById(R.id.image_baseline_done_select_24h);
-        ImageView imageSelect7d = (ImageView) bottomSheetDialog.findViewById(R.id.image_baseline_done_select_7d);
-        ImageView imageSelect30d = (ImageView) bottomSheetDialog.findViewById(R.id.image_baseline_done_select_30d);
+        RelativeLayout select1h = bottomSheetDialog.findViewById(R.id.rl_select_1h_percent_change);
+        RelativeLayout select24h = bottomSheetDialog.findViewById(R.id.rl_select_24hd_percent_change);
+        RelativeLayout select7d = bottomSheetDialog.findViewById(R.id.rl_select_7d_percent_change);
+        RelativeLayout select30d = bottomSheetDialog.findViewById(R.id.rl_select_30d_percent_change);
+        TextView tvSelect1h = bottomSheetDialog.findViewById(R.id.tv_select_1h);
+        TextView tvSelect24h = bottomSheetDialog.findViewById(R.id.tv_select_24h);
+        TextView tvSelect7d = bottomSheetDialog.findViewById(R.id.tv_select_7d);
+        TextView tvSelect30d = bottomSheetDialog.findViewById(R.id.tv_select_30d);
+        ImageView imageSelect1h = bottomSheetDialog.findViewById(R.id.image_baseline_done_select_1h);
+        ImageView imageSelect24h = bottomSheetDialog.findViewById(R.id.image_baseline_done_select_24h);
+        ImageView imageSelect7d = bottomSheetDialog.findViewById(R.id.image_baseline_done_select_7d);
+        ImageView imageSelect30d = bottomSheetDialog.findViewById(R.id.image_baseline_done_select_30d);
         if(isChange1h){
             imageSelect1h.setVisibility(View.VISIBLE);
             tvSelect1h.setTextColor(ResourcesCompat.getColor(getContext().getResources(), R.color.primaryColor, null));
@@ -450,88 +418,76 @@ public class FragmentList extends Fragment implements SwipeRefreshLayout.OnRefre
         }
         bottomSheetDialog.show();
 
-        select1h.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isChange1h = true;
-                isChange24h = false;
-                isChange7d = false;
-                isChange30d = false;
-                if(isSortByPercentChange) {
-                    adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChangeSelect(oldDataCryptoValute), metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                }
-                else{
-                    adapterCryptoValutePrice.setIsChange(true, false, false, false);
-                    adapterCryptoValutePrice.notifyDataSetChanged();
-                }
-                textViewPercentChangeSelect.setText(getString(R.string._1h));
-                bottomSheetDialog.dismiss();
+        select1h.setOnClickListener(view -> {
+            isChange1h = true;
+            isChange24h = false;
+            isChange7d = false;
+            isChange30d = false;
+            if(isSortByPercentChange) {
+                adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChangeSelect(oldDataCryptoValute), metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
             }
+            else{
+                adapterCryptoValutePrice.setIsChange(true, false, false, false);
+                adapterCryptoValutePrice.notifyDataSetChanged();
+            }
+            textViewPercentChangeSelect.setText(getString(R.string._1h));
+            bottomSheetDialog.dismiss();
         });
 
-        select24h.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isChange1h = false;
-                isChange24h = true;
-                isChange7d = false;
-                isChange30d = false;
-                if(isSortByPercentChange) {
-                    adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChangeSelect(oldDataCryptoValute), metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                }
-                else {
-                    adapterCryptoValutePrice.setIsChange(false, true, false, false);
-                    adapterCryptoValutePrice.notifyDataSetChanged();
-                }
-                textViewPercentChangeSelect.setText(getString(R.string._24h));
-                bottomSheetDialog.dismiss();
+        select24h.setOnClickListener(view -> {
+            isChange1h = false;
+            isChange24h = true;
+            isChange7d = false;
+            isChange30d = false;
+            if(isSortByPercentChange) {
+                adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChangeSelect(oldDataCryptoValute), metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
             }
+            else {
+                adapterCryptoValutePrice.setIsChange(false, true, false, false);
+                adapterCryptoValutePrice.notifyDataSetChanged();
+            }
+            textViewPercentChangeSelect.setText(getString(R.string._24h));
+            bottomSheetDialog.dismiss();
         });
 
-        select7d.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isChange1h = false;
-                isChange24h = false;
-                isChange7d = true;
-                isChange30d = false;
-                if(isSortByPercentChange) {
-                    adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChangeSelect(oldDataCryptoValute), metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                }
-                else {
-                    adapterCryptoValutePrice.setIsChange(false, false, true, false);
-                    adapterCryptoValutePrice.notifyDataSetChanged();
-                }
-                textViewPercentChangeSelect.setText(getString(R.string._7d));
-                bottomSheetDialog.dismiss();
+        select7d.setOnClickListener(view -> {
+            isChange1h = false;
+            isChange24h = false;
+            isChange7d = true;
+            isChange30d = false;
+            if(isSortByPercentChange) {
+                adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChangeSelect(oldDataCryptoValute), metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
             }
+            else {
+                adapterCryptoValutePrice.setIsChange(false, false, true, false);
+                adapterCryptoValutePrice.notifyDataSetChanged();
+            }
+            textViewPercentChangeSelect.setText(getString(R.string._7d));
+            bottomSheetDialog.dismiss();
         });
 
-        select30d.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isChange1h = false;
-                isChange24h = false;
-                isChange7d = false;
-                isChange30d = true;
-                if(isSortByPercentChange) {
-                    adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChangeSelect(oldDataCryptoValute), metadata);
-                    adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
-                    listViewTop.setAdapter(adapterCryptoValutePrice);
-                }
-                else {
-                    adapterCryptoValutePrice.setIsChange(false, false, false, true);
-                    adapterCryptoValutePrice.notifyDataSetChanged();
-                }
-                textViewPercentChangeSelect.setText(getString(R.string._30d));
-                bottomSheetDialog.dismiss();
+        select30d.setOnClickListener(view -> {
+            isChange1h = false;
+            isChange24h = false;
+            isChange7d = false;
+            isChange30d = true;
+            if(isSortByPercentChange) {
+                adapterCryptoValutePrice = new CryptoValuteList(sortByPercentChangeSelect(oldDataCryptoValute), metadata);
+                adapterCryptoValutePrice.setIsChange(isChange1h, isChange24h, isChange7d, isChange30d);
+                listViewTop.setAdapter(adapterCryptoValutePrice);
             }
+            else {
+                adapterCryptoValutePrice.setIsChange(false, false, false, true);
+                adapterCryptoValutePrice.notifyDataSetChanged();
+            }
+            textViewPercentChangeSelect.setText(getString(R.string._30d));
+            bottomSheetDialog.dismiss();
         });
     }
 
