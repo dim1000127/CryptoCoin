@@ -1,5 +1,6 @@
 package com.example.cryptocoin.retrofit;
 
+import com.example.cryptocoin.BuildConfig;
 import com.example.cryptocoin.pojo.cryptovalutepojo.CryptoValute;
 import com.example.cryptocoin.pojo.globalmetricspojo.GlobalMetrics;
 import com.example.cryptocoin.pojo.idcryptovalutepojo.IdCryptoValute;
@@ -12,30 +13,31 @@ import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import rx.Observable;
 
+
 public interface RequestsAPI {
 
     @Headers({"Accept: application/json",
-            "X-CMC_PRO_API_KEY: 908e2080-ad8d-4d43-bd0a-e65b8587d172"})
+            BuildConfig.API_KEY})
     @GET("/v1/cryptocurrency/listings/latest")
     Observable<CryptoValute> getDataCryptoValute(@Query("start") int start, @Query("limit") int limit);
 
     @Headers({"Accept: application/json",
-            "X-CMC_PRO_API_KEY: 908e2080-ad8d-4d43-bd0a-e65b8587d172"})
+            BuildConfig.API_KEY})
     @GET("/v2/cryptocurrency/info")
     Observable<Metadata> getMetadata(@Query("id") String id, @Query("aux") String aux);
 
     @Headers({"Accept: application/json",
-            "X-CMC_PRO_API_KEY: 908e2080-ad8d-4d43-bd0a-e65b8587d172"})
+            BuildConfig.API_KEY})
     @GET("/v1/cryptocurrency/map")
     Observable<IdCryptoValute> getIdCryptoValute(@Query("aux") String aux);
 
     @Headers({"Accept: application/json",
-            "X-CMC_PRO_API_KEY: 908e2080-ad8d-4d43-bd0a-e65b8587d172"})
+            BuildConfig.API_KEY})
     @GET("/v2/cryptocurrency/quotes/latest")
     Observable<QuotesCryptoValute> getQuoteCryptoValute(@Query("id") String id);
 
     @Headers({"Accept: application/json",
-            "X-CMC_PRO_API_KEY: 908e2080-ad8d-4d43-bd0a-e65b8587d172"})
+            BuildConfig.API_KEY})
     @GET("/v1/global-metrics/quotes/latest")
     Observable<GlobalMetrics> getGlobalMetrics();
 
